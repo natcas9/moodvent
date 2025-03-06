@@ -131,3 +131,8 @@ export function doLogout(req, res, next) {
       })
   })
 }
+
+export function viewEventos(req, res) {
+  res.render('paginas'), { 
+   contenido:'paginas/visualizarEventos', eventos };
+}
