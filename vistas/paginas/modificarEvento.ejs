@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modificar Evento</title>
+  </head>
+  <body>
+    <h1>Modificar tu evento</h1>
+    <form action="/eventos/modificar/ <%= evento.id %>" method="POST">
+      <div>
+        <label for="nombre">Evento:</label>
+        <input type="text" id="nombre" name="nombre"  value="<%= evento.nombre %>" required />
+      </div>
+      <div>
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" name="descripcion" value="<%= evento.descripcion %>" required />
+      </div>
+      <div>
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" value="<%= evento.fecha %>" required />
+      </div>
+      <div>
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" name="hora" value="<%= evento.hora %>" required />
+      </div>
+      <div>
+        <label for="lugar">Lugar:</label>
+        <input type="text" id="lugar" name="lugar"  value="<%= evento.lugar %>"required />
+      </div>
+      <div>
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" value="<%= evento.precio %>"required />
+      </div>
+      <div>
+        <label for="estadoAnimo">Estado de ánimo recomendado</label>
+        <select name="estadoAnimo" id="estadoAnimo">
+          <option value="Feliz" <%= evento.estadoAnimo === 'Feliz' ? 'selected': '' %>> Feliz</option>
+          <option value="Triste" <%= evento.estadoAnimo === 'Triste' ? 'selected' : '' %>>Triste</option>
+          <option value="Enojado"  <%= evento.estadoAnimo === 'Enojado' ? 'selected' : '' %>>Enojado</option>
+          <option value="Ansioso" <%= evento.estadoAnimo === 'Ansioso' ? 'selected' : '' %>>Ansioso</option>
+          <option value="Relajado" <%= evento.estadoAnimo === 'Relajado' ? 'selected' : '' %>>Relajado</option>
+        </select>
+      </div>
+      <button type="submit">Guardar Modificaciones </button>
+    </form>
+
+    <form action="/eventos/borrar/ <%= evento.id %>" method="POST">
+      <button type="submit" onclick="return confirm(' ¿ Estás seguro de que quierer eliminar este evento?')" >Borrar Evento</button>
+    </form>
+  </body>
+</html>
