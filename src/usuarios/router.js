@@ -5,6 +5,9 @@ import {
   doLogout,
   viewContenido,
   viewContenidoAdmin,
+  viewCrearEventos,
+  modificarEvento,
+  borrarEvento
 } from "./controllers.js";
 
 const usuariosRouter = express.Router();
@@ -15,6 +18,10 @@ usuariosRouter.get("/contenido/normal", viewContenido);
 usuariosRouter.get("contenido/admin", viewContenidoAdmin);
 usuariosRouter.post("/login", doLogin);
 usuariosRouter.get("/logout", doLogout);
+
+usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
+usuariosRouter.post("contenido/modificarEvente/:id", modificarEvento);
+usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
 // TODO: Añade las rutas que faltan
 

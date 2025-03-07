@@ -1,57 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-
-
-<title>Mis Eventos</title>
-<!-- to remove afterwards-->
-<style>
-   
-    .container {
-        width: 400px; 
-        padding: 20px; /*pour pas que ca soit coller au cote*/
-        border: solid 1px #ccc;
-      }
-
-      .events {
-        max-height: 300px; /* Fixed max-height */
-        overflow-y: auto; /* Enables vertical scrollbar if content overflows */
-        padding: 10px;
-
-        margin-bottom: 10px; /* Space below the events box */
-      }
-
-      .event {
-        border: solid 2px #000;
-        margin: 10px 0;
-        padding: 10px;
-        background-color: #f9f9f9;
-      }
-
-      .selected {
-        background-color: #e0e0e0;
-      }
-
-      button {
-        padding: 10px;
-        background-color: #000; /* Black background */
-        color: white;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Mis eventos:</h1>
-
-      <div class="events">
-        <div class="event" onclick="selectEvent(this);">
-          <img src="hike.jpg" alt=" Hike" />
-        </div>
-
-</style>
-
-<!-- to remove afterwards-->
 
 </head>
 <body>
@@ -99,9 +45,7 @@
       </div>
 
       <div class="buttons">
-        <button id="crear" onclick="location.href='crearEvento.ejs';">
-          Crear
-        </button>
+        <button id="crear" onclick="location.href='/contenido/crearEventos';">Crear</button>
         <button id="modificar" onclick="location.href='modificarEventos';">
           Modificar
         </button>
