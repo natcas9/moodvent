@@ -74,6 +74,17 @@ export function viewCrearEventos(req, res) {
   res.render("paginas/crearEventos.ejs"); 
 }
 
+export function viewModificarEvento(req,res) {
+  const {id} = req.params;
+
+  const evento = eventos.find( e => e.id == id);
+
+  if (!evento) {
+    return res.status(404).send("No se encontró el evento");
+  }
+  res.render("paginas/modificarEvento", {evento});
+}
+
 // modificación de eventos
 export function modificarEvento(req, res) {
   const { id } = req.params;
