@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import { config } from "./config.js";
 import { app } from "./app.js";
 import { getConnection, checkConnection, closeConnection } from "./db.js";
@@ -29,4 +27,3 @@ process.on("exit", () => {
 process.on("SIGHUP", () => process.exit(128 + 1));
 process.on("SIGINT", () => process.exit(128 + 2));
 process.on("SIGTERM", () => process.exit(128 + 15));
->>>>>>> Stashed changes

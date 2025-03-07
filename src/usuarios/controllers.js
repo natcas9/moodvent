@@ -133,6 +133,25 @@ export function viewEventos(req, res) {
     };
 }
 
+
+export function viewMisEventos(req, res) {
+  if (!req.session || !req.session.login) {
+    return res.redirect("/usuarios/login"); // Redirect to login if user is not authenticated
+  }
+
+  const db = getConnection();
+  const eventos = db.prepare("SELECT * FROM Eventos WHERE creador = ?").all(req.session.nombre);
+
+  res.render("paginas/misEventos", {
+    eventos,
+    session: req.session
+  });
+}
+
+
+
+
+
 /*
 import { body } from 'express-validator';
 import { Usuario, RolesEnum } from './Usuario.js';
