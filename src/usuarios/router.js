@@ -7,7 +7,8 @@ import {
   viewContenidoAdmin,
   viewCrearEventos,
   modificarEvento,
-  borrarEvento
+  borrarEvento,
+  viewModificarEvento
 } from "./controllers.js";
 
 const usuariosRouter = express.Router();
@@ -20,10 +21,11 @@ usuariosRouter.post("/login", doLogin);
 usuariosRouter.get("/logout", doLogout);
 
 usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
-usuariosRouter.post("contenido/modificarEvente/:id", modificarEvento);
+usuariosRouter.get("/contenido/modificarEvento/:id", viewModificarEvento)
+usuariosRouter.post("/contenido/modificarEvento/:id", modificarEvento);
 usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
-// TODO: Añade las rutas que faltan
+
 
 export default usuariosRouter;
 

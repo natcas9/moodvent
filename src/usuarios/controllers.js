@@ -1,6 +1,7 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
 
+
 export function viewLogin(req, res) {
   res.render("pagina", {
     contenido: "paginas/login", // Use the login page as content
@@ -74,6 +75,17 @@ export function viewCrearEventos(req, res) {
   res.render("paginas/crearEventos.ejs"); 
 }
 
+export function viewModificarEvento(req,res) {
+  const {id} = req.params;
+
+  const evento = eventos.find( e => e.id == id);
+
+  if (!evento) {
+    return res.status(404).send("No se encontró el evento");
+  }
+  res.render("paginas/modificarEvento", {evento});
+}
+
 // modificación de eventos
 export function modificarEvento(req, res) {
   const { id } = req.params;
@@ -81,7 +93,8 @@ export function modificarEvento(req, res) {
     req.body;
 
   // Usar el ID del evento para poder encontrarlo
-  const evento = eventos.find((e) => e.id == id);
+  const evento = eventos.find(e => e.id == id) // Deben de importarse de la bases de datos 
+  // Por ahora lo deje como un array
 
   if (!evento) {
     return res.status(404).send("No se encontró el evento");
@@ -96,7 +109,7 @@ export function modificarEvento(req, res) {
   evento.precio = precio || evento.precio;
   evento.estadoAnimo = estadoAnimo || evento.estadoAnimo;
 
-  res.redirect("/eventos");
+  res.redirect("/contenido/normal");
 }
 
 export function borrarEvento(req, res) {
@@ -108,9 +121,9 @@ export function borrarEvento(req, res) {
     return res.status(404).send("No se ha encontrado el evento");
   }
 
-  eventos.splice(index, 1); // Eliminar evento
+  eventos.splice(index, 1); // Eliminar un evento
 
-  res.redirect("/eventos");
+  res.redirect("/contenido/normal");
 }
 
 /*import { eventos } from "./data.js";

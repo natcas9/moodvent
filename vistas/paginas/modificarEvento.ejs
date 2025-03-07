@@ -7,7 +7,7 @@
   </head>
   <body>
     <h1>Modificar tu evento</h1>
-    <form action="/eventos/modificar/ <%= evento.id %>" method="POST">
+    <form action="/contenido/modificarEvento/ <%= evento.id %>" method="POST">
       <div>
         <label for="nombre">Evento:</label>
         <input type="text" id="nombre" name="nombre"  value="<%= evento.nombre %>" required />
@@ -45,7 +45,7 @@
       <button type="submit">Guardar Modificaciones </button>
     </form>
 
-    <form action="/eventos/borrar/ <%= evento.id %>" method="POST">
+    <form action="/contenido/borrarEvento/ <%= evento.id %>" method="POST">
       <button type="submit" onclick="return confirm(' ¿ Estás seguro de que quierer eliminar este evento?')" >Borrar Evento</button>
     </form>
   </body>
