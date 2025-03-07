@@ -109,7 +109,7 @@ export function borrarEvento(req, res) {
     return res.status(404).send("No se ha encontrado el evento");
   }
 
-  eventos.splice(index, 1); // Eliminar evento
+  eventos.splice(index, 1); // Eliminar un evento
 
   res.redirect("/eventos");
 }

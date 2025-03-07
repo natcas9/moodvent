@@ -23,7 +23,7 @@ usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
 usuariosRouter.get("/contenido/modificarEvento/:id", modificarEvento);
 usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
-// TODO: Añade las rutas que faltan
+
 
 export default usuariosRouter;
 
