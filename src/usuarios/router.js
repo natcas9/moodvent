@@ -13,6 +13,7 @@ eventosRouter.post("/eventos/borrar/:id", borrarEvento);
 eventosRouter.get("/login", viewLogin);
 eventosRouter.post("/login", doLogin);
 eventosRouter.get("/logout", doLogout);
+eventosRouter.get("/misEventos", viewMisEventos);
 
 export default eventosRouter;
 
