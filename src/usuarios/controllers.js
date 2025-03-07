@@ -67,6 +67,15 @@ export function doLogout(req, res, next) {
   res.render("pagina", { contenido: "paginas/logout", session: req.session });
 }
 
+
+// pour eventos:
+
+export function viewCrearEventos(req, res) {
+  res.render("paginas/crearEventos.ejs"); 
+}
+
+
+
 /*import { eventos } from "./data.js";
 
 //Procesa la creación de cada evento
