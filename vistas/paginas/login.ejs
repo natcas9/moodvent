@@ -3,10 +3,6 @@
   <fieldset>
     <legend>Usuario y Contraseña</legend>
 
-    <% if (error) { %>
-    <p style="color: red"><%= error %></p>
-    <%} %>
-
     <form method="POST" action="/usuarios/login">
       <label for="username">Nombre:</label>
       <input type="text" id="username" name="username" required />

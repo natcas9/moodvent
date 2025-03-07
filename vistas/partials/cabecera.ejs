@@ -1,0 +1,12 @@
+<!-- Cabecera de la página web -->
+<header>
+  <h1>Moodvent</h1>
+  <div class="saludo">
+    <% function mostrarSaludo(session) { %> <% if (session && session.login) {
+    %> Bienvenido, <%= session.nombre %>. Usa el menu de la izquierda para
+    navegar.
+    <a href="/usuarios/logout"> Cerrar sesión </a>
+    <% } else { %> Usuario desconocido. <a href="/usuarios/login">Login</a>
+    <% } %> <% } %> <%= mostrarSaludo(session) %>
+  </div>
+</header>
