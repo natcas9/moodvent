@@ -1,6 +1,7 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
 
+
 export function viewLogin(req, res) {
   res.render("pagina", {
     contenido: "paginas/login", // Use the login page as content
@@ -92,7 +93,7 @@ export function modificarEvento(req, res) {
     req.body;
 
   // Usar el ID del evento para poder encontrarlo
-  const evento = []; // Deben de importarse de la bases de datos 
+  const evento = eventos.find(e => e.id == id) // Deben de importarse de la bases de datos 
   // Por ahora lo deje como un array
 
   if (!evento) {
@@ -108,7 +109,7 @@ export function modificarEvento(req, res) {
   evento.precio = precio || evento.precio;
   evento.estadoAnimo = estadoAnimo || evento.estadoAnimo;
 
-  res.redirect("/eventos");
+  res.redirect("/contenido/normal");
 }
 
 export function borrarEvento(req, res) {
@@ -122,7 +123,7 @@ export function borrarEvento(req, res) {
 
   eventos.splice(index, 1); // Eliminar un evento
 
-  res.redirect("/eventos");
+  res.redirect("/contenido/normal");
 }
 
 /*import { eventos } from "./data.js";

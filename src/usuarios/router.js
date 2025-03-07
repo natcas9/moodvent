@@ -22,7 +22,7 @@ usuariosRouter.get("/logout", doLogout);
 
 usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
 usuariosRouter.get("/contenido/modificarEvento/:id", viewModificarEvento)
-usuariosRouter.get("/contenido/modificarEvento/:id", modificarEvento);
+usuariosRouter.post("/contenido/modificarEvento/:id", modificarEvento);
 usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
 
