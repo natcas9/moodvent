@@ -1,12 +1,18 @@
-<h1>Acceso al sistema</h1>
+<article>
+  <h1>Acceso al sistema</h1>
+  <fieldset>
+    <legend>Usuario y Contraseña</legend>
 
-<form action="/usuarios/login" method="POST">
-<fieldset>
-	<% if (locals.error) { %>
-		<p><strong><%= locals.error %></strong></p>
-	<% } %>
-	<legend>Usuario y contraseña</legend>
-	<div><label>Nombre:</label> <input type="text" name="username" /></div>
-	<div><label>Contraseña:</label> <input type="password" name="password" /></div>
-	<button type="submit">Enviar</button>
-</fieldset>
+    <form method="POST" action="/usuarios/login">
+      <label for="username">Nombre:</label>
+      <input type="text" id="username" name="username" required />
+      <br />
+
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required />
+      <br />
+
+      <button type="submit">Enviar</button>
+    </form>
+  </fieldset>
+</article>

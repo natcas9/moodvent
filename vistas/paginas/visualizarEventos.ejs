@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualizar Eventos</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="eventos">
+        <% eventos.forEach(evento => { %>
+        <div class="evento">
+          <img
+            src="<%= evento.imagen %>"
+            alt="Imagen del evento"
+            class="evento-img"
+          />
+          <div class="evento-info">
+            <h2><%= evento.titulo %></h2>
+            <p>Fecha: <%= evento.fecha %></p>
+            <p>Precio: <%= evento.precio %></p>
+            <p>Lugar: <%= evento.lugar %></p>
+            <p>Hora: <%= evento.hora %></p>
+            <p>Estado de ánimo: <%= evento.estado_animo %></p>
+            <button
+              class="mas-info"
+              onclick="toggleDescripcion('<%= evento.id %>')"
+            >
+              Más info
+            </button>
+            <div
+              class="descripcion"
+              id="desc-<%= evento.id %>"
+              style="display: none"
+            >
+              <p><%= evento.descripcion %></p>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+
+      <div class="filtros">
+        <h3>Filtrar eventos</h3>
+        <label
+          >Temática:
+          <select id="tematica">
+            <option value="">Todas</option>
+            <option value="musica">Música</option>
+            <option value="deporte">Deporte</option>
+            <option value="arte">Arte</option>
+          </select>
+        </label>
+        <label
+          >Ubicación:
+          <input type="text" id="ubicacion" placeholder="Ciudad o dirección" />
+        </label>
+        <label
+          >Fecha:
+          <input type="date" id="fecha" />
+        </label>
+        <label
+          >Precio máximo:
+          <input type="number" id="precio" placeholder="Máximo" />
+        </label>
+        <button onclick="filtrarEventos()">Aplicar filtros</button>
+      </div>
+    </div>
+
+    <button onclick="window.location.href='index.html'" class="back-button">
+      BACK
+    </button>
+
+    <script>
+      function toggleDescripcion(id) {
+        var desc = document.getElementById("desc-" + id);
+        desc.style.display = desc.style.display === "none" ? "block" : "none";
+      }
+
+      function filtrarEventos() {
+        // Lógica para filtrar eventos según los criterios seleccionados
+        alert("Funcionalidad de filtrado en desarrollo");
+      }
+    </script>
+  </body>
+</html>
