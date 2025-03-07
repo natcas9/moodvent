@@ -20,8 +20,8 @@ usuariosRouter.post("/login", doLogin);
 usuariosRouter.get("/logout", doLogout);
 
 usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
-usuariosRouter.get("contenido/modificarEvento/:id", modificarEvento);
-usuariosRouter.get("/contenido/borrarEvento/:id", borrarEvento);
+usuariosRouter.get("/contenido/modificarEvento/:id", modificarEvento);
+usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
 // TODO: Añade las rutas que faltan
 

@@ -81,7 +81,8 @@ export function modificarEvento(req, res) {
     req.body;
 
   // Usar el ID del evento para poder encontrarlo
-  const evento = eventos.find((e) => e.id == id);
+  const evento = []; // Deben de importarse de la bases de datos 
+  // Por ahora lo deje como un array
 
   if (!evento) {
     return res.status(404).send("No se encontró el evento");
