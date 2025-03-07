@@ -1,5 +1,27 @@
 import express from "express";
 import {
+  viewLogin,
+  doLogin,
+  doLogout,
+  viewContenido,
+  viewContenidoAdmin,
+} from "./controllers.js";
+
+const usuariosRouter = express.Router();
+
+// /usuarios/login
+usuariosRouter.get("/login", viewLogin);
+usuariosRouter.get("/contenido/normal", viewContenido);
+usuariosRouter.get("contenido/admin", viewContenidoAdmin);
+usuariosRouter.post("/login", doLogin);
+usuariosRouter.get("/logout", doLogout);
+
+// TODO: Añade las rutas que faltan
+
+export default usuariosRouter;
+
+/*import express from "express";
+import {
   crearEvento,
   borrarEvento,
   viewCrearEvento,
