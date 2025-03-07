@@ -1,6 +1,13 @@
 import express from "express";
-import { crearEvento } from "./controllers/eventos.js";
-import { borrarEvento } from "./controllers.js";
+import {
+  crearEvento,
+  borrarEvento,
+  viewCrearEvento,
+  modificarEvento,
+  viewLogin,
+  doLogin,
+  doLogout,
+} from "./controllers.js";
 
 const eventosRouter = express.Router();
 

@@ -123,6 +123,8 @@ export function doLogout(req, res, next) {
   });
 }
 
+export function viewCrearEvento(req, res) {}
+
 export function viewEventos(req, res) {
   res.render("paginas"),
     {
