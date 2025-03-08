@@ -3,6 +3,7 @@ import session from "express-session";
 import { config } from "./config.js";
 import usuariosRouter from "./usuarios/router.js";
 import contenidoRouter from "./contenido/router.js";
+import eventosRouter from "./routes/eventos.js";
 
 export const app = express();
 
@@ -14,15 +15,15 @@ app.use(session(config.session));
 
 app.use("/", express.static(config.recursos));
 app.get("/", (req, res) => {
-  // Parámetros que estarán disponibles en la plantilla
   const params = {
-    contenido: "paginas/index", // fichero ejs que tiene el contenido específico para esta vista
-    session: req.session, // Neesario para (entre otras cosas) utilizarlo en mostrarSaludo de cabecera.ejs
+    contenido: "paginas/index",
+    session: req.session,
   };
   res.render("pagina", params);
 });
 app.use("/usuarios", usuariosRouter);
 app.use("/contenido", contenidoRouter);
+app.use("/eventos", eventosRouter);
 
 /*
 https://www.digitalocean.com/community/tutorials/nodejs-express-basics
