@@ -1,5 +1,8 @@
 import { config } from "./config.js";
 import { app } from "./app.js";
+import { initDB } from "./database.js";
+
+initDB();
 
 const server = app.listen(config.port, (error) => {
   if (error) return console.log(`Error: ${error}`);
