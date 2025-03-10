@@ -14,6 +14,21 @@
         evento.estadoAnimo %> -
         <a href="/eventos/detalle/<%= evento.id %>">Ver más</a>
       </li>
+      <div>
+        <a href="/eventos/editar/<%= evento.id %>"> Editar</a>
+      </div>
+      <form
+        action="/eventos/eliminar/<%= evento.id %>"
+        method="POST"
+        style="display: inline"
+      >
+        <button
+          type="submit"
+          onclick="return confirm('¿Estás seguro de eliminar este evento?');"
+        >
+          Eliminar
+        </button>
+      </form>
       <% }) %>
     </ul>
     <p><a href="/">Volver</a></p>
