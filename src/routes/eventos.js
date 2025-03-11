@@ -1,19 +1,16 @@
 import express from "express";
 import { getConnection } from "../database.js";
 
-import { crearEvento } from "../models/evento.js";
-import { obtenerEventos } from "../models/evento.js";
+import { crearEvento, obtenerEventos } from "../models/evento.js";
+//import { obtenerEventos } from "../models/evento.js";
 
 const router = express.Router();
 
 router.get("/crearEventos", (req, res) => {
   try {
-    res.render("paginas/crearEventos"); // Asegurar que "crearEventos.ejs" está en la carpeta correcta
+    res.render("paginas/crearEventos");
   } catch (error) {
-    console.error(
-      "❌ Error al cargar la página de creación de eventos:",
-      error
-    );
+    console.error(" Error al cargar la página de creación de eventos:", error);
     res.status(500).send("Error al cargar la página");
   }
 });
@@ -74,9 +71,9 @@ router.get("/editar/:id", (req, res) => {
       return res.status(404).send("Evento no encontrado");
     }
 
-    res.render("paginas/modificarEvento", { evento }); // Asegurar que la vista existe
+    res.render("paginas/modificarEvento", { evento });
   } catch (error) {
-    console.error("❌ Error al obtener el evento:", error);
+    console.error("Error al obtener el evento:", error);
     res.status(500).send("Error al obtener el evento");
   }
 });
@@ -98,7 +95,7 @@ router.post("/modificar/:id", (req, res) => {
 
     res.redirect("/eventos/visualizar");
   } catch (error) {
-    console.error("❌ Error al modificar evento:", error);
+    console.error("Error al modificar evento:", error);
     res.status(500).send("Error al modificar el evento");
   }
 });
@@ -110,8 +107,25 @@ router.post("/eliminar/:id", (req, res) => {
     db.prepare("DELETE FROM eventos WHERE id = ?").run(id);
     res.redirect("/eventos/visualizar");
   } catch (error) {
-    console.error("❌ Error al eliminar evento:", error);
+    console.error("Error al eliminar evento:", error);
     res.status(500).send("Error al eliminar el evento");
+  }
+});
+
+router.get("/detalles/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = getConnection();
+    const evento = db.prepare("SELECT * FROM eventos WHERE id = ?").get(id);
+
+    if (!evento) {
+      return res.status(404).send("Evento no encontrado");
+    }
+
+    res.render("paginas/detallesEvento", { evento });
+  } catch (error) {
+    console.error("Error al obtener los detalles del evento:", error);
+    res.status(500).send("Error al obtener el evento");
   }
 });
 
