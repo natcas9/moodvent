@@ -6,6 +6,18 @@ import { obtenerEventos } from "../models/evento.js";
 
 const router = express.Router();
 
+router.get("/crearEventos", (req, res) => {
+  try {
+    res.render("paginas/crearEventos"); // Asegurar que "crearEventos.ejs" está en la carpeta correcta
+  } catch (error) {
+    console.error(
+      "❌ Error al cargar la página de creación de eventos:",
+      error
+    );
+    res.status(500).send("Error al cargar la página");
+  }
+});
+
 router.post("/crear", (req, res) => {
   try {
     console.log(" Datos recibidos del formulario:", req.body);
