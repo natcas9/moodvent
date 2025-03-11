@@ -52,7 +52,24 @@ router.get("/visualizar", (req, res) => {
   }
 });
 
-router.post("/editar/:id", (req, res) => {
+router.get("/editar/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const db = getConnection();
+    const evento = db.prepare("SELECT * FROM eventos WHERE id = ?").get(id);
+
+    if (!evento) {
+      return res.status(404).send("Evento no encontrado");
+    }
+
+    res.render("paginas/modificarEvento", { evento }); // Asegurar que la vista existe
+  } catch (error) {
+    console.error("❌ Error al obtener el evento:", error);
+    res.status(500).send("Error al obtener el evento");
+  }
+});
+
+router.post("/modificar/:id", (req, res) => {
   try {
     const { id } = req.params;
     const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo } =
@@ -61,13 +78,13 @@ router.post("/editar/:id", (req, res) => {
 
     db.prepare(
       `
-            UPDATE eventos 
-            SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ? 
-            WHERE id = ?
-        `
+      UPDATE eventos 
+      SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ? 
+      WHERE id = ?
+    `
     ).run(nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, id);
 
-    res.redirect("/paginas/modificarEvento");
+    res.redirect("/eventos/visualizar");
   } catch (error) {
     console.error("❌ Error al modificar evento:", error);
     res.status(500).send("Error al modificar el evento");
