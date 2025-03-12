@@ -1,8 +1,6 @@
 import express from "express";
 import { getConnection } from "../database.js";
-
 import { crearEvento, obtenerEventos } from "../models/evento.js";
-//import { obtenerEventos } from "../models/evento.js";
 
 const router = express.Router();
 

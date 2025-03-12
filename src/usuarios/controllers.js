@@ -1,7 +1,6 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
 
-
 export function viewLogin(req, res) {
   res.render("pagina", {
     contenido: "paginas/login", // Use the login page as content
@@ -68,22 +67,21 @@ export function doLogout(req, res, next) {
   res.render("pagina", { contenido: "paginas/logout", session: req.session });
 }
 
-
 // pour eventos:
 
 export function viewCrearEventos(req, res) {
-  res.render("paginas/crearEventos.ejs"); 
+  res.render("paginas/crearEventos.ejs");
 }
 
-export function viewModificarEvento(req,res) {
-  const {id} = req.params;
+export function viewModificarEvento(req, res) {
+  const { id } = req.params;
 
-  const evento = eventos.find( e => e.id == id);
+  const evento = eventos.find((e) => e.id == id);
 
   if (!evento) {
     return res.status(404).send("No se encontró el evento");
   }
-  res.render("paginas/modificarEvento", {evento});
+  res.render("paginas/modificarEvento", { evento });
 }
 
 // modificación de eventos
@@ -93,7 +91,7 @@ export function modificarEvento(req, res) {
     req.body;
 
   // Usar el ID del evento para poder encontrarlo
-  const evento = eventos.find(e => e.id == id) // Deben de importarse de la bases de datos 
+  const evento = eventos.find((e) => e.id == id); // Deben de importarse de la bases de datos
   // Por ahora lo deje como un array
 
   if (!evento) {
