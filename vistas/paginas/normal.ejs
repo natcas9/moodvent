@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <%- include('../partials/head.ejs') %> <!-- Asegura que se incluya el head -->
+</head>
+<meta charset="UTF-8" />
 
-
-<title>Mis Eventos</title>
+ <title>Mis Eventos</title>
 <!-- to remove afterwards-->
+ <!--
 <style>
    
     .container {
@@ -50,20 +52,21 @@
         </div>
 
 </style>
-
+-->
 <!-- to remove afterwards-->
 
-</head>
+
 <body>
+
 <div class="container">
     <h1>Mis eventos:</h1>
 
-      <!-- Cada evento debe tener un id que lo identifique-->
+      <!--
         <div class="event" onclick="selectEvent(this);" data-id="1">
           <img src="hike.jpg" alt=" Outdoor Paintings" />
         </div>
 
-        <!-- Test-->
+     
         <div class="event" onclick="selectEvent(this);" data-id="2">
           <img src="hike.jpg" alt=" dANCE" />
         </div>
@@ -111,7 +114,7 @@
       </div>
     </div>
 
-    <!--Pour selected buttons -->
+
     <script>
       function selectEvent(element) {
         // Remove 'selected' class from all events
@@ -135,5 +138,6 @@
         location.href = `/contenido/modificarEvento/${eventId}`;
       }
     </script>
+-->
   </body>
 </html>

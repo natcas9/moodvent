@@ -5,10 +5,6 @@ import {
   doLogout,
   viewContenido,
   viewContenidoAdmin,
-  viewCrearEventos,
-  modificarEvento,
-  borrarEvento,
-  viewModificarEvento,
 } from "./controllers.js";
 
 const usuariosRouter = express.Router();
