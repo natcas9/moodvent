@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head.ejs') %>
     <title>Eventos</title>
   </head>
   <body>
@@ -12,8 +13,23 @@
       <li>
         <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
         evento.estadoAnimo %> -
-        <a href="/eventos/detalle/<%= evento.id %>">Ver más</a>
+        <a href="/eventos/detalles/<%= evento.id %>">Ver más</a>
       </li>
+      <div>
+        <a href="/eventos/editar/<%= evento.id %>"> Editar</a>
+      </div>
+      <form
+        action="/eventos/eliminar/<%= evento.id %>"
+        method="POST"
+        style="display: inline"
+      >
+        <button
+          type="submit"
+          onclick="return confirm('¿Estás seguro de eliminar este evento?');"
+        >
+          Eliminar
+        </button>
+      </form>
       <% }) %>
     </ul>
     <p><a href="/">Volver</a></p>

@@ -5,10 +5,6 @@ import {
   doLogout,
   viewContenido,
   viewContenidoAdmin,
-  viewCrearEventos,
-  modificarEvento,
-  borrarEvento,
-  viewModificarEvento
 } from "./controllers.js";
 
 const usuariosRouter = express.Router();
@@ -20,14 +16,12 @@ usuariosRouter.get("contenido/admin", viewContenidoAdmin);
 usuariosRouter.post("/login", doLogin);
 usuariosRouter.get("/logout", doLogout);
 
-usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
-usuariosRouter.get("/contenido/modificarEvento/:id", viewModificarEvento)
-usuariosRouter.post("/contenido/modificarEvento/:id", modificarEvento);
-usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
-
-
-
 export default usuariosRouter;
+
+//usuariosRouter.get("/contenido/crearEventos", viewCrearEventos);
+//usuariosRouter.get("/contenido/modificarEvento/:id", viewModificarEvento);
+//usuariosRouter.post("/contenido/modificarEvento/:id", modificarEvento);
+//usuariosRouter.post("/contenido/borrarEvento/:id", borrarEvento);
 
 /*import express from "express";
 import {

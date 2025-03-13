@@ -10,11 +10,11 @@ const dataDir = join(__dirname, "datamood");
 const dbPath = join(dataDir, "moodvent.db");
 
 if (!existsSync(dataDir)) {
-  console.log("📂 Creando carpeta 'datamood/'...");
+  //console.log("Creando carpeta 'datamood/'...");
   mkdirSync(dataDir, { recursive: true });
 }
 
-console.log(`📂 Base de datos en: ${dbPath}`);
+//console.log(` Base de datos en: ${dbPath}`);
 
 const db = new Database(dbPath, { verbose: console.log });
 
@@ -35,5 +35,5 @@ export function initDB() {
             estadoAnimo TEXT NOT NULL
         )
     `);
-  console.log("Base de datos inicializada correctamente");
+  //console.log("Base de datos inicializada correctamente");
 }

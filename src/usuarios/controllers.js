@@ -1,6 +1,24 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
+import bcrypt from "bcryptjs";
 
+//const hashedUserPass = bcrypt.hashSync("userpass", 10);
+//const hashedAdminPass = bcrypt.hashSync("adminpass", 10);
+//console.log(`BCRYPT 'userpass': ${hashedUserPass}`);
+//console.log(`BCRYPT 'adminpass': ${hashedAdminPass}`);
+
+const users = {
+  user: {
+    password: bcrypt.hashSync("userpass", 10),
+    name: "Usuario",
+    role: "user",
+  },
+  admin: {
+    password: bcrypt.hashSync("adminpass", 10),
+    name: "Administrador",
+    role: "admin",
+  },
+};
 
 export function viewLogin(req, res) {
   res.render("pagina", {
@@ -11,27 +29,20 @@ export function viewLogin(req, res) {
 }
 
 export function doLogin(req, res) {
-  const users = {
-    user: { password: "userpass", name: "Usuario", role: "user" },
-    admin: { password: "adminpass", name: "Administrador", role: "admin" },
-  };
-
-  body("username").escape(); // Se asegura que eliminar caracteres problemáticos
-  body("password").escape(); // Se asegura que eliminar caracteres problemáticos
-  // TODO: tu código aquí
+  body("username").escape();
+  body("password").escape();
 
   const { username, password } = req.body;
+  const user = users[username];
 
-  if (users[username] && users[username].password === password) {
+  if (user && bcrypt.compareSync(password, user.password)) {
     req.session.login = true;
-    req.session.nombre = users[username].name;
-    req.session.esAdmin = users[username].role === "admin";
+    req.session.nombre = user.name;
+    req.session.esAdmin = user.role === "admin";
 
-    if (req.session.esAdmin) {
-      return res.redirect("/contenido/admin");
-    } else {
-      return res.redirect("/contenido/normal");
-    }
+    return res.redirect(
+      user.role === "admin" ? "/contenido/admin" : "/contenido/normal"
+    );
   } else {
     return res.render("pagina", {
       contenido: "paginas/login",
@@ -68,22 +79,21 @@ export function doLogout(req, res, next) {
   res.render("pagina", { contenido: "paginas/logout", session: req.session });
 }
 
-
 // pour eventos:
 
 export function viewCrearEventos(req, res) {
-  res.render("paginas/crearEventos.ejs"); 
+  res.render("paginas/crearEventos.ejs");
 }
 
-export function viewModificarEvento(req,res) {
-  const {id} = req.params;
+export function viewModificarEvento(req, res) {
+  const { id } = req.params;
 
-  const evento = eventos.find( e => e.id == id);
+  const evento = eventos.find((e) => e.id == id);
 
   if (!evento) {
     return res.status(404).send("No se encontró el evento");
   }
-  res.render("paginas/modificarEvento", {evento});
+  res.render("paginas/modificarEvento", { evento });
 }
 
 // modificación de eventos
@@ -93,7 +103,7 @@ export function modificarEvento(req, res) {
     req.body;
 
   // Usar el ID del evento para poder encontrarlo
-  const evento = eventos.find(e => e.id == id) // Deben de importarse de la bases de datos 
+  const evento = eventos.find((e) => e.id == id); // Deben de importarse de la bases de datos
   // Por ahora lo deje como un array
 
   if (!evento) {

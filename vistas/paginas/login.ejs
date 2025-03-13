@@ -1,8 +1,8 @@
 <article>
   <h1>Acceso al sistema</h1>
   <fieldset>
+    <% if (!session || !session.login) { %>
     <legend>Usuario y Contraseña</legend>
-
     <form method="POST" action="/usuarios/login">
       <label for="username">Nombre:</label>
       <input type="text" id="username" name="username" required />
@@ -14,5 +14,11 @@
 
       <button type="submit">Enviar</button>
     </form>
+    <% } else { %>
+    <p>
+      Ya has iniciado sesión. <a href="/contenido/normal">Ir al contenido</a>
+    </p>
+    <% } %>
   </fieldset>
+  <p><a href="/">Volver</a></p>
 </article>
