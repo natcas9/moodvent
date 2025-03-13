@@ -1,5 +1,6 @@
 import { getConnection } from "../database.js";
-
+//Manejo de eventos utilizando la base de datos
+//Se puede crear, visualizar, modificar y eliminar eventos
 export function crearEvento({
   nombre,
   descripcion,
@@ -29,11 +30,6 @@ export function crearEvento({
 export function obtenerEventos() {
   const db = getConnection();
   return db.prepare("SELECT * FROM eventos ORDER BY fecha DESC").all();
-}
-
-export function obtenerEvento(id) {
-  const db = getConnection();
-  return db.prepare("SELECT * FROM eventos WHERE id = ?").get(id);
 }
 
 export function obtenerEventoPorId(id) {

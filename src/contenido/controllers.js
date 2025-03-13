@@ -40,19 +40,29 @@ export function doLogin(req, res) {
 }
 
 export function viewContenido(req, res) {
-  if (req.session.login) {
-    res.render("paginas/contenido.ejs", { usuario: req.session.name });
-  } else {
-    res.render("paginas/noPermisos.ejs");
+  let contenido = "paginas/noPermisos";
+
+  if (req.session && req.session.login) {
+    contenido = "paginas/contenido";
   }
+
+  res.render("pagina", {
+    contenido,
+    session: req.session,
+  });
 }
 
 export function viewContenidoAdmin(req, res) {
-  if (req.session.administrator) {
-    res.render("paginas/contenidoAdmin.ejs", { usuario: req.session.name });
-  } else {
-    res.render("paginas/noPermisos.ejs");
+  let contenido = "paginas/noPermisos";
+
+  if (req.session && req.session.esAdmin) {
+    contenido = "paginas/contenidoAdmin";
   }
+
+  res.render("pagina", {
+    contenido,
+    session: req.session,
+  });
 }
 
 export function doLogout(req, res, next) {
@@ -65,26 +75,3 @@ export function doLogout(req, res, next) {
 
   res.render("pagina", { contenido: "paginas/logout", session: req.session });
 }
-
-/*export function viewContenidoNormal(req, res) {
-    let contenido = 'paginas/noPermisos';
-    if (req.session != null && req.session.nombre != null) {
-        contenido = 'paginas/normal';
-    }
-    res.render('pagina', {
-        contenido,
-        session: req.session
-    });
-}
-
-export function viewContenidoAdmin(req, res) {
-    let contenido = 'paginas/noPermisos';
-    if (req.session != null && req.session.login && req.session.nombre === 'Administrador') {
-        contenido = 'paginas/admin';
-    }
-    res.render('pagina', {
-        contenido,
-        session: req.session
-    });
-}
-    */
