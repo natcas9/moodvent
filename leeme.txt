@@ -1,0 +1,8 @@
+Funcionalidades completadas 
+login: 1 usuario y 1 admin - 100% 
+claves 
+Nombre: user 
+Contraseña: userpass
+Nombre: admin
+Contraseña: adminpass
+Creación, modificación, eliminación y visualización de eventos - 100%
