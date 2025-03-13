@@ -3,9 +3,9 @@ import { body, validationResult } from "express-validator";
 
 export function viewLogin(req, res) {
   res.render("pagina", {
-    contenido: "paginas/login", // Use the login page as content
-    session: req.session, // Pass session data
-    error: null, // Pass error if any
+    contenido: "paginas/login",
+    session: req.session,
+    error: null,
   });
 }
 
@@ -15,9 +15,8 @@ export function doLogin(req, res) {
     admin: { password: "adminpass", name: "Administrador", role: "admin" },
   };
 
-  body("username").escape(); // Se asegura que eliminar caracteres problemáticos
-  body("password").escape(); // Se asegura que eliminar caracteres problemáticos
-  // TODO: tu código aquí
+  body("username").escape();
+  body("password").escape();
 
   const { username, password } = req.body;
 

@@ -1,6 +1,11 @@
 import express from "express";
-import { getConnection } from "../database.js";
-import { crearEvento, obtenerEventos } from "../models/evento.js";
+import {
+  crearEvento,
+  obtenerEventos,
+  obtenerEventoPorId,
+  modificarEvento,
+  eliminarEvento,
+} from "../models/evento.js";
 
 const router = express.Router();
 
@@ -61,14 +66,10 @@ router.get("/visualizar", (req, res) => {
 
 router.get("/editar/:id", (req, res) => {
   try {
-    const { id } = req.params;
-    const db = getConnection();
-    const evento = db.prepare("SELECT * FROM eventos WHERE id = ?").get(id);
-
+    const evento = obtenerEventoPorId(req.params.id);
     if (!evento) {
       return res.status(404).send("Evento no encontrado");
     }
-
     res.render("paginas/modificarEvento", { evento });
   } catch (error) {
     console.error("Error al obtener el evento:", error);
@@ -78,19 +79,7 @@ router.get("/editar/:id", (req, res) => {
 
 router.post("/modificar/:id", (req, res) => {
   try {
-    const { id } = req.params;
-    const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo } =
-      req.body;
-    const db = getConnection();
-
-    db.prepare(
-      `
-      UPDATE eventos 
-      SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ? 
-      WHERE id = ?
-    `
-    ).run(nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, id);
-
+    modificarEvento(req.params.id, req.body);
     res.redirect("/eventos/visualizar");
   } catch (error) {
     console.error("Error al modificar evento:", error);
@@ -100,9 +89,7 @@ router.post("/modificar/:id", (req, res) => {
 
 router.post("/eliminar/:id", (req, res) => {
   try {
-    const { id } = req.params;
-    const db = getConnection();
-    db.prepare("DELETE FROM eventos WHERE id = ?").run(id);
+    eliminarEvento(req.params.id);
     res.redirect("/eventos/visualizar");
   } catch (error) {
     console.error("Error al eliminar evento:", error);
@@ -112,9 +99,7 @@ router.post("/eliminar/:id", (req, res) => {
 
 router.get("/detalles/:id", (req, res) => {
   try {
-    const { id } = req.params;
-    const db = getConnection();
-    const evento = db.prepare("SELECT * FROM eventos WHERE id = ?").get(id);
+    const evento = obtenerEventoPorId(req.params.id);
 
     if (!evento) {
       return res.status(404).send("Evento no encontrado");
