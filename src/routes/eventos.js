@@ -1,3 +1,4 @@
+//Se manejan las solicitudes para las vistas de manejo de eventos
 import express from "express";
 import {
   crearEvento,
@@ -20,8 +21,6 @@ router.get("/crearEventos", (req, res) => {
 
 router.post("/crear", (req, res) => {
   try {
-    console.log(" Datos recibidos del formulario:", req.body);
-
     const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo } =
       req.body;
 
