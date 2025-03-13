@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head.ejs') %> <!-- Asegura que se incluya el head -->
+</head>
+<meta charset="UTF-8" />
+
+ <title>Mis Eventos</title>
+<!-- to remove afterwards-->
+ <!--
+<style>
+   
+    .container {
+        width: 400px; 
+        padding: 20px; /*pour pas que ca soit coller au cote*/
+        border: solid 1px #ccc;
+      }
+
+      .events {
+        max-height: 300px; /* Fixed max-height */
+        overflow-y: auto; /* Enables vertical scrollbar if content overflows */
+        padding: 10px;
+
+        margin-bottom: 10px; /* Space below the events box */
+      }
+
+      .event {
+        border: solid 2px #000;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f9f9f9;
+      }
+
+      .selected {
+        background-color: #e0e0e0;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #000; /* Black background */
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Mis eventos:</h1>
+
+      <div class="events">
+        <div class="event" onclick="selectEvent(this);">
+          <img src="hike.jpg" alt=" Hike" />
+        </div>
+
+</style>
+-->
+<!-- to remove afterwards-->
+
+
+<body>
+
+<div class="container">
+    <h1>Mis eventos:</h1>
+
+      <!--
+        <div class="event" onclick="selectEvent(this);" data-id="1">
+          <img src="hike.jpg" alt=" Outdoor Paintings" />
+        </div>
+
+     
+        <div class="event" onclick="selectEvent(this);" data-id="2">
+          <img src="hike.jpg" alt=" dANCE" />
+        </div>
+
+        <div class="event" onclick="selectEvent(this);"  data-id="3">
+          <img src="hike.jpg" alt=" A" />
+        </div>
+
+        <div class="event" onclick="selectEvent(this);"  data-id="4">
+          <img src="hike.jpg" alt=" B" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="5">
+          <img src="hike.jpg" alt=" C" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="6">
+          <img src="hike.jpg" alt=" D" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="7">
+          <img src="hike.jpg" alt=" E" />
+        </div>
+
+        <div class="event" onclick="selectEvent(this);"  data-id="8">
+          <img src="hike.jpg" alt=" Music" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="9">
+          <img src="hike.jpg" alt=" A" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="10">
+          <img src="hike.jpg" alt=" b" />
+        </div>
+        <div class="event" onclick="selectEvent(this);"  data-id="11">
+          <img src="hike.jpg" alt=" Test" />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="crear" onclick="location.href='/contenido/crearEventos';">
+          
+          Crear
+
+        </button>
+        <button id="modificar" onclick="modificarEvento();">
+          Modificar
+        </button>
+      </div>
+    </div>
+
+
+    <script>
+      function selectEvent(element) {
+        // Remove 'selected' class from all events
+        var events = document.querySelectorAll(".event");
+        events.forEach(event => 
+          event.classList.remove("selected")
+        );
+
+        // Add 'selected' class to the clicked event
+        var eventDiv = element.closest(".event");
+        eventDiv.classList.add("selected");
+      }
+
+      function modificarEvento() {
+        var selectEvent = document.querySelector(".event.selected");
+        if (!selectEvent) {
+          alert("Tienes que seleccionar un evento a modificar");
+          return;
+        }
+        var eventId = selectEvent.getAttribute("data-id");
+        location.href = `/contenido/modificarEvento/${eventId}`;
+      }
+    </script>
+-->
+  </body>
+</html>

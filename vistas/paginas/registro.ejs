@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Registro</title>
+    
+<body>
+    <h1>Bienvenido a Moodvent!</h1>
+    <h2>Háblanos de ti</h2>
+  <form action="/eventos/registrar" method="POST">  <!-- faire le registrar a ajouter-->
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" requiered />
+    </div>
+    <div>
+        <label for="nombre">Appellido:</label>
+        <input type="text" id="nombre" name="nombre" requiered />
+    </div>
+    <div>
+        <label for="Edad">Edad:</label>
+        <input type="number" id="Edad" name="Edad" requiered />
+      </div>
+
+    <div>
+      <label for="mail">Mail:</label>
+      <input type="text" id="mail" name="mail" required />
+    </div>
+    <div>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" requiered />
+    </div>
+    <div>
+      <label for="username"><U></U>sername:</label>
+      <input type="username" id="username" name="username" requiered />
+    </div>
+    <button type="Connect">Connect</button>
+    <p><a href="/eventos/registrar">Ver todos los eventos</a></p> <!-- registro to add -->
+
+    <label for="Login"> If you already have a login <a href="login.ejs" target="_blank">Sign in here
+    </a> </label>
+    <br><br>
+  </form>
+</body>
+</html>
+
+
