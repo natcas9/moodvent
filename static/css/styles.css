@@ -1,5 +1,4 @@
-/* este será el css utilizado */
-
+/* este será el css utilizado de la página principal */
 body {
   background-color: #520556;
   font-family: Arial, sans-serif;
@@ -9,7 +8,7 @@ body {
 }
 
 a {
-  color: black;
+  color: white;
 }
 
 .logo {
@@ -59,9 +58,9 @@ td {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 20px;
+  padding: 65px;
   max-width: 1200px;
-  margin: auto;
+  margin-bottom: 20px;
 }
 
 .text-container {
@@ -88,14 +87,14 @@ td {
 }
 
 .slide-image {
-  max-width: 100%; /* Asegura que la imagen no sobrepase el contenedor */
-  max-height: 100%; /* Asegura que la imagen no sobrepase la altura del contenedor */
-  object-fit: cover; /* La imagen cubre completamente el espacio sin distorsionarse */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 .mySlides {
-  width: 100%; /* Asegura que cada imagen ocupe el 100% de la columna */
-  height: 100%; /* Asegura que la altura de las imágenes sea igual a la del contenedor */
+  width: 100%;
+  height: 100%;
 }
 
 .events-container {
@@ -113,6 +112,7 @@ td {
   display: block;
   width: 100%;
   height: 100%;
+  border-radius: 3px;
 }
 
 .overlay {
@@ -153,4 +153,8 @@ td {
   align-items: center;
   max-width: 1400px;
   margin: auto;
+}
+
+.title {
+  padding: 30px 30px 0 30px;
 }
