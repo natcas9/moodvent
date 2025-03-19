@@ -7,51 +7,42 @@
 <body>
     <h1>Bienvenido a Moodvent!</h1>
     <h2>Háblanos de ti</h2>
-  <form action="/eventos/registrar" method="POST">  <!-- faire le registrar a ajouter-->
+  <form action="/usuarios/registro" method="POST">  
     <div>
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" requiered />
     </div>
     <div>
-        <label for="nombre">Appellido:</label>
-        <input type="text" id="nombre" name="nombre" requiered />
+        <label for="nombre">Apellido:</label>
+        <input type="text" id="apellido" name="nombre" requiered />
     </div>
     <div>
         <label for="Edad">Edad:</label>
-        <input type="number" id="Edad" name="Edad" requiered />
+        <input type="number" id="edad" name="edad" requiered />
       </div>
-
     <div>
       <label for="mail">Mail:</label>
-      <input type="text" id="mail" name="mail" required />
+      <input type="text" id="email" name="email" required />
+    </div>
+    <div>
+      <label for="username">Nombre de Usuario:</label>
+      <input type="text" id="username" name="username" required />
     </div>
     <div>
       <label for="password">Contraseña:</label>
       <input type="password" id="password" name="password" requiered />
     </div>
     <div>
-      <label for="username"><U></U>sername:</label>
-      <input type="username" id="username" name="username" requiered />
+      <label for="role">Rol:</label>
+      <select name="role" id="role">
+        <option value="user">Usuario</option>
+        <option value="admin">Administrador</option>
+      </select>
     </div>
-    <button type="Connect">Connect</button>
-    <p><a href="/eventos/registrar">Ver todos los eventos</a></p> <!-- registro to add -->
-
-    <label for="Login"> If you already have a login <a href="login.ejs" target="_blank">Sign in here
-    </a> </label>
-    <br><br>
+    <button type="submit">Registrarse</button>
   </form>
+  <a href="/usuarios/login">Inicia sesión</a>
 </body>
 </html>
 
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>se está desarollando el registro de usuarios</h1>
-  </body>
-</html>
