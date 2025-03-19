@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/static/css/Eventos.css" />
+    <title>Crear Evento</title>
+  </head>
+  <body>
+    <div class="container"> 
+      <div class="form-container">
+        <h1>Crear nuevo evento</h1>
+        <form action="/eventos/crear" method="POST">
+          <div class="form-group">
+            <label for="nombre">Evento:</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" required />
+          </div>
+
+          <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" required />
+          </div>
+
+          <div class="form-group">
+            <label for="hora">Hora:</label>
+            <input type="time" id="hora" name="hora" required />
+          </div>
+
+          <div class="form-group">
+            <label for="lugar">Lugar:</label>
+            <input type="text" id="lugar" name="lugar" required />
+          </div>
+
+          <div class="form-group">
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" required />
+          </div>
+
+          <div class="form-group">
+            <label for="estadoAnimo">Estado de ánimo recomendado</label>
+            <select name="estadoAnimo" id="estadoAnimo">
+              <option value="Feliz">Feliz</option>
+              <option value="Triste">Triste</option>
+              <option value="Enojado">Enojado</option>
+              <option value="Ansioso">Ansioso</option>
+              <option value="Relajado">Relajado</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn">Crear Evento</button>
+          <p><a href="/eventos/visualizar" class="link">Ver todos los eventos</a></p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
