@@ -1,38 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <%- include('../partials/head.ejs') %>
+     <link rel="stylesheet" href="/static/css/Eventos.css" />
     <title>Modificar Evento</title>
   </head>
   <body>
-    <h1>Modificar tu evento</h1>
-    <form action="/contenido/modificarEvento/ <%= evento.id %>" method="POST">
-      <div>
+    <div class="container"> 
+    <div class="form-container">
+      <h1>Modificar tu evento</h1>
+      <form action="/eventos/modificar/<%= evento.id %>" method="POST">
+      <div class="form-group">
         <label for="nombre">Evento:</label>
         <input type="text" id="nombre" name="nombre"  value="<%= evento.nombre %>" required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" name="descripcion" value="<%= evento.descripcion %>" required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="fecha">Fecha:</label>
         <input type="date" id="fecha" name="fecha" value="<%= evento.fecha %>" required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="hora">Hora:</label>
         <input type="time" id="hora" name="hora" value="<%= evento.hora %>" required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="lugar">Lugar:</label>
         <input type="text" id="lugar" name="lugar"  value="<%= evento.lugar %>"required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="precio">Precio:</label>
         <input type="number" id="precio" name="precio" value="<%= evento.precio %>"required />
       </div>
-      <div>
+      <div class="form-group">
         <label for="estadoAnimo">Estado de ánimo recomendado</label>
         <select name="estadoAnimo" id="estadoAnimo">
           <option value="Feliz" <%= evento.estadoAnimo === 'Feliz' ? 'selected': '' %>> Feliz</option>
@@ -42,11 +46,13 @@
           <option value="Relajado" <%= evento.estadoAnimo === 'Relajado' ? 'selected' : '' %>>Relajado</option>
         </select>
       </div>
-      <button type="submit">Guardar Modificaciones </button>
+      <button type="submit" class="btn">Guardar Modificaciones </button>
     </form>
 
-    <form action="/contenido/borrarEvento/ <%= evento.id %>" method="POST">
-      <button type="submit" onclick="return confirm(' ¿ Estás seguro de que quierer eliminar este evento?')" >Borrar Evento</button>
+    <form action="/eventos/eliminar/<%= evento.id %>" method="POST">
+      <button type="submit" class="btn" onclick="return confirm(' ¿ Estás seguro de que quierer eliminar este evento?')" >Borrar Evento</button>
     </form>
+    </div>
+    </div>
   </body>
 </html>

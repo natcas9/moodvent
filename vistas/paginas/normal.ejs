@@ -1,97 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-
-
-<title>Mis Eventos</title>
-<!-- to remove afterwards-->
-<style>
-    </style>
-
-<!-- to remove afterwards-->
-
+<head>
+    <%- include('../partials/head.ejs') %> 
 </head>
+<meta charset="UTF-8" />
 <body>
 <div class="container">
-    <h1>Mis eventos:</h1>
-
-      <!-- Cada evento debe tener un id que lo identifique-->
-        <div class="event" onclick="selectEvent(this);" data-id="1">
-          <img src="hike.jpg" alt=" Outdoor Paintings" />
-        </div>
-
-        <!-- Test-->
-        <div class="event" onclick="selectEvent(this);" data-id="2">
-          <img src="hike.jpg" alt=" dANCE" />
-        </div>
-
-        <div class="event" onclick="selectEvent(this);"  data-id="3">
-          <img src="hike.jpg" alt=" A" />
-        </div>
-
-        <div class="event" onclick="selectEvent(this);"  data-id="4">
-          <img src="hike.jpg" alt=" B" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="5">
-          <img src="hike.jpg" alt=" C" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="6">
-          <img src="hike.jpg" alt=" D" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="7">
-          <img src="hike.jpg" alt=" E" />
-        </div>
-
-        <div class="event" onclick="selectEvent(this);"  data-id="8">
-          <img src="hike.jpg" alt=" Music" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="9">
-          <img src="hike.jpg" alt=" A" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="10">
-          <img src="hike.jpg" alt=" b" />
-        </div>
-        <div class="event" onclick="selectEvent(this);"  data-id="11">
-          <img src="hike.jpg" alt=" Test" />
-        </div>
-      </div>
-
-      <div class="buttons">
-        <button id="crear" onclick="location.href='/contenido/crearEventos';">
-          
-          Crear
-
-        </button>
-        <button id="modificar" onclick="modificarEvento();">
-          Modificar
-        </button>
-      </div>
-    </div>
-
-    <!--Pour selected buttons -->
-    <script>
-      function selectEvent(element) {
-        // Remove 'selected' class from all events
-        var events = document.querySelectorAll(".event");
-        events.forEach(event => 
-          event.classList.remove("selected")
-        );
-
-        // Add 'selected' class to the clicked event
-        var eventDiv = element.closest(".event");
-        eventDiv.classList.add("selected");
-      }
-
-      function modificarEvento() {
-        var selectEvent = document.querySelector(".event.selected");
-        if (!selectEvent) {
-          alert("Tienes que seleccionar un evento a modificar");
-          return;
-        }
-        var eventId = selectEvent.getAttribute("data-id");
-        location.href = `/contenido/modificarEvento/${eventId}`;
-      }
-    </script>
+    <p>Hola Usuario! Estamos trabajando para que puedas ver todo lo que Moodvent te puede ofrecer. Gracias por registrarte! </p>
   </body>
 </html>
