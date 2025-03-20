@@ -157,7 +157,7 @@ td {
 
 /* Navbar */
 .navbar {
-  background: var(background #ff9900);
+  background: #ff9900;
   display: flex;
   justify-content: center;
   padding: 15px 0;
