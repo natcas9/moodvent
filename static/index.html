@@ -9,100 +9,109 @@
   <body>
     <h1>MoodVent nueva version</h1>
     <div class="saludo">
-      <p>Inicia sesión</p>
       <a href="/usuarios/login">Login</a>
       <a href="/usuarios/registro">Registro</a>
     </div>
 
-    <div class="slideshow-container">
-      <div class="mySlides fade">
-        <img src="img/eventos/evento1.jpg" style="width: 100%" />
-      </div>
-
-      <div class="mySlides fade">
-        <img src="img/eventos/evento2.jpg" style="width: 100%" />
-      </div>
-
-      <div class="mySlides fade">
-        <img src="img/eventos/evento3.jpg" style="width: 100%" />
-      </div>
-    </div>
     <div class="content-container">
       <div class="text-container">
         <h1>Moodvent</h1>
-        <h4>todos los eventos en un mismo lugar</h4>
+        <h4>¿En que mood estas hoy?</h4>
         <p>
           Moodvent es una aplicación que te permite encontrar eventos de acuerdo
           a tu estado de ánimo. Regístrate y encuentra eventos que te hagan
           sentir bien.
         </p>
-        <button>Registro</button>
         <a href="/usuarios/registro">Registro</a>
       </div>
+      <!--Slideshow html obtenido de W3schools-->
       <div class="image-container">
-        <img src="img/eventos/evento2.jpg" alt="" />
+        <div class="slideshow-container">
+          <div class="mySlides fade">
+            <img
+              src="img/eventos/concierto3.png"
+              style="width: 100%"
+              class="slide-image"
+            />
+          </div>
+
+          <div class="mySlides fade">
+            <img
+              src="img/eventos/luces2.jpg"
+              style="width: 100%"
+              class="slide-image"
+            />
+          </div>
+
+          <div class="mySlides fade">
+            <img
+              src="img/eventos/orquesta1.jpg"
+              style="width: 100%"
+              class="slide-image"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div class="events-container">
-      <h2>¿Como te sientes hoy?</h2>
-      <h3>A cuál evento te gustaría asistir...</h3>
+      <div class="title">
+        <h2>¿Estás listo?</h2>
+        <h3>Encuentra tu entrenimiento perfecto...</h3>
+      </div>
+      <!--código obtenido de W3schools-->
       <div class="grid-container">
-        <div class="container-happy">
-          <img src="img/eventos/evento3.jpg" alt="Avatar" class="image" />
+        <div class="container-emotion">
+          <img
+            src="img/eventos/luces1.jpg"
+            alt="luces-inmersivas"
+            class="image"
+          />
           <div class="overlay">
-            <div class="text">Hello World</div>
+            <div class="text">¿Tranquilidad?</div>
           </div>
         </div>
 
-        <div class="container-happy">
-          <img src="img/eventos/evento3.jpg" alt="Avatar" class="image" />
+        <div class="container-emotion">
+          <img
+            src="img/eventos/fiesta1.jpg"
+            alt="fiesta-nocturna"
+            class="image"
+          />
           <div class="overlay">
-            <div class="text">Hello World</div>
+            <div class="text">¿Emoción?</div>
           </div>
         </div>
 
-        <div class="container-happy">
-          <img src="img/eventos/evento3.jpg" alt="Avatar" class="image" />
+        <div class="container-emotion">
+          <img
+            src="img/eventos/concierto1.jpg"
+            alt="fiesta-nocturna"
+            class="image"
+          />
           <div class="overlay">
-            <div class="text">Hello World</div>
+            <div class="text">¿Diversión?</div>
           </div>
         </div>
 
-        <div class="container-happy">
-          <img src="img/eventos/evento3.jpg" alt="Avatar" class="image" />
+        <div class="container-emotion">
+          <img src="img/eventos/ballet1.jpg" alt="Ballet" class="image" />
           <div class="overlay">
-            <div class="text">Hello World</div>
+            <div class="text">¿Relajación?</div>
           </div>
         </div>
       </div>
     </div>
-
-    <ul>
-      <li><a href="index.html">Inicio</a></li>
-      <li><a href="detalles.html">Detalles</a></li>
-      <li><a href="bocetos.html">Bocetos</a></li>
-      <li><a href="miembros.html">Miembros</a></li>
-      <li><a href="planificacion.html">Planificación</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-    </ul>
-    <p>
-      Una aplicación interactiva la cual conecte las emociones con
-      actividades/recursos, con el objetivo de ayudar a los usuarios a encontrar
-      entretenimiento adecuado según su estado de ánimo. Los usuarios pueden
-      registrar sus emociones y la aplicación les dará sugerencias
-      personalizadas como: música, libros, entretenimiento visual y eventos.
-      Además, la plataforma permitirá la creación y organización de eventos.
-      Igualmente, la aplicación permite a los usuarios dar feedback sobre las
-      sugerencias dadas, indicando si éstas mejoraron su estado de ánimo, con el
-      fin de que el sistema pueda ajustar futuras sugerencias. Finalmente, la
-      aplicación incluirá un historial que permite a los usuarios hacer un
-      seguimiento de su progreso emocional a lo largo del tiempo, ofreciendo una
-      experiencia personalizada!
-    </p>
-
-    <div class="container">
-      <img src="img/logo_moodvent.jpg" alt="logo_moodvent" class="logo" />
+    <div class="community-container">
+      <h2>Se parte de nuestra comunidad</h2>
+      <ol>
+        <li>Registrate</li>
+        <li>Ayudanos a conocerte mejor</li>
+        <li>Asiste a los eventos que van con tu estado de ánimo</li>
+        <li>Registra tus opiniones</li>
+        <li>Crea eventos!</li>
+      </ol>
     </div>
+
     <script src="js/app.js"></script>
   </body>
 </html>
