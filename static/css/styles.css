@@ -7,6 +7,12 @@ body {
   padding: 0;
 }
 
+.company {
+  font-family: "Noto Serif JP", serif;
+  text-decoration: none;
+  font-size: 1.8em;
+}
+
 a {
   color: white;
 }
@@ -61,6 +67,7 @@ td {
   padding: 65px;
   max-width: 1200px;
   margin-bottom: 20px;
+  margin-top: 40px;
 }
 
 .text-container {
@@ -157,43 +164,82 @@ td {
 
 /* Navbar */
 .navbar {
-  background: #ff9900;
+  background: black;
   display: flex;
-  justify-content: center;
-  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+.nav-links li:not(:first-child) {
+  margin-left: 50px;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
+  align-items: center;
   padding: 0;
   margin: 0;
 }
 
 .nav-links li {
   margin: 0 15px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: white;
   font-weight: bold;
-  padding: 10px 15px;
-  transition: background 0.3s;
+  font-size: 1.1em;
+  color: white;
+  cursor: pointer;
 }
 
-.nav-links a:hover {
-  background: var(background #ca431d);
-  border-radius: 5px;
+/* Login y Registro */
+.saludo {
+  display: flex;
+  gap: 10px;
 }
 
-/* Footer */
-.footer {
-  background: var(background #520556);
+.saludo .btn {
+  color: white;
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.saludo .btn:hover {
+  background-color: #a93214;
+}
+
+footer {
+  background-color: #1c1b1b;
   color: white;
   text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  width: 100%;
+  padding: 10px;
+  position: relative;
   bottom: 0;
+  width: 100%;
+}
+
+.title-text {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.intro-text {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+.community-card {
+  background-color: #ff9900;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  margin-right: auto;
 }
