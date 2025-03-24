@@ -3,33 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/styles.css" />
     <title>Inicio</title>
   </head>
   <body>
     <nav class="navbar">
       <ul class="nav-links">
-        <li><a href="/index.hmtl">Inicio</a></li>
-        <li><a href="/miembros.html">Nosotros</a></li>
-        <li><a href="/detalles.html">Mas Detalles</a></li>
-        <li><a href="/contacto.html">Contacto</a></li>
+        <li><a href="index.html" class="company">Moodvent</a></li>
+        <li>Eventos</li>
+        <li>Noticias</li>
+        <li>Comunidad</li>
       </ul>
+      <div class="saludo">
+        <a href="/usuarios/login" class="btn">Login</a>
+        <a href="/usuarios/registro" class="btn">Registro</a>
+      </div>
     </nav>
-    <div class="saludo">
-      <a href="/usuarios/login">Login</a>
-      <a href="/usuarios/registro">Registro</a>
-    </div>
 
     <div class="content-container">
       <div class="text-container">
-        <h1>Moodvent</h1>
-        <h4>¿En que mood estas hoy?</h4>
+        <h1 class="title-text">Música, Cultura, Deporte, Baile</h1>
+        <h3 class="intro-text">todo en un mismo lugar</h3>
+        <h4 class="intro-text">¿En que mood estás hoy?</h4>
         <p>
           Moodvent es una aplicación que te permite encontrar eventos de acuerdo
           a tu estado de ánimo. Regístrate y encuentra eventos que te hagan
           sentir bien.
         </p>
-        <a href="/usuarios/registro">Registro</a>
       </div>
       <!--Slideshow html obtenido de W3schools-->
       <div class="image-container">
@@ -74,7 +80,7 @@
             class="image"
           />
           <div class="overlay">
-            <div class="text">¿Tranquilidad?</div>
+            <div class="text title-text">¿Tranquilidad?</div>
           </div>
         </div>
 
@@ -85,7 +91,7 @@
             class="image"
           />
           <div class="overlay">
-            <div class="text">¿Emoción?</div>
+            <div class="text title-text">¿Emoción?</div>
           </div>
         </div>
 
@@ -96,29 +102,76 @@
             class="image"
           />
           <div class="overlay">
-            <div class="text">¿Diversión?</div>
+            <div class="text title-text">¿Diversión?</div>
           </div>
         </div>
 
         <div class="container-emotion">
           <img src="img/eventos/ballet1.jpg" alt="Ballet" class="image" />
           <div class="overlay">
-            <div class="text">¿Relajación?</div>
+            <div class="text title-text">¿Relajación?</div>
+          </div>
+        </div>
+        <div class="container-emotion">
+          <img
+            src="img/eventos/teatro1.jpg"
+            alt="luces-inmersivas"
+            class="image"
+          />
+          <div class="overlay">
+            <div class="text title-text">¿Tranquilidad?</div>
+          </div>
+        </div>
+
+        <div class="container-emotion">
+          <img
+            src="img/eventos/futbol1.jpg"
+            alt="fiesta-nocturna"
+            class="image"
+          />
+          <div class="overlay">
+            <div class="text title-text">¿Emoción?</div>
+          </div>
+        </div>
+
+        <div class="container-emotion">
+          <img
+            src="img/eventos/moda1.jpg"
+            alt="fiesta-nocturna"
+            class="image"
+          />
+          <div class="overlay">
+            <div class="text title-text">¿Diversión?</div>
+          </div>
+        </div>
+
+        <div class="container-emotion">
+          <img src="img/eventos/arte1.jpg" alt="Ballet" class="image" />
+          <div class="overlay">
+            <div class="text title-text">¿Relajación?</div>
           </div>
         </div>
       </div>
     </div>
     <div class="community-container">
-      <h2>Se parte de nuestra comunidad</h2>
-      <ol>
-        <li>Registrate</li>
-        <li>Ayudanos a conocerte mejor</li>
-        <li>Asiste a los eventos que van con tu estado de ánimo</li>
-        <li>Registra tus opiniones</li>
-        <li>Crea eventos!</li>
-      </ol>
+      <div class="community-card">
+        <h2>Se parte de nuestra comunidad</h2>
+        <ol>
+          <li>Registrate</li>
+          <li>Ayudanos a conocerte mejor</li>
+          <li>Asiste a los eventos que van con tu estado de ánimo</li>
+          <li>Registra tus opiniones</li>
+          <li>Crea eventos!</li>
+        </ol>
+      </div>
     </div>
-
+    <footer>
+      <h3>¿Quienes somos?</h3>
+      <p>
+        Somos un equipo que busca compartir los mejores eventos para cada
+        persona.
+      </p>
+    </footer>
     <script src="js/app.js"></script>
   </body>
 </html>
