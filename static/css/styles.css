@@ -200,11 +200,10 @@ td {
 }
 
 .saludo .btn {
-  background-color: #ca431d;
   color: white;
   padding: 8px 15px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 15px;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
