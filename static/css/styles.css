@@ -1,10 +1,11 @@
 /* este será el css utilizado de la página principal */
 body {
-  background-color: #520556;
+  background-color: #000000;
   font-family: Arial, sans-serif;
   margin: 0;
   color: azure;
   padding: 0;
+  overflow-x: hidden; /* Evita scroll horizontal */
 }
 
 .company {
@@ -15,6 +16,7 @@ body {
 
 a {
   color: white;
+  text-decoration: none;
 }
 
 .logo {
@@ -47,7 +49,8 @@ td {
 /* Fading animation */
 .fade {
   animation-name: fade;
-  animation-duration: 1.5s;
+  animation-duration: 2.5s;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes fade {
@@ -59,51 +62,86 @@ td {
   }
 }
 
-.content-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 65px;
-  max-width: 1200px;
-  margin-bottom: 20px;
-  margin-top: 40px;
-}
-
 .text-container {
   flex: 1;
   padding: 20px;
   text-align: left;
 }
 
+/* Slideshow */
+.content-containerm {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 .image-container {
-  flex: 1;
-  padding: 20px;
-  display: flex;
   width: 100%;
-  height: 200px;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-container img {
-  width: 100%;
-  max-width: 500px;
   height: auto;
-  border-radius: 10px;
+  overflow: hidden;
 }
 
-.slide-image {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+.slideshow-container {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  overflow: hidden;
 }
 
 .mySlides {
   width: 100%;
-  height: 100%;
+  height: 500px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
 }
 
+.mySlides img {
+  width: 100%;
+  max-width: 100vw;
+  height: 500px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.4; /* 👈 Opacidad para permitir texto encima */
+}
+
+/* Overlay de texto fijo */
+.slide-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.overlay-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-slide {
+  background-color: #ca431d;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-slide:hover {
+  background-color: #a93214;
+}
+
+/* Otros estilos */
 .events-container {
   background-color: #ca431d;
 }
@@ -145,8 +183,6 @@ td {
   position: absolute;
   top: 50%;
   left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
 }
@@ -173,6 +209,7 @@ td {
   align-items: center;
   padding: 15px 30px;
 }
+
 .nav-links li:not(:first-child) {
   margin-left: 50px;
 }
@@ -223,7 +260,7 @@ footer {
 }
 
 .title-text {
-  font-family: "Playfair Display", serif;
+  font-family: opensans, sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
 }
@@ -233,6 +270,7 @@ footer {
   font-optical-sizing: auto;
   font-style: normal;
 }
+
 .community-card {
   background-color: #ff9900;
   border-radius: 10px;
