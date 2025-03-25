@@ -1,0 +1,84 @@
+/* Makes both panels sit side-by-side */
+.registro-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Left panel (visual area) */
+  .left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #520556, #8b104e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ff9900;
+    font-size: 2rem;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Right panel (form) */
+  .right-panel {
+    flex: 1;
+    background-color: #ca431d;
+    padding: 60px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .right-panel h1, .right-panel h2 {
+    margin-top: 0;
+  }
+  
+  /* Navbar sits above everything */
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  form div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  input, select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #ff9900;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e58000;
+  }
+  
+  a {
+    color: #ff9900;
+    font-weight: bold;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
