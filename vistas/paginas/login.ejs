@@ -11,17 +11,35 @@
       <fieldset>
         <% if (!session || !session.login) { %>
         <legend>Usuario y Contraseña</legend>
-        <form method="POST" action="/usuarios/login">
-          <label for="username">Nombre:</label>
-          <input type="text" id="username" name="username" required />
-          <br />
+        <form action="/usuarios/login" method="POST">
+          <div>
+            <label for="username">Usuario:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value="<%= datos.username || '' %>"
+            />
+            <% if (errores.username) { %>
+            <span style="color: red"><%= errores.username.msg %></span>
+            <% } %>
+          </div>
 
-          <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" required />
-          <br />
+          <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" />
+            <% if (errores.password) { %>
+            <span style="color: red"><%= errores.password.msg %></span>
+            <% } %>
+          </div>
 
-          <button type="submit">Enviar</button>
+          <% if (error) { %>
+          <p style="color: red"><%= error %></p>
+          <% } %>
+
+          <button type="submit">Iniciar sesión</button>
         </form>
+
         <% } else { %>
         <p>
           Ya has iniciado sesión.

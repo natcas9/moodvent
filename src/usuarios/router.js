@@ -1,4 +1,6 @@
 import express from "express";
+import { body } from "express-validator";
+
 import {
   viewLogin,
   doLogin,
@@ -13,7 +15,17 @@ usuariosRouter.get("/registro", viewRegistro);
 usuariosRouter.post("/registro", doRegistro);
 
 usuariosRouter.get("/login", viewLogin);
-usuariosRouter.post("/login", doLogin);
+usuariosRouter.post(
+  "/login",
+  [
+    body("username")
+      .trim()
+      .notEmpty()
+      .withMessage("El nombre de usuario es obligatorio"),
+    body("password").notEmpty().withMessage("La contraseña es obligatoria"),
+  ],
+  doLogin
+);
 usuariosRouter.get("/logout", doLogout);
 
 export default usuariosRouter;
