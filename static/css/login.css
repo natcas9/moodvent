@@ -1,0 +1,104 @@
+/* Reset base styles */
+body {
+
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #520556, #8b104e);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+ /* Navbar styling (from partial) */
+ .navbar {
+    margin-top: 40px;
+  }
+
+  .navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .navbar .nav-links li a {
+    color: #ff9900;
+    text-decoration: none;/* si je l'ai veux souligner j'enleve*/
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  .navbar .nav-links li a:hover {
+    color: white;
+  }
+
+
+  /* Login box styling */
+  article {
+    background: #ca431d;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 12px; 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.7em;
+  }
+
+  fieldset {
+    /*border: none; */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  legend {
+    font-weight: bold;
+    color: #ff9900;
+    margin-bottom: 10px;
+  }
+
+  input {
+    width: 90%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  button {
+    margin-top: 15px;
+    background: #ff9900;
+    color: white;
+    border: none;
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background: #e08000;
+  }
+
+  /*boutton de retour*/
+  p a {
+    color: #ff9900;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  p a:hover {
+    text-decoration: underline;
+  }
+  
+
+
+
+  /*une fois logged in*/
+  /* A faire */
