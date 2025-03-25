@@ -74,12 +74,24 @@ export function viewLogin(req, res) {
     contenido: "paginas/login",
     session: req.session,
     error: null,
+    errores: {},
+    datos: {},
   });
 }
 
 export function doLogin(req, res) {
-  body("username").escape();
-  body("password").escape();
+  const errores = validationResult(req);
+  const datos = req.body;
+
+  if (!errores.isEmpty()) {
+    return res.render("pagina", {
+      contenido: "paginas/login",
+      session: req.session,
+      error: null,
+      errores: errores.mapped(), // Mapea errores por campo
+      datos,
+    });
+  }
 
   const { username, password } = req.body;
   const db = getConnection();
@@ -87,21 +99,23 @@ export function doLogin(req, res) {
     .prepare("SELECT * FROM usuarios WHERE username = ?")
     .get(username);
 
-  if (user && bcrypt.compareSync(password, user.password)) {
-    req.session.login = true;
-    req.session.nombre = user.nombre;
-    req.session.esAdmin = user.role === "admin";
-
-    return res.redirect(
-      user.role === "admin" ? "/contenido/admin" : "/contenido/normal"
-    );
-  } else {
+  if (!user || !bcrypt.compareSync(password, user.password)) {
     return res.render("pagina", {
       contenido: "paginas/login",
       session: req.session,
       error: "Usuario o contraseña incorrectos",
+      errores: {},
+      datos,
     });
   }
+
+  req.session.login = true;
+  req.session.nombre = user.nombre;
+  req.session.esAdmin = user.role === "admin";
+
+  res.redirect(
+    user.role === "admin" ? "/contenido/admin" : "/contenido/normal"
+  );
 }
 
 export function doLogout(req, res, next) {

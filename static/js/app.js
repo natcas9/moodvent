@@ -14,3 +14,12 @@ function showSlides() {
   slides[slideIndex - 1].style.display = "block";
   setTimeout(showSlides, 5000);
 }
+
+const toggle = document.getElementById("menu-toggle");
+const links = document.getElementById("nav-links");
+const saludo = document.querySelector(".saludo");
+
+toggle.addEventListener("click", () => {
+  links.classList.toggle("active");
+  saludo.classList.toggle("active");
+});
