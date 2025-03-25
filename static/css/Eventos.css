@@ -12,8 +12,16 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
 }
 
+.title {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
 /* Centered Form Box */
 .container {
     display: flex;
@@ -21,20 +29,21 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px;
+    flex-direction: column;
 }
 
 /* FORM BOX - Now with visible border */
 .form-container {
     background: #ff9900; 
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3) !important;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     text-align: left;
     border: 3px solid #8b104e; /* Forces the box */
 
-    max-height: 400px;
+    max-height: 500px;
     overflow-y: auto;
 }
 
