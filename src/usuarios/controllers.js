@@ -25,7 +25,16 @@ export function registrarUsuario({
   if (usuarioRegistrado) {
     throw new Error("El usuario ya existe");
   }
+
+  const emailRegistrado = db
+    .prepare("SELECT * FROM usuarios WHERE email = ?")
+    .get(email);
+  if (emailRegistrado) {
+    throw new Error("El email ya está registrado");
+  }
+
   const passwordHash = bcrypt.hashSync(password, 10);
+
   db.prepare(
     "INSERT INTO usuarios (nombre, apellido, edad, email, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)"
   ).run(nombre, apellido, edad, email, username, passwordHash, role);
@@ -80,42 +89,30 @@ export function viewLogin(req, res) {
 }
 
 export function doLogin(req, res) {
-  const errores = validationResult(req);
-  const datos = req.body;
-
-  if (!errores.isEmpty()) {
-    return res.render("pagina", {
-      contenido: "paginas/login",
-      session: req.session,
-      error: null,
-      errores: errores.mapped(), // Mapea errores por campo
-      datos,
-    });
-  }
-
   const { username, password } = req.body;
-  const db = getConnection();
-  const user = db
-    .prepare("SELECT * FROM usuarios WHERE username = ?")
-    .get(username);
+  const user = obtenerUsuario(username); // o tu lista fija de usuarios
 
-  if (!user || !bcrypt.compareSync(password, user.password)) {
+  if (user && bcrypt.compareSync(password, user.password)) {
+    req.session.login = true;
+    req.session.nombre = user.name;
+    req.session.esAdmin = user.role === "admin";
+
+    res.setFlash(`¡Encantado de verte de nuevo, ${user.name}!`);
+
+    return res.redirect(
+      user.role === "admin" ? "/contenido/admin" : "/usuarios/normal"
+    );
+  } else {
     return res.render("pagina", {
       contenido: "paginas/login",
       session: req.session,
       error: "Usuario o contraseña incorrectos",
-      errores: {},
-      datos,
     });
   }
-
-  req.session.login = true;
-  req.session.nombre = user.nombre;
-  req.session.esAdmin = user.role === "admin";
-
-  res.redirect(
-    user.role === "admin" ? "/contenido/admin" : "/contenido/normal"
-  );
+}
+function obtenerUsuario(username) {
+  const db = getConnection();
+  return db.prepare("SELECT * FROM usuarios WHERE username = ?").get(username);
 }
 
 export function doLogout(req, res, next) {

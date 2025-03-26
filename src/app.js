@@ -22,6 +22,22 @@ app.get("/", (req, res) => {
   };
   res.render("pagina", params);
 });
+
+// Middleware para manejar mensajes flash
+app.use((req, res, next) => {
+  res.setFlash = (msg) => {
+    req.session.flashMsg = msg;
+  };
+
+  res.locals.getAndClearFlash = () => {
+    const msg = req.session.flashMsg;
+    delete req.session.flashMsg;
+    return msg;
+  };
+
+  next();
+});
+
 app.use("/usuarios", usuariosRouter);
 app.use("/contenido", contenidoRouter);
 app.use("/eventos", eventosRouter);

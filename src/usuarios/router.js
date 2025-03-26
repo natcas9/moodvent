@@ -28,4 +28,11 @@ usuariosRouter.post(
 );
 usuariosRouter.get("/logout", doLogout);
 
+usuariosRouter.get("/normal", (req, res) => {
+  res.render("pagina", {
+    contenido: "paginas/normal",
+    session: req.session,
+  });
+});
+
 export default usuariosRouter;

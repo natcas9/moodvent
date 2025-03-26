@@ -6,6 +6,7 @@
 
   <body>
     <%- include('./partials/navbar.ejs') %>
+
     <div id="contenedor">
       <% if (session && session.login) { %> <%-
       include('./partials/cabecera.ejs', { session: locals.session }) %> <%-
@@ -13,12 +14,28 @@
 
       <main>
         <article><%- include(contenido) %></article>
+
+        <% if (getAndClearFlash && getAndClearFlash()) { %>
+        <dialog open class="flash-dialog" id="flashModal">
+          <p><%= getAndClearFlash() %></p>
+          <form method="dialog">
+            <button>OK</button>
+          </form>
+        </dialog>
+
+        <script>
+          setTimeout(() => {
+            const dialog = document.getElementById("flashModal");
+            if (dialog) dialog.close();
+          }, 4000);
+        </script>
+        <% } %>
       </main>
 
       <%- include('./partials/sidebarDer.ejs') %> <%-
       include('./partials/pie.ejs') %>
     </div>
-    <!-- Fin del contenedor -->
+
     <footer><%- include('./partials/pie.ejs') %></footer>
   </body>
 </html>
