@@ -13,6 +13,12 @@ body {
   text-decoration: none;
   font-size: 1.8em;
   color: white;
+  font-weight: 600;
+}
+
+.title-overlay {
+  font-family: "Noto Serif JP", serif;
+  font-size: 35px;
 }
 
 a {
@@ -285,7 +291,6 @@ td {
   margin-right: auto;
 }
 
-/* 🔻 NAVBAR RESPONSIVE 🔻 */
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -338,6 +343,7 @@ td {
   justify-content: space-between;
   padding: 30px 50px;
   flex-wrap: wrap;
+  text-align: center;
 }
 
 .footer-column {
@@ -380,7 +386,7 @@ td {
 
 .events-title {
   text-align: center;
-  font-size: 2em;
+  font-size: 28px;
   margin: 20px;
   font-family: "Noto Serif JP", serif;
 }
