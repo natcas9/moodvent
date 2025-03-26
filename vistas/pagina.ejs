@@ -5,8 +5,11 @@
   </head>
 
   <body>
-    <%- include('./partials/navbar.ejs') %>
-
+    <% const mostrarLayoutCompleto = ( contenido === "paginas/normal" ||
+    contenido === "paginas/admin" ); %> <% const ocultarTodo = ( contenido ===
+    "paginas/login" || contenido === "paginas/registro" ); %> <% if
+    (!ocultarTodo) { %> <%- include('./partials/navbar.ejs') %> <% } %> <% if
+    (mostrarLayoutCompleto) { %>
     <div id="contenedor">
       <% if (session && session.login) { %> <%-
       include('./partials/cabecera.ejs', { session: locals.session }) %> <%-
@@ -35,7 +38,13 @@
       <%- include('./partials/sidebarDer.ejs') %> <%-
       include('./partials/pie.ejs') %>
     </div>
+    <% } else { %>
 
+    <main>
+      <article><%- include(contenido) %></article>
+    </main>
+    <% } %> <% if (!ocultarTodo) { %>
     <footer><%- include('./partials/pie.ejs') %></footer>
+    <% } %>
   </body>
 </html>
