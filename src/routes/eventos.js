@@ -56,7 +56,11 @@ router.post("/crear", (req, res) => {
 router.get("/visualizar", (req, res) => {
   try {
     const eventos = obtenerEventos();
-    res.render("paginas/eventos.ejs", { eventos });
+    res.render("pagina", {
+      contenido: "paginas/eventos",
+      session: req.session,
+      eventos,
+    });
   } catch (error) {
     console.error("Error al obtener eventos:", error);
     res.status(500).send("Error al obtener los eventos");
