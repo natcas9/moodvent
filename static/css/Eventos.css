@@ -5,10 +5,14 @@
     box-sizing: border-box;
 }
 
+/* Las dimensiones no se ven tan correctas -> 
+toca cambiarlas para que se vea mejor */
 body {
     font-family: Arial, sans-serif;
-    background-image: url('/static/img/Background.jpg');
+    background-image: url('/img/Background.jpg');
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
