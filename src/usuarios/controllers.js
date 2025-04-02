@@ -50,13 +50,6 @@ export function viewEventos(req, res) {
   res.render("pagina", { contenido: "paginas/visualizarEventos", session: req.session });
 }
 
-
-export function viewRegistro(req, res) {
-  res.render("pagina", { contenido: "paginas/registro", session: req.session });
-}
-
-
-
 export function doRegistro(req, res) {
   console.log("Datos recibidos en el registro:", req.body);
 
