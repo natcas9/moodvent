@@ -1,108 +1,109 @@
 /* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Las dimensiones no se ven tan correctas -> 
 toca cambiarlas para que se vea mejor */
 body {
-    font-family: Arial, sans-serif;
-    background-image: url('/img/fondoo.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-image: url("/img/fondoo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
 }
 
 .title {
-    color: #ffffff;
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #000000;
 }
 /* Centered Form Box */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding: 20px;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  flex-direction: column;
 }
 
 /* FORM BOX - Now with visible border */
 .form-container {
-    background: #ff9900; 
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3) !important;
-    width: 100%;
-    max-width: 500px;
-    text-align: left;
-    border: 3px solid #8b104e; /* Forces the box */
+  background: #000000;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3) !important;
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+  border: 3px solid #8b104e; /* Forces the box */
 
-    max-height: 500px;
-    overflow-y: auto;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .form-group {
-    margin-bottom: 20px; 
-    display: flex;
-    flex-direction: column; 
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Label Style */
 label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #520556;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffffff;
 }
 
 /* Input & Select */
 input,
 select {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid #8b104e;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #8b104e;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
 }
 
 /* BUTTON STYLES */
 .btn {
-    background-color: #8b104e;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    cursor: pointer;
-    font-size: 18px;
-    margin-top: 15px;
-    transition: background 0.3s ease;
+  background-color: #7b0e45;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 18px;
+  margin-top: 15px;
+  transition: background 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #ca431d; 
+  background-color: #650c38;
 }
 
 /* Links */
 .link {
-    color: #520556;
-    text-decoration: none;
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 15px;
+  color: #650c38;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 15px;
 }
 
 .link:hover {
-    text-decoration: underline;
+  color: #8b104e;
 }
