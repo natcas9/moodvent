@@ -3,7 +3,6 @@ node_modules/
 
 src/datamood/moodvent.db
 
-
 .env
 
 /logs/
