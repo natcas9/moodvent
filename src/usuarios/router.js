@@ -12,6 +12,7 @@ import {
 const usuariosRouter = express.Router();
 
 usuariosRouter.get("/registro", viewRegistro);
+
 usuariosRouter.post("/registro", doRegistro);
 
 usuariosRouter.get("/login", viewLogin);
