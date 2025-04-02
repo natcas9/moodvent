@@ -13,7 +13,25 @@ import {
 const usuariosRouter = express.Router();
 
 usuariosRouter.get("/registro", asyncHandler(viewRegistro));
-usuariosRouter.post("/registro", asyncHandler(doRegistro));
+usuariosRouter.post(
+  "/registro",
+  [
+    body("nombre").trim().notEmpty().withMessage("El nombre es obligatorio"),
+    body("apellido")
+      .trim()
+      .notEmpty()
+      .withMessage("El apellido es obligatorio"),
+    body("edad")
+      .isInt({ min: 1 })
+      .withMessage("La edad debe ser un número válido"),
+    body("email").isEmail().withMessage("Correo electrónico no válido"),
+    body("username").trim().notEmpty().withMessage("El usuario es obligatorio"),
+    body("password").notEmpty().withMessage("La contraseña es obligatoria"),
+    body("role").notEmpty().withMessage("El rol es obligatorio"),
+  ],
+  asyncHandler(doRegistro)
+);
+
 usuariosRouter.get("/login", asyncHandler(viewLogin));
 usuariosRouter.post(
   "/login",
