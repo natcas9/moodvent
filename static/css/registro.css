@@ -5,20 +5,19 @@
 }
 
 .left-panel {
-  flex: 1;
-  background: linear-gradient(135deg, #520556, #8b104e);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffcc00;
-  font-size: 1.8rem;
-  padding: 20px;
-  text-align: center;
+  width: 50%;
+  height: 100vh;
+  background-image: url("/img/background_registro1.jpg");
+  background-size: cover;
+  background-position: center;
 }
+
+/* TO FIX THE IMAGE IT GETS CUT*/
+
 
 .right-panel {
   flex: 1;
-  background-color: #ca431d;
+  background-color: #8b104e;
   padding: 60px;
   color: white;
   display: flex;
