@@ -1,0 +1,46 @@
+import pino from "pino";
+import { config } from "./config.js";
+import { join } from "node:path";
+
+const now = new Date();
+const logFile = `${now.toISOString().replaceAll(/[^0-9A-Z]/gi, "_")}.log`;
+
+const transportConfig = {
+  targets: [
+    {
+      level: config.logger.level,
+      target: "pino/file",
+      options: {
+        destination: join(config.logs, logFile),
+        mkdir: true,
+      },
+    },
+  ],
+};
+
+// También mostrar por consola en desarrollo
+if (!config.isProduction) {
+  transportConfig.targets.push({
+    level: config.logger.level,
+    target: "pino-pretty", // mucho mejor para desarrollo visual
+    options: {
+      destination: 1, // stdout
+      colorize: true,
+      translateTime: "SYS:standard",
+    },
+  });
+}
+
+export const logger = pino({
+  ...config.logger,
+  transport: transportConfig,
+});
+
+process.on("uncaughtException", (err) => {
+  logger.error(err, "uncaughtException");
+  process.exitCode = 1;
+});
+
+process.on("unhandledRejection", (reason) =>
+  logger.error(reason, "unhandledRejection")
+);
