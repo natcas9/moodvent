@@ -1,14 +1,11 @@
 import session from "express-session";
-import { body, validationResult } from "express-validator";
+import { body, validationResult, matchedData } from "express-validator";
+import { logger } from "../logger.js";
 import bcrypt from "bcryptjs";
 import { getConnection } from "../database.js";
 
-//const hashedUserPass = bcrypt.hashSync("userpass", 10);
-//const hashedAdminPass = bcrypt.hashSync("adminpass", 10);
-//console.log(`BCRYPT 'userpass': ${hashedUserPass}`);
-//console.log(`BCRYPT 'adminpass': ${hashedAdminPass}`);
-
-export function registrarUsuario({
+// Función para insertar nuevo usuario
+export async function registrarUsuario({
   nombre,
   apellido,
   edad,
@@ -33,7 +30,7 @@ export function registrarUsuario({
     throw new Error("El email ya está registrado");
   }
 
-  const passwordHash = bcrypt.hashSync(password, 10);
+  const passwordHash = await bcrypt.hash(password, 10);
 
   db.prepare(
     "INSERT INTO usuarios (nombre, apellido, edad, email, username, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)"
@@ -41,56 +38,47 @@ export function registrarUsuario({
 }
 
 export function viewRegistro(req, res) {
-  res.render("pagina", { contenido: "paginas/registro", session: req.session });
+  res.render("pagina", {
+    contenido: "paginas/registro",
+    session: req.session,
+    errores: {},
+    datos: {},
+    error: null,
+  });
 }
 
-// to view the events :
+export async function doRegistro(req, res) {
+  const errores = validationResult(req);
+  const datos = matchedData(req);
 
-export function viewEventos(req, res) {
-  res.render("pagina", { contenido: "paginas/visualizarEventos", session: req.session });
-}
+  console.log("📦 Datos validados:", datos); // 🔍 Este log es importante
 
-
-export function viewRegistro(req, res) {
-  res.render("pagina", { contenido: "paginas/registro", session: req.session });
-}
-
-
-
-export function doRegistro(req, res) {
-  console.log("Datos recibidos en el registro:", req.body);
-
-  const { nombre, apellido, edad, email, username, password, role } = req.body;
-
-  if (
-    !nombre ||
-    !apellido ||
-    !edad ||
-    !email ||
-    !username ||
-    !password ||
-    !role
-  ) {
-    console.error(" Error: Falta un campo en el registro");
-    return res.status(400).send("Todos los campos son obligatorios");
+  if (!errores.isEmpty()) {
+    return res.render("pagina", {
+      contenido: "paginas/registro",
+      session: req.session,
+      errores: errores.mapped(),
+      datos,
+      error: null,
+    });
   }
 
   try {
-    registrarUsuario({
-      nombre,
-      apellido,
-      edad,
-      email,
-      username,
-      password,
-      role,
-    });
+    await registrarUsuario(datos);
     res.redirect("/usuarios/login");
   } catch (error) {
-    console.error(" Error en el registro:", error);
-    res.status(500).send("Error al guardar el usuario");
+    logger.error("❌ Error en el registro");
+    logger.debug(error.message);
+    res.render("pagina", {
+      contenido: "paginas/registro",
+      session: req.session,
+      error: error.message,
+      errores: {},
+      datos,
+    });
   }
 }
+
 export function viewLogin(req, res) {
   res.render("pagina", {
     contenido: "paginas/login",
@@ -101,37 +89,60 @@ export function viewLogin(req, res) {
   });
 }
 
-export function doLogin(req, res) {
-  const { username, password } = req.body;
-  const user = obtenerUsuario(username); // o tu lista fija de usuarios
+export async function doLogin(req, res) {
+  const errores = validationResult(req);
+  const datos = matchedData(req);
 
-  if (user && bcrypt.compareSync(password, user.password)) {
-    req.session.login = true;
-    req.session.nombre = user.name;
-    req.session.esAdmin = user.role === "admin";
-
-    res.setFlash(`¡Encantado de verte de nuevo, ${user.name}!`);
-
-    return res.redirect(
-      user.role === "admin" ? "/contenido/admin" : "/usuarios/normal"
-    );
-  } else {
+  if (!errores.isEmpty()) {
     return res.render("pagina", {
       contenido: "paginas/login",
       session: req.session,
-      error: "Usuario o contraseña incorrectos",
+      errores: errores.mapped(),
+      datos,
+      error: null,
     });
   }
+
+  const { username, password } = datos;
+  const user = obtenerUsuario(username);
+
+  if (user) {
+    try {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (passwordMatch) {
+        req.session.login = true;
+        req.session.nombre = user.nombre;
+        req.session.esAdmin = user.role === "admin";
+
+        res.setFlash(`¡Encantado de verte de nuevo, ${user.nombre}!`);
+
+        logger.info(`Inicio de sesión exitoso: ${user.username}`);
+        return res.redirect(
+          user.role === "admin" ? "/contenido/admin" : "/usuarios/normal"
+        );
+      }
+    } catch (e) {
+      logger.error("Error durante login (bcrypt falló)");
+      logger.debug(e.message);
+    }
+  }
+  logger.warn(`Intento de login fallido para username: ${username}`);
+
+  return res.render("pagina", {
+    contenido: "paginas/login",
+    session: req.session,
+    error: "Usuario o contraseña incorrectos",
+    errores: {},
+    datos,
+  });
 }
+
 function obtenerUsuario(username) {
   const db = getConnection();
   return db.prepare("SELECT * FROM usuarios WHERE username = ?").get(username);
 }
 
 export function doLogout(req, res, next) {
-  // TODO: https://expressjs.com/en/resources/middleware/session.html
-
-  // Eliminar las variables de sesion
   delete req.session.login;
   delete req.session.nombre;
   delete req.session.esAdmin;
