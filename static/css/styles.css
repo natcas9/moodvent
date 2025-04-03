@@ -449,7 +449,8 @@ div.scroll-container img {
 /* Visualizar eventos */
 /* CSS de la sección de visualizar eventos */
 /* Toca cambiar todos los px en % */
-body {
+
+ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -460,7 +461,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5%; /* was too big before */
+    padding: 5%; 
   }
   
 
@@ -480,21 +481,21 @@ body {
   margin: 10px;
   width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex; /* changed from column */
-  flex-direction: row; /* row layout for image + info */
+  display: flex; 
+  flex-direction: row; 
   align-items: center;
-  gap: 20px; /* spacing between image and info */
+  gap: 20px; 
 }
 
 .evento-img {
-  width: 25%; /* 1/4 width */
+  width: 25%; 
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .evento-info {
-  width: 75%; /* 3/4 width */
+  width: 75%; 
   text-align: left;
 }
 
@@ -533,7 +534,7 @@ body {
   cursor: pointer;
 }
 
-/*for the text to be in black*/
+
 bodys {
   color: black;
 }
@@ -546,4 +547,4 @@ bodys {
 .evento,
 .evento * {
   color: black !important;
-}
+} 
