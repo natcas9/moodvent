@@ -1,45 +1,4 @@
 <!-- visualizarEventos -->
-<!DOCTYPE html>
-<!--
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head.ejs') %>
-    <link rel="stylesheet" href="/static/css/visualizarEventos.css" />
-    <title>Eventos</title>
-  </head>
-
-  <body>
-    <h1>Lista de Eventos</h1>
-    <ul>
-      <% eventos.forEach(evento => { %>
-      <li>
-        <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
-        evento.estadoAnimo %> -
-        <a href="/eventos/detalles/<%= evento.id %>">Ver más</a>
-      </li>
-      <div>
-        <a href="/eventos/editar/<%= evento.id %>"> Editar</a>
-      </div>
-      <form
-        action="/eventos/eliminar/<%= evento.id %>"
-        method="POST"
-        style="display: inline"
-      >
-        <button
-          type="submit"
-          onclick="return confirm('¿Estás seguro de eliminar este evento?');"
-        >
-          Eliminar
-        </button>
-      </form>
-      <% }) %>
-    </ul>
-    <p><a href="/">Volver</a></p>
-    <!--SE SIGUE DESAROLLANDO-->
-    <!--esta página será para poder ver los eventos que crea cada usuario -->
-
     <!DOCTYPE html>
     <html lang="es">
       <head>
