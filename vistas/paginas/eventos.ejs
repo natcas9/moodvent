@@ -88,11 +88,39 @@
         <% }) %>
       </div>
 
+      <div class="filtros">
+        <h3>Filtrar Eventos</h3>
+        <label
+          >Temática:
+          <select id="tematica">
+            <option value="">Todas</option>
+            <option value="musica">Música</option>
+            <option value="deporte">Deporte</option>
+            <option value="arte">Arte</option>
+          </select>
+        </label>
+
+        <label
+          >Ubicación:
+          <input type="text" id="ubicacion" placeholder="Ciudad o dirección" />
+        </label>
+
+        <label
+          >Fecha:
+          <input type="date" id="fecha" />
+        </label>
+
+        <label
+          >Precio máximo:
+          <input type="number" id="precio" placeholder="Máximo" />
+        </label>
+
+        <button onclick="filtrarEventos()">Aplicar filtros</button>
+      </div>
     </div>
 
-
     <button onclick="window.location.href='/'" class="back-button">
-      BACK
+      Volver al inicio
     </button>
 
     <script>
@@ -106,4 +134,3 @@
     </script>
   </body>
 </html>
-
