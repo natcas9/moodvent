@@ -14,11 +14,7 @@
       <div class="right-panel">
         <h1>¡Bienvenido a Moodvent!</h1>
         <h2>Cuéntanos un poco sobre ti</h2>
-
-        <% if (error) { %>
-          <p style="color:red"><%= error %></p>
-        <% } %>
-
+        
         <form action="/usuarios/registro" method="POST">
           <div>
             <label for="nombre">Nombre:</label>

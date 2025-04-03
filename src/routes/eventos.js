@@ -7,6 +7,7 @@ import {
   modificarEvento,
   eliminarEvento,
 } from "../models/evento.js";
+import session from "express-session";
 
 const router = express.Router();
 
@@ -59,19 +60,19 @@ router.post("/crear", (req, res) => {
 router.get("/visualizar", (req, res) => {
   try {
     const filtros = {
-      tematica: req.query.tematica,
-      ubicacion: req.query.ubicacion,
+      estadoAnimo: req.query.estadoAnimo,
+      ubicacion: req.query.ubicacion ,
       fecha: req.query.fecha,
       precio: req.query.precio ? parseFloat(req.query.precio) : undefined,
     };
 
     const eventos = obtenerEventos(filtros); // pass filters to model
-
+    
     res.render("pagina", {
       contenido: "paginas/eventos",
       session: req.session,
-      eventos,
-    });
+      eventos, filtros
+    }); 
   } catch (error) {
     console.error("Error al obtener eventos:", error);
     res.status(500).send("Error al obtener los eventos");

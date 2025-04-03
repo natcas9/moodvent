@@ -96,6 +96,7 @@ td {
   overflow: hidden;
 }
 
+/* comment */
 .mySlides {
   width: 100%;
 
@@ -449,7 +450,8 @@ div.scroll-container img {
 /* Visualizar eventos */
 /* CSS de la sección de visualizar eventos */
 /* Toca cambiar todos los px en % */
-/*body {
+
+ /*body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -480,23 +482,33 @@ div.scroll-container img {
   margin: 10px;
   width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex; /* changed from column */
-  flex-direction: row; /* row layout for image + info */
+  display: flex; 
+  flex-direction: row; 
   align-items: center;
-  gap: 20px; /* spacing between image and info */
+  gap: 20px; 
 }
 
 .evento-img {
-  width: 25%; /* 1/4 width */
-  height: 150px;
+  width: 20%; 
+  height: 120px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .evento-info {
-  width: 75%; /* 3/4 width */
+  width: 75%; 
   text-align: left;
 }
+
+.evento-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.evento-info p {
+  margin: 5px 0;
+}
+
 
 .mas-info {
   background-color: #520556;
@@ -505,11 +517,15 @@ div.scroll-container img {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
-.descripcion {
+.evento-details {
   display: none;
   margin-top: 10px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .filtros {

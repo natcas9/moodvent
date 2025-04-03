@@ -1,5 +1,6 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
+//import { getConnection } from "../database";
 
 export function viewLogin(req, res) {
   res.render("pagina", {
