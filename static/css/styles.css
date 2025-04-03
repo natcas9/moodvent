@@ -456,12 +456,13 @@ body {
   background-color: #f4f4f4;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20%;
-}
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5%; /* was too big before */
+  }
+  
 
 .eventos {
   display: flex;
@@ -479,21 +480,24 @@ body {
   margin: 10px;
   width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
+  display: flex; /* changed from column */
+  flex-direction: row; /* row layout for image + info */
   align-items: center;
+  gap: 20px; /* spacing between image and info */
 }
 
 .evento-img {
-  width: 100%;
-  max-height: 200px;
+  width: 25%; /* 1/4 width */
+  height: 150px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .evento-info {
-  text-align: center;
+  width: 75%; /* 3/4 width */
+  text-align: left;
 }
+
 
 .mas-info {
   background-color: #520556;
@@ -513,9 +517,11 @@ body {
   background: white;
   padding: 15px;
   border-radius: 10px;
+  margin-bottom: 25px;
+  width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
 }
+
 
 .back-button {
   margin-top: 20px;
@@ -525,4 +531,19 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/*for the text to be in black*/
+bodys {
+  color: black;
+}
+
+.filtros,
+.filtros * {
+  color: black !important;
+}
+
+.evento,
+.evento * {
+  color: black !important;
 }
