@@ -8,7 +8,7 @@
     <title>Eventos</title>
   </head>
   
-  <!--
+<!---
   <body>
     <h1>Lista de Eventos</h1>
     <ul>
@@ -93,12 +93,42 @@
                 <p>Precio: <%= evento.precio %></p>
                 <p>Lugar: <%= evento.lugar %></p>
                 <p>Estado de animo: <%= evento.estado_animo %></p>
+
+                <button
+                  class="Editar"
+                  onclick="toggleDescripcion(' <%= evento.id %>')"
+                >
+                  Editar
+                </button>
+                
+
+                <form
+                action="/eventos/eliminar/<%= evento.id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button
+                  type="submit"
+                  onclick="return confirm('¿Estás seguro de eliminar este evento?');"
+                >
+                  Eliminar
+                </button>
+              </form>
+
                 <button
                   class="mas-info"
                   onclick="toggleDescripcion(' <%= evento.id %>')"
                 >
                   Más info
                 </button>
+                
+                
+
+
+
+
+                
+
                 <div class="descripcion" id="desc-<%= evento.id %>">
                   <p><%= evento.descripcion %></p>
                 </div>
