@@ -1,49 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Moodvent</title>
+    <title>Bienvenido a Moodvent</title>
+    <link rel="stylesheet" href="/css/normal.css" />
   </head>
-  <body class="color">
-    <h1>Bienvenido</h1>
-    <h2>Próximos eventos</h2>
-    <!--code de W3school-->
-    <h2>Image Gallery With Horizontal Scroll</h2>
-    <p>Use the horizontal scrollbar to see the other images.</p>
+  <body>
+    <header>
+      <h1>Bienvenido, <%= session?.nombre || "usuario" %> 👋</h1>
+      <p>Explora experiencias únicas para tu estado de ánimo</p>
+    </header>
 
-    <div class="scroll-container">
-      <img
-        src="/img/eventos/arte1.jpg"
-        alt="Cinque Terre"
-        width="600"
-        height="400"
-      />
-      <img
-        src="/img/eventos/concierto3.png"
-        alt="Forest"
-        width="600"
-        height="400"
-      />
-      <img
-        src="/img/eventos/futbol1.jpg"
-        alt="Northern Lights"
-        width="600"
-        height="400"
-      />
-      <img
-        src="/img/eventos/moda1.jpg"
-        alt="Mountains"
-        width="600"
-        height="400"
-      />
-    </div>
-    <h1>Mis eventos</h1>
+    <main>
+      <ul>
+        <li><a href="/eventos/crearEventos">Crear Eventos</a></li>
+        <li><a href="/eventos/visualizar">Ver eventos</a></li>
+      </ul>
 
-    <h1>Nuestras recomendaciones</h1>
+      <section>
+        <h2>🎉 Próximos Eventos</h2>
+        <div class="scroll-container">
+          <img src="/img/eventos/arte1.jpg" alt="Arte" />
+          <img src="/img/eventos/concierto3.png" alt="Concierto" />
+          <img src="/img/eventos/futbol1.jpg" alt="Fútbol" />
+          <img src="/img/eventos/moda1.jpg" alt="Moda" />
+        </div>
+      </section>
 
-    <h1>Nuestros artistas</h1>
+      <!-- Mis Eventos -->
+      <section>
+        <h2>🗓️ Mis eventos</h2>
+        <p>Aquí verás los eventos a los que estás registrado (próximamente).</p>
+      </section>
 
-    <h1>Involucrate en nuestra comunidad</h1>
+      <!-- Recomendaciones -->
+      <section>
+        <h2>🌟 Nuestras Recomendaciones</h2>
+        <ul>
+          <li>Evento recomendado para cuando estás feliz 😊</li>
+          <li>Evento para días de bajón 😔</li>
+          <li>Concierto para despejarte 🎶</li>
+        </ul>
+      </section>
+
+      <!-- Artistas -->
+      <section class="artistas">
+        <h2>🎤 Nuestros artistas</h2>
+        <p>Conoce a los creadores de experiencias Moodvent.</p>
+
+        <div class="grid-artistas">
+          <div class="artista">
+            <img src="/img/artistas/olivia.jpg" alt="Artista 1" />
+            <p>Olivia Rodrigo</p>
+          </div>
+          <div class="artista">
+            <img src="/img/artistas/benson.png" alt="Artista 2" />
+            <p>Benson Boone</p>
+          </div>
+          <div class="artista">
+            <img src="/img/artistas/badbunny.jpg" alt="Artista 3" />
+            <p>Bad Bunny</p>
+          </div>
+          <div class="artista">
+            <img src="/img/artistas/tini.jpg" alt="Artista 4" />
+            <p>Tini</p>
+          </div>
+          <div class="artista">
+            <img src="/img/artistas/shakira.jpg" alt="Artista 5" />
+            <p>Shakira</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comunidad -->
+      <section>
+        <h2>🤝 Involúcrate en nuestra comunidad</h2>
+        <p>Comparte eventos, comenta y descubre nuevas conexiones.</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Moodvent</p>
+      <a href="/usuarios/logout">Cerrar sesión</a>
+    </footer>
   </body>
 </html>
