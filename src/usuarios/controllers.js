@@ -67,7 +67,7 @@ export async function doRegistro(req, res) {
     await registrarUsuario(datos);
     res.redirect("/usuarios/login");
   } catch (error) {
-    logger.error("❌ Error en el registro");
+    logger.error("Error en el registro");
     logger.debug(error.message);
     res.render("pagina", {
       contenido: "paginas/registro",

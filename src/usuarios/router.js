@@ -53,4 +53,32 @@ usuariosRouter.get("/normal", (req, res) => {
   });
 });
 
+usuariosRouter.get("/api/usuario", asyncHandler(async (req, res) => {
+  try {
+    if (!req.session.userId) {
+      return res.status(401).json({ error: "Usuario no autenticado" });
+    }
+    
+    const userId = req.session.userId;
+    const [usuario] = await db.query("SELECT nombre, email, estado_animo FROM usuarios WHERE id = ?", [userId]);
+    const historial = await db.query("SELECT descripcion FROM historial WHERE usuario_id = ?", [userId]);
+
+    res.json({
+      nombre: usuario.nombre,
+      email: usuario.email,
+      estado_animo: usuario.estado_animo || "neutral",
+      historial: historial.map(h => h.descripcion)
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener datos del usuario" });
+  }
+}));
+
+usuariosRouter.post("/api/logout", (req, res) => {
+  req.session.destroy(() => {
+    res.json({ message: "Sesión cerrada" });
+  });
+});
+
 export default usuariosRouter;
+
