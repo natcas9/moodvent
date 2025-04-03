@@ -57,7 +57,7 @@ router.get("/visualizar", (req, res) => {
   try {
     const eventos = obtenerEventos();
     res.render("pagina", {
-      contenido: "paginas/visualizarEventos", // paginas/eventos -->la on a le truc de eventos dcp just la list des evenement 
+      contenido: "paginas/eventos", // paginas/eventos -->la on a le truc de eventos dcp just la list des evenement 
       session: req.session,
       eventos,
     });
