@@ -38,33 +38,28 @@ export async function registrarUsuario({
 }
 
 export function viewRegistro(req, res) {
-  res.render("pagina", { contenido: "paginas/registro", session: req.session });
+  res.render("pagina", {
+    contenido: "paginas/registro",
+    session: req.session,
+    errores: {},
+    datos: {},
+    error: null,
+  });
 }
-
-// to view the events :
-
-export function viewEventos(req, res) {
-  res.render("pagina", { contenido: "paginas/visualizarEventos", session: req.session });
-}
-
-
 
 export async function doRegistro(req, res) {
+  const errores = validationResult(req);
+  const datos = matchedData(req);
+
   console.log("Datos recibidos en el registro:", req.body);
-
-  const { nombre, apellido, edad, email, username, password, role } = req.body;
-
-  if (
-    !nombre ||
-    !apellido ||
-    !edad ||
-    !email ||
-    !username ||
-    !password ||
-    !role
-  ) {
-    console.error(" Error: Falta un campo en el registro");
-    return res.status(400).send("Todos los campos son obligatorios");
+  if (!errores.isEmpty()){
+    return res.render("pagina", {
+      contenido: "paginas/registro",
+      session: req.session,
+      errores: errores.mapped(),
+      datos,
+      error: null,
+    });
   }
 
   try {

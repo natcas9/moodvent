@@ -1,6 +1,6 @@
 import session from "express-session";
 import { body, validationResult } from "express-validator";
-import { getConnection } from "../database";
+//import { getConnection } from "../database";
 
 export function viewLogin(req, res) {
   res.render("pagina", {
@@ -41,14 +41,15 @@ export function doLogin(req, res) {
 }
 
 export function viewContenido(req, res) {
-  const db = getConnection();
-  const eventos = db.prepare("SELECT * FROM eventos").all();
   let contenido = "paginas/noPermisos";
 
+  if (req.session && req.session.login) {
+    contenido = "paginas/contenido";
+  }
+
   res.render("pagina", {
-    contenido: "paginas/contenido",
+    contenido,
     session: req.session,
-    eventos,
   });
 }
 
