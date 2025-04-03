@@ -1,7 +1,4 @@
 node_modules/
-
-src/datamood/*.db
-
 .env
-
 /logs/
+logs/
