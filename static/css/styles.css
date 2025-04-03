@@ -496,6 +496,7 @@ div.scroll-container img {
 }
 
 .evento-info {
+  color: black !important;
   width: 75%; 
   text-align: left;
 }
@@ -530,6 +531,7 @@ div.scroll-container img {
 
 .filtros {
   background: white;
+  color: black !important; 
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 25px;
