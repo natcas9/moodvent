@@ -5,9 +5,9 @@
   </head>
 
   <body>
-    <% const mostrarLayoutCompleto = ( contenido === "paginas/normal" ||
-    contenido === "paginas/admin" ); %> <% const ocultarTodo = ( contenido ===
-    "paginas/login" || contenido === "paginas/registro" ); %> <% if
+    <% const mostrarLayoutCompleto = (contenido === "paginas/normal" ||
+    contenido === "paginas/admin"); %> <% const ocultarTodo = (contenido ===
+    "paginas/login" || contenido === "paginas/registro"); %> <% if
     (!ocultarTodo) { %> <%- include('./partials/navbar.ejs') %> <% } %> <% if
     (mostrarLayoutCompleto) { %>
     <div id="contenedor">
@@ -35,11 +35,9 @@
         <% } %>
       </main>
 
-      <%- include('./partials/sidebarDer.ejs') %> <%-
-      include('./partials/pie.ejs') %>
+      <%- include('./partials/sidebarDer.ejs') %>
     </div>
     <% } else { %>
-
     <main>
       <article><%- include(contenido) %></article>
     </main>
