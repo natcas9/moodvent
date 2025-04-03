@@ -21,7 +21,7 @@ router.get("/crearEventos", (req, res) => {
 
 router.post("/crear", (req, res) => {
   try {
-    const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo } =
+    const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, tematica} =
       req.body;
 
     if (
@@ -44,6 +44,7 @@ router.post("/crear", (req, res) => {
       lugar,
       precio,
       estadoAnimo,
+      tematica
     });
 
     res.redirect("/eventos/visualizar");
@@ -53,9 +54,19 @@ router.post("/crear", (req, res) => {
   }
 });
 
+
+//to filter
 router.get("/visualizar", (req, res) => {
   try {
-    const eventos = obtenerEventos();
+    const filtros = {
+      tematica: req.query.tematica,
+      ubicacion: req.query.ubicacion,
+      fecha: req.query.fecha,
+      precio: req.query.precio ? parseFloat(req.query.precio) : undefined,
+    };
+
+    const eventos = obtenerEventos(filtros); // pass filters to model
+
     res.render("pagina", {
       contenido: "paginas/eventos",
       session: req.session,
@@ -66,6 +77,7 @@ router.get("/visualizar", (req, res) => {
     res.status(500).send("Error al obtener los eventos");
   }
 });
+
 
 router.get("/editar/:id", (req, res) => {
   try {
@@ -116,3 +128,4 @@ router.get("/detalles/:id", (req, res) => {
 });
 
 export default router;
+   
