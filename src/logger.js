@@ -18,13 +18,12 @@ const transportConfig = {
   ],
 };
 
-// También mostrar por consola en desarrollo
 if (!config.isProduction) {
   transportConfig.targets.push({
     level: config.logger.level,
-    target: "pino-pretty", // mucho mejor para desarrollo visual
+    target: "pino-pretty",
     options: {
-      destination: 1, // stdout
+      destination: 1,
       colorize: true,
       translateTime: "SYS:standard",
     },

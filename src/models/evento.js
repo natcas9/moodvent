@@ -27,10 +27,37 @@ export function crearEvento({
   return result.lastInsertRowid;
 }
 
-export function obtenerEventos() {
+export function obtenerEventos(filtros = {}) {
   const db = getConnection();
-  return db.prepare("SELECT * FROM eventos ORDER BY fecha DESC").all();
+
+  let filtevent = "SELECT * FROM eventos WHERE 1=1";
+  const params = [];
+
+  if (filtros.estadoAnimo && filtros.estadoAnimo.trim() !== " ") {
+    filtevent += " AND LOWER(estadoAnimo) = LOWER(?)";
+    params.push(filtros.estadoAnimo);
+  }
+
+  if (filtros.ubicacion) {
+    filtevent += " AND lugar LIKE ?";
+    params.push(`%${filtros.ubicacion}%`);
+  }
+
+  if (filtros.fecha) {
+    filtevent += " AND fecha = ?";
+    params.push(filtros.fecha);
+  }
+
+  if (filtros.precio !== undefined) {
+    filtevent += " AND precio <= ?";
+    params.push(filtros.precio);
+  }
+
+  filtevent += " ORDER BY fecha DESC";
+
+  return db.prepare(filtevent).all(...params);
 }
+
 
 export function obtenerEventoPorId(id) {
   const db = getConnection();
@@ -51,3 +78,8 @@ export function eliminarEvento(id) {
   const db = getConnection();
   db.prepare("DELETE FROM eventos WHERE id = ?").run(id);
 }
+
+
+//Filtrar eventos 
+
+

@@ -7,6 +7,7 @@ import {
   modificarEvento,
   eliminarEvento,
 } from "../models/evento.js";
+import session from "express-session";
 
 const router = express.Router();
 
@@ -21,7 +22,7 @@ router.get("/crearEventos", (req, res) => {
 
 router.post("/crear", (req, res) => {
   try {
-    const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo } =
+    const { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, tematica} =
       req.body;
 
     if (
@@ -44,6 +45,7 @@ router.post("/crear", (req, res) => {
       lugar,
       precio,
       estadoAnimo,
+      tematica
     });
 
     res.redirect("/eventos/visualizar");
@@ -53,19 +55,30 @@ router.post("/crear", (req, res) => {
   }
 });
 
+
+//to filter
 router.get("/visualizar", (req, res) => {
   try {
-    const eventos = obtenerEventos();
+    const filtros = {
+      estadoAnimo: req.query.estadoAnimo,
+      ubicacion: req.query.ubicacion ,
+      fecha: req.query.fecha,
+      precio: req.query.precio ? parseFloat(req.query.precio) : undefined,
+    };
+
+    const eventos = obtenerEventos(filtros); // pass filters to model
+    
     res.render("pagina", {
-      contenido: "paginas/eventos", // paginas/eventos -->la on a le truc de eventos dcp just la list des evenement 
+      contenido: "paginas/eventos",
       session: req.session,
-      eventos,
-    });
+      eventos, filtros
+    }); 
   } catch (error) {
     console.error("Error al obtener eventos:", error);
     res.status(500).send("Error al obtener los eventos");
   }
 });
+
 
 router.get("/editar/:id", (req, res) => {
   try {
@@ -116,3 +129,4 @@ router.get("/detalles/:id", (req, res) => {
 });
 
 export default router;
+   

@@ -488,8 +488,8 @@ div.scroll-container img {
 }
 
 .evento-img {
-  width: 25%; 
-  height: 150px;
+  width: 20%; 
+  height: 120px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -497,6 +497,15 @@ div.scroll-container img {
 .evento-info {
   width: 75%; 
   text-align: left;
+}
+
+.evento-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.evento-info p {
+  margin: 5px 0;
 }
 
 
@@ -507,11 +516,15 @@ div.scroll-container img {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
-.descripcion {
+.evento-details {
   display: none;
   margin-top: 10px;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 .filtros {
