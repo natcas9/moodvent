@@ -1,125 +1,108 @@
-<!--visualizarEventos-->
+<!-- visualizarEventos -->
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" href="/static/css/visualizarEventos.css" />
     <title>Eventos</title>
   </head>
+
   <body>
-    <h1>Lista de Eventos</h1>
-    <ul>
-      <% eventos.forEach(evento => { %>
-      <li>
-        <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
-        evento.estadoAnimo %> -
-        <a href="/eventos/detalles/<%= evento.id %>">Ver más</a>
-      </li>
-      <div>
-        <a href="/eventos/editar/<%= evento.id %>"> Editar</a>
-      </div>
-      <form
-        action="/eventos/eliminar/<%= evento.id %>"
-        method="POST"
-        style="display: inline"
-      >
-        <button
-          type="submit"
-          onclick="return confirm('¿Estás seguro de eliminar este evento?');"
-        >
-          Eliminar
-        </button>
+    <div class="container">
+
+      <!-- Filtrar  -->
+      <form class="filtros" method="GET" action="/eventos/visualizar">
+        <h3>Filtrar Eventos</h3>
+        <label>Temática:
+          <select name="tematica">
+            <option value="">Todas</option>
+            <option value="musica">Música</option>
+            <option value="deporte">Deporte</option>
+            <option value="arte">Arte</option>
+          </select>
+        </label>
+
+        <label>Ubicación:
+          <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
+        </label>
+
+        <label>Fecha:
+          <input type="date" name="fecha" />
+        </label>
+
+        <label>Precio máximo:
+          <input type="number" name="precio" placeholder="Máximo" />
+        </label>
+
+        <button type="submit">Aplicar filtros</button>
       </form>
-      <% }) %>
-    </ul>
-    <p><a href="/">Volver</a></p>
-    <!--SE SIGUE DESAROLLANDO-->
-    <!--esta página será para poder ver los eventos que crea cada usuario -->
 
-    <!DOCTYPE html>
-    <html lang="es">
-      <head>
-        <meta charset="UTF-8" />
-        <title>EVENTOS</title>
-        <link rel="stylesheet" href="/static/css/visualizarEventos.css" />
-      </head>
+      <!-- displaying the events thingys-->
+      <div class="eventos">
+        <% eventos.forEach(evento => { %>
+          <div class="evento">
+            <img
+              src="<%= evento.imagen %>"
+              alt="Imagen del evento"
+              class="evento-img"
+            />
+            <div class="evento-info">
+              <h2><%= evento.titulo %></h2>
+              <p>Fecha: <%= evento.fecha %></p>
+              <p>Precio: <%= evento.precio %></p>
+              <p>Lugar: <%= evento.lugar %></p>
+              <p>Estado de ánimo: <%= evento.estado_animo %></p>
 
-      <bodys>
-        <div class="container">
+            
+              <a href="/eventos/editar/<%= evento.id %>" class="Editar">Editar</a>
 
-
-
-          <!--Filtrar--><form class="filtros" method="GET" action="/eventos">
-  <h3>Filtrar Eventos</h3>
-  <label>Temática:
-    <select name="tematica">
-      <option value="">Todas</option>
-      <option value="musica">Música</option>
-      <option value="deporte">Deporte</option>
-      <option value="arte">Arte</option>
-    </select>
-  </label>
-  <label>Ubicación:
-    <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
-  </label>
-  <label>Fecha:
-    <input type="date" name="fecha" />
-  </label>
-  <label>Precio máximo:
-    <input type="number" name="precio" placeholder="Máximo" />
-  </label>
-  <button type="submit">Aplicar filtros</button>
-</form>
-
-
-
-        </div>
-
-
-          <div class="eventos">
-            <% eventos.forEach(evento => { %>
-            <div class="evento">
-              <img
-                src="<%= evento.imagen %>"
-                alt="Imagen del evento"
-                class="evento-img"
-              />
-              <div class="evento-info">
-                <h2><%= evento.titulo %></h2>
-                <p>Fecha: <%= evento.fecha %></p>
-                <p>Precio: <%= evento.precio %></p>
-                <p>Lugar: <%= evento.lugar %></p>
-                <p>Estado de animo: <%= evento.estado_animo %></p>
+              
+              <form
+                action="/eventos/eliminar/<%= evento.id %>"
+                method="POST"
+                style="display: inline"
+              >
                 <button
-                  class="mas-info"
-                  onclick="toggleDescripcion(' <%= evento.id %>')"
+                  type="submit"
+                  onclick="return confirm('¿Estás seguro de eliminar este evento?');"
                 >
-                  Más info
+                  Eliminar
                 </button>
-                <div class="descripcion" id="desc-<%= evento.id %>">
-                  <p><%= evento.descripcion %></p>
-                </div>
+              </form>
+
+         
+              <button
+                class="mas-info"
+                onclick="toggleDescripcion('<%= evento.id %>')"
+              >
+                Más info
+              </button>
+
+              <div class="descripcion" id="desc-<%= evento.id %>" style="display: none;">
+                <p><%= evento.descripcion %></p>
               </div>
             </div>
-            <% }) %>
           </div>
-          
-        <button onclick="window.location.href='/index.html'" class="back-button">
-          BACK
-        </button>
-        <script>
-          function toggleDescripcion(id) {
-            var desc = document.getElementById("desc-" + id);
-            desc.style.display =
-              desc.style.display == "none" ? "block" : "none";
-          }
-          function filtrarEventos() {
-            alert("Funcionalidad de filtrado en desarrollo");
-          }
-        </script>
-      </bodys>
-    </html>
+        <% }) %>
+      </div>
+
+    </div>
+
+
+    <button onclick="window.location.href='/'" class="back-button">
+      BACK
+    </button>
+
+    <script>
+      function toggleDescripcion(id) {
+        const desc = document.getElementById("desc-" + id);
+        if (desc) {
+          desc.style.display = desc.style.display === "none" ? "block" : "none";
+        }
+      }
+    </script>
   </body>
 </html>
 
