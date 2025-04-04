@@ -9,7 +9,6 @@ export function crearEvento({
   lugar,
   precio,
   estadoAnimo,
-  tematica, //added the tematica to try to check if the filtrar 
 }) {
   const db = getConnection();
   const stmt = db.prepare(`
@@ -34,9 +33,9 @@ export function obtenerEventos(filtros = {}) {
   let filtevent = "SELECT * FROM eventos WHERE 1=1";
   const params = [];
 
-  if (filtros.tematica) {
-    filtevent += " AND nombre LIKE ?";
-    params.push(`%${filtros.tematica}%`);
+  if (filtros.estadoAnimo && filtros.estadoAnimo.trim() !== " ") {
+    filtevent += " AND LOWER(estadoAnimo) = LOWER(?)";
+    params.push(filtros.estadoAnimo);
   }
 
   if (filtros.ubicacion) {

@@ -11,26 +11,6 @@
 
   <body>
     <div class="container">
-      <div class="eventos">
-        <% eventos.forEach(evento => { %>
-        <div class="evento" >
-          <img src="<%= evento.imagen %>" alt="Imagen del evento" class="evento-img" />
-          <div class="evento-info" >
-            <h2> 
-              <%= evento.titulo %> 
-            </h2>
-            <p> Fecha: <%= evento.fecha %> </p>
-            <p> Precio: <%= evento.precio %> </p>
-            <p> Lugar: <%= evento.lugar %> </p>
-            <p> Estado de animo: <%= evento.estado_animo %> </p>
-            <button class="mas-info" onclick="toggleDescripcion(' <%= evento.id %>')"> Más info</button>
-            <div class="descripcion" id="desc-<%= evento.id %>" >
-              <p> <%= evento.descripcion %></p>
-            </div>
-          </div>
-        </div>
-        <%  }) %>
-      </div>
       <div class="filtros" >
         <h3> Filtrar Eventos</h3>
         <label> Temática: 
@@ -52,12 +32,36 @@
         </label>
         <button onclick="filtrarEventos()"> Aplicar filtros</button>
       </div>
+      <div class="eventos">
+        <% eventos.forEach(evento => { %>
+        <div class="evento" >
+          <img src="<%= evento.imagen %>" alt="Imagen del evento" class="evento-img" />
+          <div class="evento-info" >
+            <h2> 
+              <%= evento.titulo %> 
+            </h2>
+            <p> Fecha: <%= evento.fecha %> </p>
+            <p> Precio: <%= evento.precio %> </p>
+            <p> Lugar: <%= evento.lugar %> </p>
+            <p> Estado de animo: <%= evento.estado_animo %> </p>
+            <button class="mas-info" onclick="toggleDescripcion('<%= evento.id %>')">Más info</button>
+            <div class="descripcion" id="desc-<%= evento.id %>" >
+              <p> <%= evento.descripcion %></p>
+            </div>
+          </div>
+        </div>
+        <%  }) %>
+      </div>
     </div>
     <button onclick="window.location.href='index.html'" class="back-button"> BACK </button>
     <script>
       function toggleDescripcion(id) {
         var desc= document.getElementById("desc-" + id);
-        desc.style.display = desc.style.display == "none" ? "block" : "none";
+        if (desc.style.maxHeight == "0px" || desc.style.maxHeight == " ") {
+          desc.style.maxHeight = desc.scrollHeight + "px";
+        } else {
+          desc.style.maxHeight = "0px";
+        }
       }
       function filtrarEventos() {
         alert("Funcionalidad de filtrado en desarrollo");

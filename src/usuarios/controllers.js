@@ -51,9 +51,8 @@ export async function doRegistro(req, res) {
   const errores = validationResult(req);
   const datos = matchedData(req);
 
-  console.log("📦 Datos validados:", datos); // 🔍 Este log es importante
-
-  if (!errores.isEmpty()) {
+  console.log("Datos recibidos en el registro:", req.body);
+  if (!errores.isEmpty()){
     return res.render("pagina", {
       contenido: "paginas/registro",
       session: req.session,
