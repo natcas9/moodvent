@@ -549,6 +549,11 @@ div.scroll-container img {
   cursor: pointer;
 }
 
+.Editar{
+  color: black;
+}
+
+
 /*contenido normal*/
 
 main {
@@ -659,4 +664,33 @@ section {
   font-weight: bold;
   color: #ee821c;
   margin-bottom: 10px;
+}
+
+
+/* admin takes the one of normal but with this as well*/
+.config-grid {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.config-box {
+  flex: 1;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.config-box h3 {
+  margin-bottom: 0.5rem;
+}
+
+.config-box textarea {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
