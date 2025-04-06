@@ -1,29 +1,35 @@
 import { config } from "./config.js";
 import { app } from "./app.js";
 import { getConnection, checkConnection, closeConnection } from "./database.js";
+import { inicializaModelos } from "./modelos.js";
 import { logger } from "./logger.js";
-// import { inicializaModelos } from './modelos.js'; // Si decides usar modelos en el futuro
 
-// Inicializa la conexión a la base de datos
+// Obtener la conexión a la base de datos
 const db = getConnection();
-checkConnection(db);
-// inicializaModelos(db); // Si usas modelos personalizados
 
-// Inicia el servidor
+// Verificar que la conexión funciona
+checkConnection(db);
+
+// Inicializar los modelos (como Usuario)
+inicializaModelos(db);
+
+// Iniciar el servidor
 const server = app.listen(config.port, (error) => {
-  if (error) return logger.error(`Error al iniciar el servidor: ${error}`);
+  if (error) {
+    logger.error(`Error al iniciar el servidor: ${error}`);
+    return;
+  }
 
   const address = server.address();
-  const actualPort = typeof address === "string" ? address : address?.port;
-
-  logger.info(` Server is listening on port ${actualPort}`);
+  let actualPort = typeof address === "string" ? address : String(address.port);
+  logger.info(`✅ Servidor escuchando en el puerto ${actualPort}`);
 });
 
-// Cierre seguro al salir
+// Cierre limpio al terminar la app
 process.on("exit", () => {
+  logger.info("🛑 Cerrando servidor y base de datos");
   server.close();
   closeConnection();
-  logger.info(" Servidor cerrado correctamente");
 });
 
 // Manejo de señales del sistema

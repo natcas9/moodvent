@@ -9,7 +9,7 @@ import { flashMessages } from "./middleware/flash.js";
 
 import usuariosRouter from "./usuarios/router.js";
 import contenidoRouter from "./contenido/router.js";
-import eventosRouter from "./routes/eventos.js";
+import eventosRouter from "./eventos/router.js";
 
 export const app = express();
 

@@ -1,0 +1,147 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenido a Moodvent</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<section class="comunidad-section">
+  <div class="comunidad-content">
+    <div class="comunidad-texto">
+      <h1 class="bienvenido">
+        Bienvenido, <%= session?.nombre || "usuario" %> 👋
+      </h1>
+      <h2>Explora experiencias únicas para tu estado de ánimo</h2>
+    </div>
+
+    <div class="comunidad-imagen">
+      <img src="/img/welcome-moodvent.png" alt="connect-platform" />
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="container-events-grid">
+    <h2 class="events-title">Próximos eventos</h2>
+    <div class="btn-container">
+      <a href="/eventos/crearEventos" class="btn-eventos">Crear Eventos</a>
+      <a href="/eventos/visualizar" class="btn-eventos">Ver eventos</a>
+    </div>
+    <section class="event-grid">
+      <div class="event-card">
+        <img src="/img/eventos/luces1.jpg" alt="Orquesta" />
+        <div class="event-info">
+          <h3>Día inmersivo</h3>
+          <p>Hora: 19:30</p>
+          <p>Lugar: Teatro de la Ciudad</p>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="/img/eventos/teatro1.jpg" alt="Orquesta" />
+        <div class="event-info">
+          <h3>Noche de Teatro</h3>
+          <p>Hora: 19:30</p>
+          <p>Lugar: Teatro de la Ciudad</p>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="/img/eventos/ballet1.jpg" alt="Orquesta" />
+        <div class="event-info">
+          <h3>Ballet</h3>
+          <p>Hora: 19:30</p>
+          <p>Lugar: Teatro de la Ciudad</p>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="/img/eventos/futbol1.jpg" alt="Luces" />
+        <div class="event-info">
+          <h3>Real Madrid</h3>
+          <p>Hora: 21:00</p>
+          <p>Lugar: Parque Central</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Recomendaciones -->
+  <section>
+    <div class="container-events-grid">
+      <h2 class="events-title">Tus beneficios</h2>
+      <section class="event-grid">
+        <div class="event-card">
+          <div class="event-info">
+            <h3>The Killers</h3>
+            <p>2x1</p>
+            <p>Hora: 20:00</p>
+            <p>Lugar: Auditorio Nacional</p>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-info">
+            <h3>Festival del Arte</h3>
+            <p>25% off</p>
+            <p>Hora: 19:30</p>
+            <p>Lugar: Teatro de la Ciudad</p>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-info">
+            <h3>Dior Runway</h3>
+            <p>Merch gratis</p>
+            <p>Hora: 19:30</p>
+            <p>Lugar: Teatro de la Ciudad</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Artistas -->
+  <section class="artistas">
+    <h2>Nuestros artistas</h2>
+    <p>Conoce a los creadores de experiencias Moodvent exclusivos para ti!</p>
+
+    <div class="grid-artistas">
+      <div class="artista">
+        <img src="/img/artistas/olivia.jpg" alt="Artista 1" />
+        <p>Olivia Rodrigo</p>
+      </div>
+      <div class="artista">
+        <img src="/img/artistas/benson.png" alt="Artista 2" />
+        <p>Benson Boone</p>
+      </div>
+      <div class="artista">
+        <img src="/img/artistas/badbunny.jpg" alt="Artista 3" />
+        <p>Bad Bunny</p>
+      </div>
+      <div class="artista">
+        <img src="/img/artistas/tini.jpg" alt="Artista 4" />
+        <p>Tini</p>
+      </div>
+      <div class="artista">
+        <img src="/img/artistas/shakira.jpg" alt="Artista 5" />
+        <p>Shakira</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comunidad -->
+  <section class="comunidad-section">
+    <div class="comunidad-content">
+      <div class="comunidad-texto">
+        <h2>Involúcrate en nuestra comunidad</h2>
+        <p>Comparte eventos, comenta y descubre nuevas conexiones.</p>
+        <p>Invita a tus amigos y gana recompensas.</p>
+      </div>
+
+      <div class="comunidad-imagen">
+        <img src="/img/connect-moodvent.png" alt="connect-platform" />
+      </div>
+    </div>
+  </section>
+</main>
