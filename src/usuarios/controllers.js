@@ -28,12 +28,12 @@ export async function doLogin(req, res) {
     req.session.nombre = usuario.nombre;
     req.session.rol = usuario.role;
 
-    res.setFlash(`¡Encantado de verte de nuevo, ${usuario.nombre}!`);
+    req.setFlash(`¡Encantado de verte de nuevo, ${usuario.nombre}!`);
     return res.redirect(
-      usuario.role === "admin" ? "/contenido/admin" : "/usuarios/home"
+      usuario.role === "admin" ? "/contenido/admin" : "/contenido/normal"
     );
   } catch (e) {
-    req.log.warn(` Login fallido para '${datos.username}'`);
+    req.log.warn(`❌ Login fallido para '${datos.username}'`);
     req.log.debug(e.message);
     return render(req, res, "paginas/login", {
       error: "Usuario o contraseña incorrectos",
@@ -64,8 +64,9 @@ export async function doRegistro(req, res) {
   }
 
   try {
+    datos.role = "user";
     await Usuario.registro(datos);
-    res.setFlash("¡Usuario registrado correctamente!");
+    req.setFlash("¡Usuario registrado correctamente!");
     return res.redirect("/usuarios/login");
   } catch (e) {
     req.log.error(`Error al registrar '${datos.username}'`);

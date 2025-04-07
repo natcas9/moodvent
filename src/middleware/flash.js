@@ -1,11 +1,11 @@
-export function flashMessages(request, response, next) {
-  response.setFlash = (msg) => {
-    request.session.flashMsg = msg;
+export function flashMessages(req, res, next) {
+  req.setFlash = (msg) => {
+    req.session.flashMsg = msg;
   };
 
-  response.locals.getAndClearFlash = () => {
-    const msg = request.session.flashMsg;
-    delete request.session.flashMsg;
+  res.locals.getAndClearFlash = () => {
+    const msg = req.session.flashMsg;
+    delete req.session.flashMsg;
     return msg;
   };
 
