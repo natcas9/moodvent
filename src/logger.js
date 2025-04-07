@@ -3,9 +3,8 @@ import { config } from "./config.js";
 import { join } from "node:path";
 
 const now = new Date();
-const logFile = `${now.toISOString().replaceAll(/[^0-9A-Z]/gi, "_")}.log`; // También puedes usar un formato YYYYMMDD
+const logFile = `${now.toISOString().replaceAll(/[^0-9A-Z]/gi, "_")}.log`;
 
-// Configuración de los destinos (file + stdout en desarrollo)
 const transportConfig = {
   targets: [
     {
@@ -13,7 +12,7 @@ const transportConfig = {
       target: "pino/file",
       options: {
         destination: join(config.logs, logFile),
-        mkdir: true, // Crea carpeta de logs si no existe
+        mkdir: true,
       },
     },
   ],
@@ -24,18 +23,16 @@ if (!config.isProduction) {
     level: config.logger.level,
     target: "pino/file",
     options: {
-      destination: 1, // stdout
+      destination: 1,
     },
   });
 }
 
-// Opciones completas del logger
 const loggerOpts = {
   ...config.logger,
   transport: transportConfig,
 };
 
-// Captura de errores inesperados
 process.on("uncaughtException", (err) => {
   logger.error(err, "uncaughtException");
   process.exitCode = 1;
@@ -45,5 +42,4 @@ process.on("unhandledRejection", (reason) => {
   logger.error(reason, "unhandledRejection");
 });
 
-// Exportar logger ya configurado
 export const logger = pino(loggerOpts);

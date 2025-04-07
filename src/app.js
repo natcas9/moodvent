@@ -13,23 +13,19 @@ import eventosRouter from "./eventos/router.js";
 
 export const app = express();
 
-// Configurar EJS como motor de vistas
 app.set("view engine", "ejs");
 app.set("views", config.vistas);
 
-// Logging con pino
 const pinoMiddleware = pinoHttp(config.logger.http(logger));
 app.use(pinoMiddleware);
 
-// Middlewares básicos
+// Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(session(config.session));
 app.use(flashMessages);
 
-// Archivos estáticos (CSS, img, etc.)
 app.use("/", express.static(config.recursos));
 
-// Ruta principal
 app.get("/", (req, res) => {
   res.render("pagina", {
     contenido: "paginas/index",
@@ -37,10 +33,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// Rutas principales
 app.use("/usuarios", usuariosRouter);
 app.use("/contenido", contenidoRouter);
 app.use("/eventos", eventosRouter);
 
-// Middleware de errores (último)
 app.use(errorHandler);

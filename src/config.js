@@ -4,7 +4,7 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = dirname(__dirname); // apunta a la raíz del proyecto
+const rootDir = dirname(__dirname);
 
 const isProduction = process.env.NODE_ENV === "production";
 const DEFAULT_PORT = 3000;
@@ -16,12 +16,10 @@ const sessionSecret = process.env.APP_SESSION_SECRET ?? DEFAULT_SESSION_SECRET;
 export const config = {
   port: !isNaN(port) ? port : DEFAULT_PORT,
 
-  // rutas importantes
   recursos: join(rootDir, "static"),
   vistas: join(rootDir, "vistas"),
   logs: join(rootDir, "logs"),
 
-  // configuración de sesiones
   session: {
     resave: false,
     saveUninitialized: true,
@@ -30,7 +28,6 @@ export const config = {
 
   isProduction,
 
-  // configuración del logger
   logger: {
     level: process.env.APP_LOG_LEVEL ?? (!isProduction ? "debug" : "info"),
     http: (pino) => ({

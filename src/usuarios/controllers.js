@@ -33,7 +33,7 @@ export async function doLogin(req, res) {
       usuario.role === "admin" ? "/contenido/admin" : "/usuarios/home"
     );
   } catch (e) {
-    req.log.warn(`❌ Login fallido para '${datos.username}'`);
+    req.log.warn(` Login fallido para '${datos.username}'`);
     req.log.debug(e.message);
     return render(req, res, "paginas/login", {
       error: "Usuario o contraseña incorrectos",
@@ -68,7 +68,7 @@ export async function doRegistro(req, res) {
     res.setFlash("¡Usuario registrado correctamente!");
     return res.redirect("/usuarios/login");
   } catch (e) {
-    req.log.error(`❌ Error al registrar '${datos.username}'`);
+    req.log.error(`Error al registrar '${datos.username}'`);
     req.log.debug(e.message);
     return render(req, res, "paginas/registro", {
       error: e instanceof UsuarioYaExiste ? "El usuario ya existe" : e.message,
