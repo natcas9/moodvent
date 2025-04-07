@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('../partials/head.ejs') %>
-    <title>Detalles del Evento</title>
-  </head>
-  <body>
-    <h1><%= evento.nombre %></h1>
-    <p><strong>Descripción:</strong> <%= evento.descripcion %></p>
-    <p><strong>Fecha:</strong> <%= evento.fecha %></p>
-    <p><strong>Hora:</strong> <%= evento.hora %></p>
-    <p><strong>Lugar:</strong> <%= evento.lugar %></p>
-    <p><strong>Precio:</strong> $<%= evento.precio %></p>
-    <p>
-      <strong>Estado de Ánimo Recomendado:</strong> <%= evento.estadoAnimo %>
-    </p>
+<h1><%= evento.nombre %></h1>
 
-    <p><a href="/eventos/visualizar">Volver a la lista de eventos</a></p>
-  </body>
-</html>
+<p><strong>Descripción:</strong> <%= evento.descripcion %></p>
+<p><strong>Fecha:</strong> <%= evento.fecha %></p>
+<p><strong>Hora:</strong> <%= evento.hora %></p>
+<p><strong>Lugar:</strong> <%= evento.lugar %></p>
+<p><strong>Precio:</strong> $<%= evento.precio %></p>
+<p><strong>Estado de Ánimo Recomendado:</strong> <%= evento.estadoAnimo %></p>
+
+<p><a href="/eventos/visualizar">Volver a la lista de eventos</a></p>

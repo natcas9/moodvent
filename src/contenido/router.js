@@ -1,27 +1,19 @@
 import express from "express";
+import asyncHandler from "express-async-handler";
+import { viewContenidoNormal, viewContenidoAdmin } from "./controllers.js";
+import { autenticado, tieneRol } from "../middleware/auth.js";
+import { RolesEnum } from "../usuarios/Usuario.js";
 
 const contenidoRouter = express.Router();
 
-contenidoRouter.get("/normal", (req, res) => {
-  let contenido = "paginas/noPermisos";
-  if (req.session && req.session.login) {
-    contenido = "paginas/normal";
-  }
-  res.render("pagina", {
-    contenido,
-    session: req.session,
-  });
-});
+contenidoRouter.use(autenticado("/usuarios/login"));
 
-contenidoRouter.get("/admin", (req, res) => {
-  if (req.session && req.session.esAdmin) {
-    res.render("pagina", { contenido: "paginas/admin", session: req.session });
-  } else {
-    res.render("pagina", {
-      contenido: "paginas/noPermisos",
-      session: req.session,
-    });
-  }
-});
+contenidoRouter.get("/normal", asyncHandler(viewContenidoNormal));
+
+contenidoRouter.get(
+  "/admin",
+  tieneRol(RolesEnum.ADMIN),
+  asyncHandler(viewContenidoAdmin)
+);
 
 export default contenidoRouter;

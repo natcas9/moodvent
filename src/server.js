@@ -1,24 +1,30 @@
 import { config } from "./config.js";
 import { app } from "./app.js";
-import { initDB } from "./database.js";
-import eventosRouter from "./routes/eventos.js";
+import { getConnection, checkConnection, closeConnection } from "./database.js";
+import { inicializaModelos } from "./modelos.js";
+import { logger } from "./logger.js";
 
-initDB();
+const db = getConnection();
+
+checkConnection(db);
+
+inicializaModelos(db);
 
 const server = app.listen(config.port, (error) => {
-  if (error) return console.log(`Error: ${error}`);
-  const address = server.address();
-  let actualPort = "n/a";
-  if (typeof address === "string") {
-    actualPort = address;
-  } else {
-    actualPort = String(address.port);
+  if (error) {
+    logger.error(`Error al iniciar el servidor: ${error}`);
+    return;
   }
-  console.log(`Server is listening on port ${actualPort}`);
+
+  const address = server.address();
+  let actualPort = typeof address === "string" ? address : String(address.port);
+  logger.info(` Servidor escuchando en el puerto ${actualPort}`);
 });
 
 process.on("exit", () => {
+  logger.info("Cerrando servidor y base de datos");
   server.close();
+  closeConnection();
 });
 
 process.on("SIGHUP", () => process.exit(128 + 1));

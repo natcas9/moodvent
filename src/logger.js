@@ -21,25 +21,25 @@ const transportConfig = {
 if (!config.isProduction) {
   transportConfig.targets.push({
     level: config.logger.level,
-    target: "pino-pretty",
+    target: "pino/file",
     options: {
       destination: 1,
-      colorize: true,
-      translateTime: "SYS:standard",
     },
   });
 }
 
-export const logger = pino({
+const loggerOpts = {
   ...config.logger,
   transport: transportConfig,
-});
+};
 
 process.on("uncaughtException", (err) => {
   logger.error(err, "uncaughtException");
   process.exitCode = 1;
 });
 
-process.on("unhandledRejection", (reason) =>
-  logger.error(reason, "unhandledRejection")
-);
+process.on("unhandledRejection", (reason) => {
+  logger.error(reason, "unhandledRejection");
+});
+
+export const logger = pino(loggerOpts);

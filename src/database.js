@@ -1,53 +1,46 @@
-// Se creó la base de datos con ayuda del ejercicio 2, chatgpt y el siguiente video https://www.youtube.com/watch?v=ehppT_7lYH0&ab_channel=LeonardoJose
-import { fileURLToPath } from "url";
-import { mkdirSync, existsSync } from "fs";
 import { join, dirname } from "node:path";
+import { fileURLToPath } from "url";
 import Database from "better-sqlite3";
+import { logger } from "./logger.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const dataDir = join(__dirname, "datamood");
-const dbPath = join(dataDir, "moodvent.db");
-
-if (!existsSync(dataDir)) {
-  //console.log("Creando carpeta 'datamood/'...");
-  mkdirSync(dataDir, { recursive: true });
-}
-
-//console.log(` Base de datos en: ${dbPath}`);
-
-const db = new Database(dbPath, { verbose: console.log });
+let db = null;
 
 export function getConnection() {
+  if (db !== null) return db;
+  db = createConnection();
   return db;
 }
 
-export function initDB() {
-  db.exec(`
-        CREATE TABLE IF NOT EXISTS eventos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT NOT NULL,
-            descripcion TEXT NOT NULL,
-            fecha TEXT NOT NULL,
-            hora TEXT NOT NULL,
-            lugar TEXT NOT NULL,
-            precio REAL NOT NULL,
-            estadoAnimo TEXT NOT NULL
-        )
-    `);
+function createConnection() {
+  const options = {
+    verbose: (sql) => logger.debug(sql),
+  };
 
-  db.exec(`
-      CREATE TABLE IF NOT EXISTS usuarios (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
-        apellido TEXT NOT NULL,
-        edad INTEGER NOT NULL,
-        email TEXT UNIQUE NOT NULL,
-        username TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL,
-        role TEXT CHECK(role IN ('admin', 'user')) NOT NULL
-      )
-    `);
-  //console.log("Base de datos inicializada correctamente");
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  const dbPath = join(__dirname, "..", "datamood", "moodvent.db");
+  const db = new Database(dbPath, options);
+  db.pragma("journal_mode = WAL");
+
+  return db;
+}
+
+export function closeConnection(db = getConnection()) {
+  if (db === null) return;
+  db.close();
+}
+
+export function checkConnection(db = getConnection()) {
+  const checkStmt = db.prepare("SELECT 1+1 as suma");
+  const suma = checkStmt.get().suma;
+  if (suma == null || suma !== 2)
+    throw new Error(`La bbdd no funciona correctamente`);
+}
+
+export class ErrorDatos extends Error {
+  constructor(message, options) {
+    super(message, options);
+    this.name = "ErrorDatos";
+  }
 }
