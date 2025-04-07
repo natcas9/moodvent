@@ -31,7 +31,7 @@ export function crearEvento(req, res) {
       precio,
       estadoAnimo,
     });
-    res.redirect("/eventos/visualizar");
+    res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error creando evento");
     req.log.debug(e.message);
@@ -45,10 +45,11 @@ export function viewEventos(req, res) {
     ubicacion: req.query.ubicacion,
     fecha: req.query.fecha,
     precio: req.query.precio ? parseFloat(req.query.precio) : undefined,
+    estadoAnimo: req.query.estadoAnimo,
   };
 
   const eventos = Evento.obtenerTodos(filtros);
-  render(req, res, "paginas/eventos", { eventos });
+  render(req, res, "paginas/visualizarEventos", { eventos });
 }
 
 export function viewEditarEvento(req, res) {
@@ -60,7 +61,7 @@ export function viewEditarEvento(req, res) {
 export function modificarEvento(req, res) {
   try {
     Evento.modificar(req.params.id, req.body);
-    res.redirect("/eventos/visualizar");
+    res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error modificando evento");
     req.log.debug(e.message);
@@ -71,7 +72,7 @@ export function modificarEvento(req, res) {
 export function eliminarEvento(req, res) {
   try {
     Evento.eliminar(req.params.id);
-    res.redirect("/eventos/visualizar");
+    res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error eliminando evento");
     req.log.debug(e.message);

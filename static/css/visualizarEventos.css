@@ -1,116 +1,78 @@
-/* CSS de la sección de visualizar eventos */
-/* Toca cambiar todos los px en % */
-/*
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #de745c;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: black;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    margin: auto;
-}
-
-.filtros {
-    width: 100%;
-    background: #814edf;
-    color: black;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.filtros label {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20%;
 }
 
 .eventos {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  max-height: 70vh;
+  width: 90%;
 }
 
 .evento {
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    transition: transform 0.3s;
-  
-}
-
-.evento:hover {
-    transform: scale(1.02);
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  width: 90%;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .evento-img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-right: 15px;
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
 }
-  
+
 .evento-info {
-   flex: 1;
+  text-align: center;
 }
-  
+
 .mas-info {
-    background-color: #520556;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-  
-.mas-info:hover {
-    background: #0056b3;
+  background-color: #520556;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .descripcion {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
+  display: none;
+  margin-top: 10px;
 }
 
+.filtros {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+}
 
 .back-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #ca431d;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ca431d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-@media (max-width: 768px) {
-    .evento {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .evento-img {
-        margin-right: 0;
-        margin-bottom: 10px;
-    }
-}
- 
-*/

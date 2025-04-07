@@ -40,32 +40,39 @@ export class Evento {
   }
 
   static obtenerTodos(filtros = {}) {
-    let sql = `SELECT * FROM eventos WHERE 1=1`;
-    const params = [];
+    const condiciones = [];
+    const valores = {};
 
     if (filtros.tematica) {
-      sql += " AND nombre LIKE ?";
-      params.push(`%${filtros.tematica}%`);
+      condiciones.push("tematica = @tematica");
+      valores.tematica = filtros.tematica;
     }
 
     if (filtros.ubicacion) {
-      sql += " AND lugar LIKE ?";
-      params.push(`%${filtros.ubicacion}%`);
+      condiciones.push("lugar LIKE @ubicacion");
+      valores.ubicacion = `%${filtros.ubicacion}%`;
     }
 
     if (filtros.fecha) {
-      sql += " AND fecha = ?";
-      params.push(filtros.fecha);
+      condiciones.push("fecha = @fecha");
+      valores.fecha = filtros.fecha;
     }
 
     if (filtros.precio !== undefined) {
-      sql += " AND precio <= ?";
-      params.push(filtros.precio);
+      condiciones.push("precio <= @precio");
+      valores.precio = filtros.precio;
     }
 
-    sql += " ORDER BY fecha DESC";
+    if (filtros.estadoAnimo) {
+      condiciones.push("estadoAnimo = @estadoAnimo");
+      valores.estadoAnimo = filtros.estadoAnimo;
+    }
 
-    return this.db.prepare(sql).all(...params);
+    const where =
+      condiciones.length > 0 ? `WHERE ${condiciones.join(" AND ")}` : "";
+    const query = `SELECT * FROM eventos ${where} ORDER BY fecha DESC`;
+
+    return this.db.prepare(query).all(valores);
   }
 
   static obtenerPorId(id) {

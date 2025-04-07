@@ -37,19 +37,19 @@ usuariosRouter.get(
 
 usuariosRouter.post(
   "/registro",
-  body("username")
-    .trim()
-    .notEmpty()
-    .matches(/^[A-Za-z0-9]+$/)
-    .withMessage("Solo letras y números"),
-  body("nombre").trim().notEmpty().withMessage("El nombre es obligatorio"),
-  body("apellido").trim().notEmpty().withMessage("El apellido es obligatorio"),
-  body("email").isEmail().withMessage("Correo inválido"),
-  body("edad").isInt({ min: 1 }).withMessage("Edad inválida"),
-  body("password")
-    .isLength({ min: 6, max: 10 })
-    .withMessage("La contraseña no tiene entre 6 y 10 caracteres"),
-  body("role").notEmpty().withMessage("Selecciona un rol"),
+  [
+    body("nombre").trim().notEmpty().withMessage("El nombre es obligatorio"),
+    body("apellido")
+      .trim()
+      .notEmpty()
+      .withMessage("El apellido es obligatorio"),
+    body("edad").isInt({ min: 1 }).withMessage("Edad inválida"),
+    body("email").isEmail().withMessage("Correo electrónico inválido"),
+    body("username").trim().notEmpty().withMessage("El usuario es obligatorio"),
+    body("password")
+      .isLength({ min: 6, max: 12 })
+      .withMessage("La contraseña debe tener entre 6 y 12 caracteres"),
+  ],
   asyncHandler(doRegistro)
 );
 

@@ -5,46 +5,68 @@
   <link rel="stylesheet" href="/css/registro.css" />
 </head>
 <div class="registro-container">
-  <div class="left-panel">
-    <!-- Aquí puedes poner imágenes o ilustraciones -->
-  </div>
-
+  <div class="left-panel"></div>
   <div class="right-panel">
     <h1>¡Bienvenido a Moodvent!</h1>
     <h2>Cuéntanos un poco sobre ti</h2>
 
     <% if (error) { %>
-      <p style="color:red"><%= error %></p>
+    <p style="color: red"><%= error %></p>
     <% } %>
 
     <form action="/usuarios/registro" method="POST">
       <div>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="<%= datos.nombre || '' %>" />
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          value="<%= datos.nombre || '' %>"
+        />
         <%= helpers.error(errores, 'nombre') %>
       </div>
 
       <div>
         <label for="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" value="<%= datos.apellido || '' %>" />
+        <input
+          type="text"
+          id="apellido"
+          name="apellido"
+          value="<%= datos.apellido || '' %>"
+        />
         <%= helpers.error(errores, 'apellido') %>
       </div>
 
       <div>
         <label for="edad">Edad:</label>
-        <input type="number" id="edad" name="edad" value="<%= datos.edad || '' %>" />
+        <input
+          type="number"
+          id="edad"
+          name="edad"
+          value="<%= datos.edad || '' %>"
+        />
         <%= helpers.error(errores, 'edad') %>
       </div>
 
       <div>
         <label for="email">Correo:</label>
-        <input type="email" id="email" name="email" value="<%= datos.email || '' %>" />
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="<%= datos.email || '' %>"
+        />
         <%= helpers.error(errores, 'email') %>
       </div>
 
       <div>
         <label for="username">Usuario:</label>
-        <input type="text" id="username" name="username" value="<%= datos.username || '' %>" />
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value="<%= datos.username || '' %>"
+        />
         <%= helpers.error(errores, 'username') %>
       </div>
 
@@ -54,15 +76,6 @@
         <%= helpers.error(errores, 'password') %>
       </div>
 
-      <div>
-        <label for="role">Rol:</label>
-        <select name="role" id="role">
-          <option value="">Selecciona un rol</option>
-          <option value="user" <%= datos.role === "user" ? "selected" : "" %>>Usuario</option>
-          <option value="admin" <%= datos.role === "admin" ? "selected" : "" %>>Administrador</option>
-        </select>
-        <%= helpers.error(errores, 'role') %>
-      </div>
       <button type="submit">Registrarse</button>
     </form>
 

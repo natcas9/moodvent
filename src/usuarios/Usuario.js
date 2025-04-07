@@ -36,15 +36,7 @@ export class Usuario {
     return row;
   }
 
-  static async registro({
-    nombre,
-    apellido,
-    edad,
-    email,
-    username,
-    password,
-    role,
-  }) {
+  static async registro({ nombre, apellido, edad, email, username, password }) {
     const existeUsername = this.selectPorUsername.get(username);
     if (existeUsername) throw new UsuarioYaExiste("El usuario ya existe");
 
@@ -52,6 +44,15 @@ export class Usuario {
     if (existeEmail) throw new UsuarioYaExiste("El email ya está registrado");
 
     const hash = await bcrypt.hash(password, 10);
-    this.insertUsuario.run(nombre, apellido, edad, email, username, hash, role);
+    const rolPorDefecto = RolesEnum.USER;
+    this.insertUsuario.run(
+      nombre,
+      apellido,
+      edad,
+      email,
+      username,
+      hash,
+      rolPorDefecto
+    );
   }
 }
