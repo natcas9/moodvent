@@ -1,0 +1,67 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> MOOD TEST</title>
+    <link rel="stylesheet" href="/css/mood-test.css" />
+</head>
+
+<main> 
+    <h1> ¿ Cómo te sientes hoy? </h1>
+    <form  action="/submit-test" method="POST">
+        <div>
+            <p> ¿ Qué tan feliz te sientes? </p>
+            <%= for (let i=0; i <5; i++) { %>
+                <label>
+                    <input type="radio" name="FELIZ" value="<%= i %>" required />
+                    <%= i %>
+                </label>
+            <% } %>
+        </div>
+
+        <div>
+            <p> ¿ Qué tan triste te sientes ? </p>
+            <%= for (let i=0; i<5; i++) { %>
+                <label> 
+                    <input type="radio" name="TRISTE" value="<%= i %>" required />
+                    <%= i %>
+                </label>
+            <% } %>
+            </div>
+
+        <div>
+            <p> ¿ Qué tan relajado(a) te sientes ? </p>
+            <%= for (let i=0; i<5; i++) { %> 
+                <label>
+                    <input type="radio" name="RELAJADO" value="<%= i %>" required />
+                    <%= i %>
+                </label>
+            <% } >
+        </div>
+
+        <div>
+            <p> ¿ Qué tan ansioso(a) te sientes? </p>
+            <%= for (let i=0; i<5; i++) { %>
+                <label>
+                    <input type="radio" name="ANSIOSO" value="<%= i %>" required />
+                    <%= i %>
+                </label>   
+            <% } %>     
+        </div>
+
+        <div>
+            <p> ¿ Qué tan enojado(a) te sientes? </p>
+            <%= for (let i=0; i<5; i++) { %> 
+                <label>
+                    <input type="radio" name="ENOJADO" value="<%= i %>" required />
+                    <= i %>
+                </label>
+            <% } %>
+        </div>
+
+        <!-- Submit button-->
+         <div>
+            <button type="submit"> Enviar respuestas </button>
+         </div>
+    </form>
+</main>
+

@@ -1,5 +1,6 @@
 import { Evento } from "./Evento.js";
 import { render } from "../utils/render.js";
+import session from "express-session";
 
 export function viewCrearEvento(req, res) {
   render(req, res, "paginas/crearEventos");
@@ -84,4 +85,10 @@ export function viewDetalles(req, res) {
   const evento = Evento.porId(req.params.id);
   if (!evento) return res.status(404).send("Evento no encontrado");
   render(req, res, "paginas/detallesEvento", { evento });
+}
+
+
+// TODO FINISH THIS 
+export function viewMoodForm(req,res) {
+  res.render("pagina", { contenido: "paginas/mood-test", session: req.session});
 }
