@@ -1,124 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ver eventos</title>
-    <link rel="stylesheet" href="/css/styles.css" />
-  </head>
-  <body>
-    <h1 class="titulo">Explora los eventos disponibles</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ver eventos</title>
+  <link rel="stylesheet" href="/css/visualizarEventos.css" /> 
+</head>
 
-    <form class="filtros" method="GET" action="/eventos/visualizarEventos">
-      <h3>Filtrar Eventos</h3>
+<body>
+  <h1 class="titulo">Explora los eventos disponibles</h1>
 
-      <label>
-        Temática:
-        <select name="tematica">
-          <option value="">Todas</option>
-          <option value="musica">Música</option>
-          <option value="deporte">Deporte</option>
-          <option value="arte">Arte</option>
-        </select>
-      </label>
+  <form class="filtros" method="GET" action="/eventos/visualizarEventos">
+    <h3>Filtrar Eventos</h3>
 
-      <label>
-        Ubicación:
-        <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
-      </label>
+    <label>
+      Ubicación:
+      <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
+    </label>
 
-      <label>
-        Fecha:
-        <input type="date" name="fecha" />
-      </label>
+    <label>
+      Fecha:
+      <input type="date" name="fecha" />
+    </label>
 
-      <label>
-        Precio máximo:
-        <input type="number" name="precio" placeholder="Máximo" />
-      </label>
+    <label>
+      Precio máximo:
+      <input type="number" name="precio" placeholder="Máximo" />
+    </label>
 
-      <label>
-        Estado de Ánimo:
-        <select name="estadoAnimo">
-          <option value="">Todos</option>
-          <option value="Feliz">Feliz</option>
-          <option value="Triste">Triste</option>
-          <option value="Enojado">Enojado</option>
-          <option value="Ansioso">Ansioso</option>
-          <option value="Relajado">Relajado</option>
-        </select>
-      </label>
+    <label>
+      Estado de Ánimo:
+      <select name="estadoAnimo">
+        <option value="">Todos</option>
+        <option value="Feliz">Feliz</option>
+        <option value="Triste">Triste</option>
+        <option value="Enojado">Enojado</option>
+        <option value="Ansioso">Ansioso</option>
+        <option value="Relajado">Relajado</option>
+      </select>
+    </label>
 
-      <button type="submit">Aplicar filtros</button>
-      <button
-        type="button"
-        onclick="window.location.href='/eventos/visualizarEventos'"
-      >
-        Limpiar filtros
-      </button>
-    </form>
-
-    <div class="eventos-container">
-      <% if (eventos.length === 0) { %>
-      <p>No hay eventos disponibles por ahora.</p>
-      <% } else { %> <% eventos.forEach(evento => { %>
-      <div class="evento-card">
-        <img
-          src="<%= evento.imagen || '/img/default-event.png' %>"
-          alt="Imagen del evento"
-          class="evento-img"
-        />
-        <div class="evento-info">
-          <h2><%= evento.nombre %></h2>
-          <p><strong>Fecha:</strong> <%= evento.fecha %></p>
-          <p><strong>Hora:</strong> <%= evento.hora %></p>
-          <p><strong>Lugar:</strong> <%= evento.lugar %></p>
-          <p><strong>Precio:</strong> $<%= evento.precio %></p>
-          <p><strong>Estado de ánimo:</strong> <%= evento.estadoAnimo %></p>
-
-          <button
-            class="mas-info"
-            onclick="toggleDescripcion('<%= evento.id %>')"
-          >
-            Más info
-          </button>
-          <div
-            class="descripcion"
-            id="desc-<%= evento.id %>"
-            style="display: none"
-          >
-            <p><%= evento.descripcion %></p>
-          </div>
-
-          <a
-            href="/eventos/editar/<%= evento.id %>"
-            class="btn-evento modificar"
-            >Modificar</a
-          >
-
-          <!-- FORMULARIO ELIMINAR -->
-          <form
-            action="/eventos/eliminar/<%= evento.id %>"
-            method="POST"
-            onsubmit="return confirm('¿Estás seguro de eliminar este evento?')"
-            style="display: inline"
-          >
-            <button type="submit" class="btn-evento eliminar">Eliminar</button>
-          </form>
-        </div>
-      </div>
-      <% }) %> <% } %>
-    </div>
-
-    <button onclick="window.location.href='/'" class="back-button">
-      Volver
+    <button type="submit">Aplicar filtros</button>
+    <button
+      type="button"
+      onclick="window.location.href='/eventos/visualizarEventos'"
+    >
+      Limpiar filtros
     </button>
+  </form>
 
-    <script>
-      function toggleDescripcion(id) {
-        const desc = document.getElementById("desc-" + id);
-        desc.style.display = desc.style.display === "none" ? "block" : "none";
-      }
-    </script>
-  </body>
+  <div class="eventos-container">
+    <% if (eventos.length === 0) { %>
+    <p>No hay eventos disponibles por ahora.</p>
+    <% } else { %> <% eventos.forEach(evento => { %>
+    <div class="evento-card">
+      <img
+        src="<%= evento.imagen || '/img/default-event.png' %>"
+        alt="Imagen del evento"
+        class="evento-img"
+      />
+      <div class="evento-info">
+        <h2><%= evento.nombre %></h2>
+        <p>Estado de ánimo: <%= evento.estadoAnimo %></p>
+
+        <button class="mas-info" onclick="toggleDescripcion('<%= evento.id %>')"> Más info</button>
+        <div class="descripcion" id="desc-<%= evento.id %>"  style="display:none">
+          <p>Fecha: <%= evento.fecha %></p>
+          <p>Hora:<%= evento.hora %></p>
+          <p>Lugar: <%= evento.lugar %></p>
+          <p>Precio: $<%= evento.precio %></p>
+          <p><%= evento.descripcion %></p>
+        </div>
+      
+        <a
+          href="/eventos/editar/<%= evento.id %>"
+          class="btn-evento modificar"
+          >Modificar</a
+        >
+
+        <!-- FORMULARIO ELIMINAR -->
+        <form
+          action="/eventos/eliminar/<%= evento.id %>"
+          method="POST"
+          onsubmit="return confirm('¿Estás seguro de eliminar este evento?')"
+          style="display: inline"
+        >
+          <button type="submit" class="btn-evento eliminar">Eliminar</button>
+        </form>
+      </div>
+    </div>
+    <% }) %> <% } %>
+  </div>
+
+  <button onclick="window.location.href='/'" class="back-button">
+    Volver
+  </button>
+
+  <script>
+    function toggleDescripcion(id) {
+      const desc = document.getElementById("desc-" + id);
+      desc.style.display = desc.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</body>
 </html>
