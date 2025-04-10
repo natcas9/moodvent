@@ -13,7 +13,7 @@ CREATE TABLE eventos (
 DROP TABLE IF EXISTS "usuarios";
 CREATE TABLE usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        nombre TEXT NOT NULL,
+        nombre TEXT NOT NULL
         apellido TEXT NOT NULL,
         edad INTEGER NOT NULL,
         email TEXT UNIQUE NOT NULL,

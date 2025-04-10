@@ -5,8 +5,7 @@
   box-sizing: border-box;
 }
 
-/* Las dimensiones no se ven tan correctas -> 
-toca cambiarlas para que se vea mejor */
+
 body {
   font-family: Arial, sans-serif;
   background-image: url("/img/fondoo.jpg");
@@ -28,7 +27,8 @@ body {
   text-align: center;
   background-color: #000000;
 }
-/* Centered Form Box */
+
+
 .container {
   display: flex;
   justify-content: center;
@@ -38,7 +38,7 @@ body {
   flex-direction: column;
 }
 
-/* FORM BOX - Now with visible border */
+
 .form-container {
   background: #000000;
   padding: 30px;
@@ -59,14 +59,14 @@ body {
   flex-direction: column;
 }
 
-/* Label Style */
+
 label {
   font-weight: bold;
   margin-bottom: 5px;
   color: #ffffff;
 }
 
-/* Input & Select */
+
 input,
 select {
   width: 100%;
