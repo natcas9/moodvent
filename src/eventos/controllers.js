@@ -53,7 +53,7 @@ export function viewEventos(req, res) {
 }
 
 export function viewEditarEvento(req, res) {
-  const evento = Evento.porId(req.params.id);
+  const evento = Evento.obtenerPorId(req.params.id);
   if (!evento) return res.status(404).send("Evento no encontrado");
   render(req, res, "paginas/modificarEvento", { evento });
 }

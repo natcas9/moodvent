@@ -96,7 +96,6 @@ td {
   overflow: hidden;
 }
 
-/* comment */
 .mySlides {
   width: 100%;
 
@@ -451,7 +450,7 @@ div.scroll-container img {
 /* CSS de la sección de visualizar eventos */
 /* Toca cambiar todos los px en % */
 
- /*body {
+/*body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -483,22 +482,30 @@ div.scroll-container img {
   margin: 10px;
   width: 90%;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex; 
-  flex-direction: row; 
+  display: flex; /* changed from column */
+  flex-direction: row; /* row layout for image + info */
   align-items: center;
-  gap: 20px; 
+  gap: 20px; /* spacing between image and info */
 }
 
 .evento-img {
-  width: 20%; 
+  width: 25%; /* 1/4 width */
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.evento-img {
+  width: 20%;
   height: 120px;
   object-fit: cover;
   border-radius: 10px;
 }
 
 .evento-info {
-  color: black !important;
-  width: 75%; 
+  width: 75%; /* 3/4 width */
   text-align: left;
 }
 
@@ -511,7 +518,6 @@ div.scroll-container img {
   margin: 5px 0;
 }
 
-
 .mas-info {
   background-color: #520556;
   color: white;
@@ -519,20 +525,16 @@ div.scroll-container img {
   padding: 10px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 10px;
 }
 
-.evento-details {
+.descripcion {
   display: none;
   margin-top: 10px;
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-radius: 8px;
 }
 
 .filtros {
   background: white;
-  color: black !important; 
+  color: black !important;
   padding: 15px;
   color: black;
   border-radius: 10px;
@@ -551,10 +553,9 @@ div.scroll-container img {
   cursor: pointer;
 }
 
-.Editar{
+.Editar {
   color: black;
 }
-
 
 /*contenido normal*/
 
@@ -668,7 +669,6 @@ section {
   margin-bottom: 10px;
 }
 
-
 /* admin takes the one of normal but with this as well*/
 .config-grid {
   display: flex;
@@ -695,4 +695,20 @@ section {
   padding: 0.5rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.contenedor-test {
+  background-color: #ee821c;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.btn-test {
+  background-color: #3e204f;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.btn-test:hover {
+  background-color: #1f092b;
 }
