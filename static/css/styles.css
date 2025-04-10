@@ -449,6 +449,7 @@ div.scroll-container img {
 /* Visualizar eventos */
 /* CSS de la sección de visualizar eventos */
 /* Toca cambiar todos los px en % */
+
 /*body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -490,6 +491,15 @@ div.scroll-container img {
 .evento-img {
   width: 25%; /* 1/4 width */
   height: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.evento-img {
+  width: 20%;
+  height: 120px;
   object-fit: cover;
   border-radius: 10px;
 }
@@ -497,6 +507,15 @@ div.scroll-container img {
 .evento-info {
   width: 75%; /* 3/4 width */
   text-align: left;
+}
+
+.evento-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.evento-info p {
+  margin: 5px 0;
 }
 
 .mas-info {
@@ -515,6 +534,7 @@ div.scroll-container img {
 
 .filtros {
   background: white;
+  color: black !important;
   padding: 15px;
   color: black;
   border-radius: 10px;
@@ -531,6 +551,10 @@ div.scroll-container img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.Editar {
+  color: black;
 }
 
 /*contenido normal*/
@@ -643,4 +667,48 @@ section {
   font-weight: bold;
   color: #ee821c;
   margin-bottom: 10px;
+}
+
+/* admin takes the one of normal but with this as well*/
+.config-grid {
+  display: flex;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.config-box {
+  flex: 1;
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.config-box h3 {
+  margin-bottom: 0.5rem;
+}
+
+.config-box textarea {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.contenedor-test {
+  background-color: #ee821c;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.btn-test {
+  background-color: #3e204f;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.btn-test:hover {
+  background-color: #1f092b;
 }
