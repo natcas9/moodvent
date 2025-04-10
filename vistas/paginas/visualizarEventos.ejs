@@ -82,7 +82,6 @@
           >
             Más info
           </button>
-
           <div
             class="descripcion"
             id="desc-<%= evento.id %>"
@@ -90,6 +89,22 @@
           >
             <p><%= evento.descripcion %></p>
           </div>
+
+          <a
+            href="/eventos/editar/<%= evento.id %>"
+            class="btn-evento modificar"
+            >Modificar</a
+          >
+
+          <!-- FORMULARIO ELIMINAR -->
+          <form
+            action="/eventos/eliminar/<%= evento.id %>"
+            method="POST"
+            onsubmit="return confirm('¿Estás seguro de eliminar este evento?')"
+            style="display: inline"
+          >
+            <button type="submit" class="btn-evento eliminar">Eliminar</button>
+          </form>
         </div>
       </div>
       <% }) %> <% } %>
@@ -103,10 +118,6 @@
       function toggleDescripcion(id) {
         const desc = document.getElementById("desc-" + id);
         desc.style.display = desc.style.display === "none" ? "block" : "none";
-      }
-
-      function filtrarEventos() {
-        alert("Funcionalidad de filtrado aún en desarrollo.");
       }
     </script>
   </body>

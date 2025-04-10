@@ -1,16 +1,10 @@
-<button id="openProfileBtn">
-  <img src="/static/img/user_icon.png" alt="Perfil" width="40" />
-</button>
-
-<div id="profileModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Perfil de Usuario</h2>
-    <p><strong>Nombre:</strong> <span id="userName"></span></p>
-    <p><strong>Email:</strong> <span id="userEmail"></span></p>
-    <h3>Historial de Perfil</h3>
-    <ul id="userHistory"></ul>
-
-    <button id="logoutBtn">Cerrar Sesión</button>
-  </div>
+<h1 class="bienvenido">Bienvenido, <%= session?.nombre || "usuario" %> 👋</h1>
+<div class="contenedor-perfil">
+  <img src="" alt="" />
+  <p>Nombre:</p>
+  <p>Apellido:</p>
+  <p>Usuario:</p>
+  <p>Edad</p>
+  <a href="">modificar</a>
 </div>
+<div class="mis-eventos"></div>
