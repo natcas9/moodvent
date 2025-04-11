@@ -10,7 +10,7 @@
     <form  action="/submit-test" method="POST">
         <div>
             <p> ¿ Qué tan feliz te sientes? </p>
-            <%= for (let i=0; i <5; i++) { %>
+            <% for (let i=0; i <5; i++) { %>
                 <label>
                     <input type="radio" name="FELIZ" value="<%= i %>" required />
                     <%= i %>
@@ -20,7 +20,7 @@
 
         <div>
             <p> ¿ Qué tan triste te sientes ? </p>
-            <%= for (let i=0; i<5; i++) { %>
+            <% for (let i=0; i<5; i++) { %>
                 <label> 
                     <input type="radio" name="TRISTE" value="<%= i %>" required />
                     <%= i %>
@@ -30,17 +30,17 @@
 
         <div>
             <p> ¿ Qué tan relajado(a) te sientes ? </p>
-            <%= for (let i=0; i<5; i++) { %> 
+            <% for (let i=0; i<5; i++) { %> 
                 <label>
                     <input type="radio" name="RELAJADO" value="<%= i %>" required />
                     <%= i %>
                 </label>
-            <% } >
+            <% } %>
         </div>
 
         <div>
             <p> ¿ Qué tan ansioso(a) te sientes? </p>
-            <%= for (let i=0; i<5; i++) { %>
+            <% for (let i=0; i<5; i++) { %>
                 <label>
                     <input type="radio" name="ANSIOSO" value="<%= i %>" required />
                     <%= i %>
@@ -50,10 +50,10 @@
 
         <div>
             <p> ¿ Qué tan enojado(a) te sientes? </p>
-            <%= for (let i=0; i<5; i++) { %> 
+            <% for (let i=0; i<5; i++) { %> 
                 <label>
                     <input type="radio" name="ENOJADO" value="<%= i %>" required />
-                    <= i %>
+                    <%= i %>
                 </label>
             <% } %>
         </div>

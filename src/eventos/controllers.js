@@ -92,3 +92,31 @@ export function viewDetalles(req, res) {
 export function viewMoodForm(req,res) {
   res.render("pagina", { contenido: "paginas/mood-test", session: req.session});
 }
+
+export function handleMoodTest(req,res) {
+  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO} = req.body;
+
+  const emociones = {
+    FELIZ: parseInt(FELIZ),
+    TRISTE: parseInt(TRISTE),
+    RELAJADO: parseInt(RELAJADO),
+    ANSIOSO: parseInt(ANSIOSO),
+    ENOJADO: parseInt(ENOJADO)
+  };
+
+  const dominantEmotion = getDominantEmotion(emociones);
+
+  res.redirect(`/eventos/visualizarEventos?estadoAnimo=${dominantEmotion}`);
+}
+
+function getDominantEmotion(emociones) {
+  const entrada = Object.entries(emociones);
+
+  const priority = [ "FELIZ" , "RELAJADO", "TRISTE", "ANSIOSO", "ENOJADO"];
+
+  entrada.sort((a,b) => {
+    if (b[1] !== a[1] ) return b[1] - a[1];
+    return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+  });
+  return entrada[0][0];
+}
