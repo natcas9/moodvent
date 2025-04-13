@@ -105,6 +105,8 @@ export function handleMoodTest(req,res) {
   };
 
   const dominantEmotion = getDominantEmotion(emociones);
+  console.log("Dominant emotion:", dominantEmotion);
+
 
   res.redirect(`/eventos/visualizarEventos?estadoAnimo=${dominantEmotion}`);
 }

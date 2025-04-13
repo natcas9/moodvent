@@ -1,0 +1,17 @@
+.main {
+    text-align: center; 
+    font-family: Arial, sans-serif;
+}
+
+.main p {
+    font-size: 18px;
+}
+
+.main h1 {
+    font-size: 28px;
+}
+
+
+.boton {
+    margin-top: 20px;
+}
