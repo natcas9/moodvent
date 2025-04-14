@@ -1,0 +1,30 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Resultado del Test</title>
+    <link rel="stylesheet" href="/css/mood-test.css" />
+</head>
+
+<body> 
+    <main class="main">
+        <h1> Resultado del test de ánimo</h1>
+        <p> Gracias por contestar el formulario, aquí está tu resumen:</p>
+
+        <ul>
+           <% sortedEmotions.forEach(emotion => { %>
+            <li>
+                <%= emotion.charAt(0) + emotion.slice(1).toLowerCase() %>
+            </li>
+            <% }) %>
+        </ul>
+
+        <h2> Emoción principal: 
+            <%= dominantEmotion.charAt(0) + dominantEmotion.slice(1).toLowerCase() %>
+        </h2>
+
+        <form action="/eventos/visualizarEventos" method="GET">
+            <input type="hidden" name="estadoAnimo" value="<%= dominantEmotion %>" />
+            <button class="boton" type="submit"> VER EVENTOS RECOMENDADOS </button>
+        </form>
+    </main>
+</body> 

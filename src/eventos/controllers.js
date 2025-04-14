@@ -104,11 +104,15 @@ export function handleMoodTest(req,res) {
     ENOJADO: parseInt(ENOJADO)
   };
 
-  const dominantEmotion = getDominantEmotion(emociones);
-  console.log("Dominant emotion:", dominantEmotion);
+  const { dominant, sorted } = getDominantEmotion(emociones);
 
 
-  res.redirect(`/eventos/visualizarEventos?estadoAnimo=${dominantEmotion}`);
+  res.render("pagina",{ 
+      contenido: "paginas/resultado",
+      session: req.session,
+      sortedEmotions: sorted,
+      dominantEmotion: dominant 
+    });
 }
 
 function getDominantEmotion(emociones) {
@@ -120,5 +124,8 @@ function getDominantEmotion(emociones) {
     if (b[1] !== a[1] ) return b[1] - a[1];
     return priority.indexOf(a[0]) - priority.indexOf(b[0]);
   });
-  return entrada[0][0];
+  return {
+    dominant: entrada[0][0],
+    sorted: entrada.map(([key]) => key)
+  };
 }
