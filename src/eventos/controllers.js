@@ -88,7 +88,10 @@ export function viewDetalles(req, res) {
 }
 
 
-// TODO FINISH THIS 
+export function viewProfile(req,res) {
+  res.render("pagina", { contenido: "paginas/home", session: req.session});
+}
+
 export function viewMoodForm(req,res) {
   res.render("pagina", { contenido: "paginas/mood-test", session: req.session});
 }

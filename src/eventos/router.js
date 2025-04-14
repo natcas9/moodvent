@@ -10,7 +10,8 @@ import {
   eliminarEvento,
   viewDetalles,
   viewMoodForm,
-  handleMoodTest
+  handleMoodTest,
+  viewProfile
 } from "./controllers.js";
 
 const router = express.Router();
@@ -24,5 +25,6 @@ router.post("/eliminar/:id", asyncHandler(eliminarEvento));
 router.get("/detalles/:id", asyncHandler(viewDetalles));
 router.get("/mood-form", asyncHandler(viewMoodForm))
 router.post("/submit-test", asyncHandler(handleMoodTest));
+router.get("/verPerfil", asyncHandler(viewProfile));
 
 export default router;
