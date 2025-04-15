@@ -97,14 +97,15 @@ export function viewMoodForm(req,res) {
 }
 
 export function handleMoodTest(req,res) {
-  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO} = req.body;
+  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO} = req.body;
 
   const emociones = {
     FELIZ: parseInt(FELIZ),
     TRISTE: parseInt(TRISTE),
     RELAJADO: parseInt(RELAJADO),
     ANSIOSO: parseInt(ANSIOSO),
-    ENOJADO: parseInt(ENOJADO)
+    ENOJADO: parseInt(ENOJADO),
+    ABURRIDO: parseInt(ABURRIDO)
   };
 
   const { dominant, sorted } = getDominantEmotion(emociones);
@@ -121,7 +122,7 @@ export function handleMoodTest(req,res) {
 function getDominantEmotion(emociones) {
   const entrada = Object.entries(emociones);
 
-  const priority = [ "FELIZ" , "RELAJADO", "TRISTE", "ANSIOSO", "ENOJADO"];
+  const priority = [ "FELIZ" , "RELAJADO", "TRISTE", "ANSIOSO", "ENOJADO", "ABURRIDO"];
 
   entrada.sort((a,b) => {
     if (b[1] !== a[1] ) return b[1] - a[1];
