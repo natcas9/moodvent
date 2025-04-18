@@ -26,7 +26,6 @@ body {
   background-color: white;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   padding: 15px;
   margin: 10px 0;
@@ -38,14 +37,18 @@ body {
 
 }
 
-  
-.evento-img {
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.estado-icon {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 5px 0;
 }
+
+.icono-estado {
+  width: 60x;
+  height: 60px;
+}
+
   
 .evento-info {
   color: black;

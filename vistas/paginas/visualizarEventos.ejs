@@ -55,13 +55,14 @@
     <p>No hay eventos disponibles por ahora.</p>
     <% } else { %> <% eventos.forEach(evento => { %>
     <div class="evento-card">
-      <img
-        src="<%= evento.imagen || '/img/default-event.png' %>"
-        alt="Imagen del evento"
-        class="evento-img"
-      />
       <div class="evento-info">
         <h2><%= evento.nombre %></h2>
+        <div class="estado-icon">
+          <img 
+            src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
+            alt="<=% evento.estadoAnimo %>"
+            class="icono-estado" />
+        </div>
         <p>Estado de ánimo: <%= evento.estadoAnimo %></p>
 
         <button class="mas-info" onclick="toggleDescripcion('<%= evento.id %>')"> Más info</button>
