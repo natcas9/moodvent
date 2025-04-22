@@ -1,10 +1,17 @@
-<h1 class="bienvenido">Bienvenido, <%= session?.nombre || "usuario" %> 👋</h1>
-<div class="contenedor-perfil">
-  <img src="" alt="" />
-  <p>Nombre:</p>
-  <p>Apellido:</p>
-  <p>Usuario:</p>
-  <p>Edad</p>
-  <a href="">modificar</a>
-</div>
-<div class="mis-eventos"></div>
+<h1>Perfil de <%= usuario.nombre %> <%= usuario.apellido %></h1>
+<p><strong>Usuario:</strong> <%= usuario.username %></p>
+<p><strong>Email:</strong> <%= usuario.email %></p>
+<p><strong>Edad:</strong> <%= usuario.edad %></p>
+<p><strong>Rol:</strong> <%= usuario.role %></p>
+
+<h2>Eventos creados por ti:</h2>
+<ul>
+  <% if (eventos.length === 0) { %>
+  <li>No has creado ningún evento todavía.</li>
+  <% } else { %> <% eventos.forEach(evento => { %>
+  <li>
+    <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
+    evento.lugar %>
+  </li>
+  <% }) %> <% } %>
+</ul>
