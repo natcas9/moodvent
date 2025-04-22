@@ -67,7 +67,7 @@ export class Evento {
     }
 
     if (filtros.estadoAnimo) {
-      condiciones.push("estadoAnimo = @estadoAnimo");
+      condiciones.push("estadoAnimo LIKE @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 

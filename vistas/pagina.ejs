@@ -5,18 +5,22 @@
   </head>
 
   <body>
-    <% const mostrarLayoutCompleto = (contenido === "paginas/home" || contenido
-    === "paginas/admin"); const ocultarTodo = (contenido === "paginas/login" ||
-    contenido === "paginas/registro"); const ocultarNavbar = (contenido ===
-    "paginas/crearEventos" || contenido === "paginas/modificarEvento"); const
-    ocultarFooter = (contenido === "paginas/crearEventos" || contenido ===
-    "paginas/modificarEvento"); %> <% if (!ocultarTodo && !ocultarNavbar) { %>
-    <%- include('./partials/navbar.ejs') %> <% } %> <% if
-    (mostrarLayoutCompleto) { %>
+    <% const mostrarLayoutCompleto = (contenido === "paginas/home" || contenido === "paginas/admin" || contenido === "paginas/mood-test");
+       const ocultarTodo = (contenido === "paginas/login" || contenido === "paginas/registro"); 
+       const ocultarNavbar = (contenido === "paginas/crearEventos" || contenido === "paginas/modificarEvento" || contenido === "paginas/visualizarEventos");
+       const ocultarFooter = (contenido === "paginas/crearEventos" || contenido === "paginas/modificarEvento" || contenido === "paginas/visualizarEventos"); 
+    %>
+        
+    <% if (!ocultarTodo && !ocultarNavbar) { %>
+      <%- include('./partials/navbar.ejs') %> 
+    <% }  %>
+    
+    <% if (mostrarLayoutCompleto) { %>
     <div id="contenedor">
-      <% if (session && session.login) { %> <%-
-      include('./partials/cabecera.ejs', { session }) %> <%-
-      include('./partials/sidebarIzq.ejs') %> <% } %>
+      <% if (session && session.login) { %>
+        <%-include('./partials/cabecera.ejs', { session }) %>
+        <%- include('./partials/sidebarIzq.ejs') %> 
+      <% } %>
 
       <main>
         <article><%- include(contenido) %></article>
