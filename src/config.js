@@ -1,25 +1,39 @@
-// Cargar variables de entorno desde .env
 import "dotenv/config";
-import { join, dirname } from "node:path"; // ✅ Corrección aquí
+import { join, dirname } from "node:path";
 import { fileURLToPath } from "url";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const rootDir = dirname(__dirname);
+
+const isProduction = process.env.NODE_ENV === "production";
+const DEFAULT_PORT = 3000;
+const DEFAULT_SESSION_SECRET = "no muy secreto";
+
+const port = parseInt(process.env.APP_PORT, 10);
+const sessionSecret = process.env.APP_SESSION_SECRET ?? DEFAULT_SESSION_SECRET;
 
 export const config = {
-  port: Number(process.env.APP_PORT) || 3000,
-  isProduction: process.env.NODE_ENV === "production",
+  port: !isNaN(port) ? port : DEFAULT_PORT,
+
+  recursos: join(rootDir, "static"),
+  vistas: join(rootDir, "vistas"),
+  logs: join(rootDir, "logs"),
 
   session: {
-    secret: process.env.APP_SESSION_SECRET || "no muy secreto",
     resave: false,
     saveUninitialized: true,
+    secret: sessionSecret,
   },
 
-  logs: join(__dirname, "../logs"),
-  recursos: join(__dirname, "../static"),
-  vistas: join(__dirname, "../vistas"), // ✅ Necesario para app.set("views", ...)
+  isProduction,
 
   logger: {
-    level: "debug",
+    level: process.env.APP_LOG_LEVEL ?? (!isProduction ? "debug" : "info"),
+    http: (pino) => ({
+      logger: pino,
+      autoLogging: !isProduction,
+      useLevel: "trace",
+    }),
   },
 };

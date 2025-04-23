@@ -1,58 +1,63 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Crear Evento</title>
-    <link rel="stylesheet" href="/css/Eventos.css" />
-  </head>
-  </head>
-  <body>
-    <div class="container"> 
-    <h1 class="title">Modificar tu evento</h1>
-    <div class="form-container">
-      <form action="/eventos/modificar/<%= evento.id %>" method="POST">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenido a Moodvent</title>
+  <link rel="stylesheet" href="/css/Eventos.css" />
+</head>
+<h1 class="title">Modificar tu evento</h1>
+
+<div class="container">
+  <div class="form-container">
+    <form action="/eventos/modificar/<%= evento.id %>" method="POST">
       <div class="form-group">
         <label for="nombre">Evento:</label>
-        <input type="text" id="nombre" name="nombre"  value="<%= evento.nombre %>" required />
+        <input type="text" id="nombre" name="nombre" value="<%= evento.nombre %>" required />
       </div>
+
       <div class="form-group">
         <label for="descripcion">Descripción:</label>
         <input type="text" id="descripcion" name="descripcion" value="<%= evento.descripcion %>" required />
       </div>
+
       <div class="form-group">
         <label for="fecha">Fecha:</label>
         <input type="date" id="fecha" name="fecha" value="<%= evento.fecha %>" required />
       </div>
+
       <div class="form-group">
         <label for="hora">Hora:</label>
         <input type="time" id="hora" name="hora" value="<%= evento.hora %>" required />
       </div>
+
       <div class="form-group">
         <label for="lugar">Lugar:</label>
-        <input type="text" id="lugar" name="lugar"  value="<%= evento.lugar %>"required />
+        <input type="text" id="lugar" name="lugar" value="<%= evento.lugar %>" required />
       </div>
+
       <div class="form-group">
         <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" value="<%= evento.precio %>"required />
+        <input type="number" id="precio" name="precio" value="<%= evento.precio %>" required />
       </div>
+
       <div class="form-group">
-        <label for="estadoAnimo">Estado de ánimo recomendado</label>
-        <select name="estadoAnimo" id="estadoAnimo">
-          <option value="Feliz" <%= evento.estadoAnimo === 'Feliz' ? 'selected': '' %>> Feliz</option>
+        <label for="estadoAnimo">Estado de ánimo recomendado:</label>
+        <select name="estadoAnimo" id="estadoAnimo" required>
+          <option value="Feliz" <%= evento.estadoAnimo === 'Feliz' ? 'selected': '' %>>Feliz</option>
           <option value="Triste" <%= evento.estadoAnimo === 'Triste' ? 'selected' : '' %>>Triste</option>
-          <option value="Enojado"  <%= evento.estadoAnimo === 'Enojado' ? 'selected' : '' %>>Enojado</option>
+          <option value="Enojado" <%= evento.estadoAnimo === 'Enojado' ? 'selected' : '' %>>Enojado</option>
           <option value="Ansioso" <%= evento.estadoAnimo === 'Ansioso' ? 'selected' : '' %>>Ansioso</option>
           <option value="Relajado" <%= evento.estadoAnimo === 'Relajado' ? 'selected' : '' %>>Relajado</option>
+          <option value="Aburrido" <%= evento.estadoAnimo === 'Aburrido' ? 'selected' : '' %>>Aburrido</option>
+           
         </select>
       </div>
-      <button type="submit" class="btn">Guardar Modificaciones </button>
+      <button type="submit" class="btn">Guardar modificaciones</button>
     </form>
 
-    <form action="/eventos/eliminar/<%= evento.id %>" method="POST">
-      <button type="submit" class="btn" onclick="return confirm(' ¿ Estás seguro de que quierer eliminar este evento?')" >Borrar Evento</button>
+    <form action="/eventos/eliminar/<%= evento.id %>" method="POST" style="margin-top: 1rem;">
+      <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este evento?')">
+        Borrar evento
+      </button>
     </form>
-    </div>
-    </div>
-  </body>
-</html>
+  </div>
+</div>

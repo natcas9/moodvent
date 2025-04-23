@@ -1,73 +1,108 @@
-<!--SE SIGUE DESAROLLANDO-->
-<!--esta página será para poder ver los eventos que crea cada usuario -->
-
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>EVENTOS</title>
-    <link rel="stylesheet" href="/static/css/visualizarEventos.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ver eventos</title>
+  <link rel="stylesheet" href="/css/visualizarEventos.css" /> 
+</head>
 
-  <body>
-    <div class="container">
-      <div class="filtros" >
-        <h3> Filtrar Eventos</h3>
-        <label> Temática: 
-          <select id="tematica">
-            <option value="">Todas</option>
-            <option value="musica">Música</option>
-            <option value="deporte">Deporte</option>
-            <option value="arte">Arte</option>
-          </select>
-        </label>
-        <label> Ubicación: 
-          <input type="text" id="ubicacion" placeholder="Cuidad o dirección" />
-        </label>
-        <label> Fecha:
-          <input type="date" id="fecha" />
-        </label>
-        <label> Precio máximo:
-          <input type="number" id="precio" placeholder="Máximo" />
-        </label>
-        <button onclick="filtrarEventos()"> Aplicar filtros</button>
-      </div>
-      <div class="eventos">
-        <% eventos.forEach(evento => { %>
-        <div class="evento" >
-          <img src="<%= evento.imagen %>" alt="Imagen del evento" class="evento-img" />
-          <div class="evento-info" >
-            <h2> 
-              <%= evento.titulo %> 
-            </h2>
-            <p> Fecha: <%= evento.fecha %> </p>
-            <p> Precio: <%= evento.precio %> </p>
-            <p> Lugar: <%= evento.lugar %> </p>
-            <p> Estado de animo: <%= evento.estado_animo %> </p>
-            <button class="mas-info" onclick="toggleDescripcion('<%= evento.id %>')">Más info</button>
-            <div class="descripcion" id="desc-<%= evento.id %>" >
-              <p> <%= evento.descripcion %></p>
-            </div>
-          </div>
+<body>
+  <h1 class="titulo">Explora los eventos disponibles</h1>
+
+  <form class="filtros" method="GET" action="/eventos/visualizarEventos">
+    <h3>Filtrar Eventos</h3>
+
+    <label>
+      Ubicación:
+      <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
+    </label>
+
+    <label>
+      Fecha:
+      <input type="date" name="fecha" />
+    </label>
+
+    <label>
+      Precio máximo:
+      <input type="number" name="precio" placeholder="Máximo" />
+    </label>
+
+    <label>
+      Estado de Ánimo:
+      <select name="estadoAnimo">
+        <option value="">Todos</option>
+        <option value="Feliz">Feliz</option>
+        <option value="Triste">Triste</option>
+        <option value="Enojado">Enojado</option>
+        <option value="Ansioso">Ansioso</option>
+        <option value="Relajado">Relajado</option>
+        <option value="Aburrido"> Aburrido</option>
+      </select>
+    </label>
+
+    <button type="submit">Aplicar filtros</button>
+    <button
+      type="button"
+      onclick="window.location.href='/eventos/visualizarEventos'"
+    >
+      Limpiar filtros
+    </button>
+  </form>
+
+  <div class="eventos-container">
+    <% if (eventos.length === 0) { %>
+    <p>No hay eventos disponibles por ahora.</p>
+    <% } else { %> <% eventos.forEach(evento => { %>
+    <div class="evento-card">
+      <div class="evento-info">
+        <h2><%= evento.nombre %></h2>
+        <div class="estado-icon">
+          <img 
+            src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
+            alt="<=% evento.estadoAnimo %>"
+            class="icono-estado" />
         </div>
-        <%  }) %>
+        <p>Estado de ánimo: <%= evento.estadoAnimo %></p>
+
+        <button class="mas-info" onclick="toggleDescripcion('<%= evento.id %>')"> Más info</button>
+        <div class="descripcion" id="desc-<%= evento.id %>"  style="display:none">
+          <p>Fecha: <%= evento.fecha %></p>
+          <p>Hora:<%= evento.hora %></p>
+          <p>Lugar: <%= evento.lugar %></p>
+          <p>Precio: $<%= evento.precio %></p>
+          <p><%= evento.descripcion %></p>
+        </div>
+      
+        <a
+          href="/eventos/editar/<%= evento.id %>"
+          class="btn-evento modificar"
+          >Modificar</a
+        >
+
+        <!-- FORMULARIO ELIMINAR -->
+        <form
+          action="/eventos/eliminar/<%= evento.id %>"
+          method="POST"
+          onsubmit="return confirm('¿Estás seguro de eliminar este evento?')"
+          style="display: inline"
+        >
+          <button type="submit" class="btn-evento eliminar">Eliminar</button>
+        </form>
       </div>
     </div>
-    <button onclick="window.location.href='index.html'" class="back-button"> BACK </button>
-    <script>
-      function toggleDescripcion(id) {
-        var desc= document.getElementById("desc-" + id);
-        if (desc.style.maxHeight == "0px" || desc.style.maxHeight == " ") {
-          desc.style.maxHeight = desc.scrollHeight + "px";
-        } else {
-          desc.style.maxHeight = "0px";
-        }
-      }
-      function filtrarEventos() {
-        alert("Funcionalidad de filtrado en desarrollo");
-      }
-    </script>
-  </body>
-</html>
+    <% }) %> <% } %>
+  </div>
 
-  
+  <button onclick="window.location.href='/eventos/verPerfil'" class="back-button">
+    Volver
+  </button>
+
+  <script>
+    function toggleDescripcion(id) {
+      const desc = document.getElementById("desc-" + id);
+      desc.style.display = desc.style.display === "none" ? "block" : "none";
+    }
+  </script>
+</body>
+</html>

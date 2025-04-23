@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Perfil</title>
-  </head>
-  <body>
-    <button id="openProfileBtn">
-        <img src="/static/img/user_icon.png" alt="Perfil" width="40">
-    </button>
-    
-    <div id="profileModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Perfil de Usuario</h2>
-            <p><strong>Nombre:</strong> <span id="userName"></span></p>
-            <p><strong>Email:</strong> <span id="userEmail"></span></p>
-            <h3>Historial de Perfil</h3>
-            <ul id="userHistory"></ul>
+<h1>Perfil de <%= usuario.nombre %> <%= usuario.apellido %></h1>
+<p><strong>Usuario:</strong> <%= usuario.username %></p>
+<p><strong>Email:</strong> <%= usuario.email %></p>
+<p><strong>Edad:</strong> <%= usuario.edad %></p>
+<p><strong>Rol:</strong> <%= usuario.role %></p>
 
-            <button id="logoutBtn">Cerrar Sesión</button>
-        </div>
-    </div>
-  </body>
-
-</html>
+<h2>Eventos creados por ti:</h2>
+<ul>
+  <% if (eventos.length === 0) { %>
+  <li>No has creado ningún evento todavía.</li>
+  <% } else { %> <% eventos.forEach(evento => { %>
+  <li>
+    <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
+    evento.lugar %>
+  </li>
+  <% }) %> <% } %>
+</ul>

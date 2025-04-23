@@ -1,8 +1,7 @@
 Funcionalidades completadas 
-login: 1 usuario y 1 admin - 100% 
-claves 
-Nombre: user 
-Contraseña: userpass
-Nombre: admin
-Contraseña: adminpass
-Creación, modificación, eliminación y visualización de eventos - 100%
+base de datos con tablas usuarios y eventos
+login y logout 
+Crear, modificar, visualizar y eliminar eventos
+implementación ejercicio 3 
+filtración de eventos
+

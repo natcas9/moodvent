@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -17,86 +16,70 @@
           <h2>Administra eventos y mejora la experiencia Moodvent</h2>
         </div>
         <div class="comunidad-imagen">
-          <img src="/img/admin/admin-welcome.png" alt="admin" />
+          <img src="/img/admin-welcome.png" alt="admin" />
         </div>
       </div>
     </section>
 
     <main>
-      <div class="container-events-grid">
-        <h2 class="events-title">Gestión de Eventos</h2>
-        <div class="btn-container">
-          <a href="/admin/eventos/crear" class="btn-eventos">Crear</a>
-          <a href="/admin/eventos/editar" class="btn-eventos">Editar</a>
-          <a href="/admin/eventos/eliminar" class="btn-eventos">Eliminar</a>
-          <a href="/admin/eventos/filtrar" class="btn-eventos">Filtrar</a>
-        </div>
+  <div class="container-events-grid">
+    <h2 class="events-title">Próximos eventos</h2>
+    <div class="btn-container">
+      <a href="/eventos/crearEventos" class="btn-eventos">Crear Eventos</a>
+      <a href="/eventos/visualizarEventos" class="btn-eventos">Ver eventos</a>
+    </div>
 
-        <section class="event-grid">
-          <div class="event-card">
-            <img src="/img/eventos/ballet1.jpg" alt="Evento" />
-            <div class="event-info">
-              <div class="event-details">
-                <div>
-                  <h3>Nuevo Evento</h3>
-                  <p>Hora: 19:30</p>
-                  <p>Lugar: Teatro de la Ciudad</p>
-                </div>
-                <div class="creado-por">
-                  <p>Creado por:</p>
-                  <img src="/img/yserß.jpg" alt="Pic du user " />
-              
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- to add more events (created by user ) -->
-        </section>
-      </div>
 
+    
 
       <section class="configuracion-section">
         <h2 class="events-title">Configuración</h2>
         <div class="config-grid">
           <div class="config-box">
             <h3>Sistema de Sugerencias</h3>
-            <textarea placeholder="Agregar o modificar el sistema de sugerencias..."></textarea>
+            <textarea
+              placeholder="Agregar o modificar el sistema de sugerencias..."
+            ></textarea>
             <button class="btn-eventos">Guardar cambios</button>
           </div>
           <div class="config-box">
             <h3>Sistema de Feedback</h3>
-            <textarea placeholder="Agregar o modificar el sistema de feedback..."></textarea>
+            <textarea
+              placeholder="Agregar o modificar el sistema de feedback..."
+            ></textarea>
             <button class="btn-eventos">Guardar cambios</button>
           </div>
         </div>
       </section>
 
       <!--Equipe -->
-<section class="artistas">
-  <h2>Nuestro equipo</h2>
-  <p>The management team</p>
+      <section class="artistas">
+        <h2>Nuestro equipo</h2>
+        <p>Conoce a las personas que hacen posible Moodvent día a día.</p>
 
-  <div class="grid-artistas">
-    <div class="artista">
-      <img src="/img/equipo/placeholder1.jpg" alt="Miembro del equipo" />
-      <p>Ana López<br><span style="font-size: 0.9rem; color: #aaa;">Directora de Producto</span></p>
-    </div>
-    <div class="artista">
-      <img src="/img/equipo/placeholder2.jpg" alt="Miembro del equipo" />
-      <p>Carlos Ruiz<br><span style="font-size: 0.9rem; color: #aaa;">CTO</span></p>
-    </div>
-    <div class="artista">
-      <img src="/img/equipo/placeholder3.jpg" alt="Miembro del equipo" />
-      <p>Lucía Fernández<br><span style="font-size: 0.9rem; color: #aaa;">Marketing</span></p>
-    </div>
-    <div class="artista">
-      <img src="/img/equipo/placeholder4.jpg" alt="Miembro del equipo" />
-      <p>Mario Torres<br><span style="font-size: 0.9rem; color: #aaa;">Desarrollador</span></p>
-    </div>
-  </div>
-</section>
-
+        <div class="grid-artistas">
+          <div class="artista">
+            <img src="/img/natalia.jpeg" alt="Miembro del equipo" />
+            <p>Natalia</p>
+            <p><span style="font-size: 0.9rem; color: #aaa"
+                >Desarolladora</span</p>
+          </div>
+          <div class="artista">
+            <img src="/img/myriam.jpeg" alt="Miembro del equipo" />
+            <p>Myriam</p>
+            <p><span style="font-size: 0.9rem; color: #aaa"
+                >Desarolladora</span</p>
+          </div>
+          </div>
+          <div class="artista">
+            <img src="/img/sofia.jpeg" alt="Miembro del equipo" />
+                <p>Sofia</p>
+            <p><span style="font-size: 0.9rem; color: #aaa"
+                >Desarolladora</span</p>
+          </div>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>

@@ -1,0 +1,107 @@
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> MOOD TEST</title>
+    <link rel="stylesheet" href="/css/mood-test.css" />
+</head>
+
+<main class="main"> 
+    <h1> ¿ Cómo te sientes hoy? </h1>
+    <form  action="/eventos/submit-test" method="POST">
+        <div class="form-grid">
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan feliz te sientes? </p>
+                </div>
+                <div class="radio-group">
+                    <% for (let i=0; i <5; i++) { %>
+                        <label>
+                            <input type="radio" name="FELIZ" value="<%= i %>" required />
+                            <%= i %>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan triste te sientes ? </p>
+                    </div>
+                    <div class="radio-group">
+                    <% for (let i=0; i<5; i++) { %>
+                        <label> 
+                            <input type="radio" name="TRISTE" value="<%= i %>" required />
+                            <%= i %>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan relajado(a) te sientes ? </p>
+                    </div>
+                    <div class="radio-group">
+                    <% for (let i=0; i<5; i++) { %> 
+                        <label>
+                            <input type="radio" name="RELAJADO" value="<%= i %>" required />
+                            <%= i %>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+            
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan ansioso(a) te sientes? </p>
+                    </div>
+                    <div class="radio-group">
+                    <% for (let i=0; i<5; i++) { %>
+                        <label>
+                            <input type="radio" name="ANSIOSO" value="<%= i %>" required />
+                            <%= i %>
+                        </label>   
+                    <% } %>     
+                </div>
+            </div>
+                
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan enojado(a) te sientes? </p>
+                    </div>
+                    <div class="radio-group">
+                    <% for (let i=0; i<5; i++) { %> 
+                        <label>
+                            <input type="radio" name="ENOJADO" value="<%= i %>" required />
+                            <%= i %>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <div class="question-box">
+                    <p> ¿ Qué tan aburrido(a) te sientes? </p>
+                    </div>
+                    <div class="radio-group">
+                    <% for (let i=0; i<5; i++) { %> 
+                        <label>
+                            <input type="radio" name="ABURRIDO" value="<%= i %>" required />
+                            <%= i %>
+                        </label>
+                    <% } %>
+                </div>
+            </div>
+            </div>
+
+        <!-- Submit button-->
+         <div>
+            <button class="boton" type="submit"> SUBMIT </button>
+         </div>
+
+        <!-- Antes de ir a la página de eventos
+            Indicar la emoción principal del usuario 
+            (Resultado del formulario)-->
+    </form>
+</main>
+

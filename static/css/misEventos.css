@@ -1,35 +1,31 @@
 /* to remove from mis eventos  */
 
 .container {
-        width: 400px; 
-        padding: 20px; /*pour pas que ca soit coller au cote*/
-        border: solid 1px #ccc;
-     
-    }
+  width: 400px;
+  padding: 20px; /*pour pas que ca soit coller au cote*/
+  border: solid 1px #ccc;
+}
 
-    .events {
-        max-height: 300px; /* Fixed max-height */
-        overflow-y: auto; /* Enables vertical scrollbar if content overflows */
-        padding: 10px;
-        
-        margin-bottom: 10px; /* Space below the events box */
-    }
+.events {
+  max-height: 300px; /* Fixed max-height */
+  overflow-y: auto; /* Enables vertical scrollbar if content overflows */
+  padding: 10px;
+  margin-bottom: 10px; /* Space below the events box */
+}
 
-    .event {
-        border: solid 2px #000;
-        margin: 10px 0; /*espace entre les boites*/
-        padding: 10px;
-        background-color: #f9f9f9;
-       
-    }
+.event {
+  border: solid 2px #000;
+  margin: 10px 0; /*espace entre les boites*/
+  padding: 10px;
+  background-color: #f9f9f9;
+}
 
-    .selected {
-        background-color: #e0e0e0; 
-    }
-   
-    button {
-        padding: 10px;
-        background-color: #000; /* Black background */
-        color: white;
-       
-    }
+.selected {
+  background-color: #e0e0e0;
+}
+
+button {
+  padding: 10px;
+  background-color: #000; /* Black background */
+  color: white;
+}
