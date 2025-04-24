@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <h1 class="bienvenido">Bienvenido, <%= session?.nombre || "usuario" %> 👋</h1>
 <div class="contenedor-perfil">
   <img src="" alt="" />
@@ -8,3 +9,42 @@
   <a href="">modificar</a>
 </div>
 <div class="mis-eventos"></div>
+=======
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moodvent</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<section class="comunidad-section">
+  <div class="comunidad-content">
+    <div class="comunidad-texto">
+      <div class="perfil">
+        <div class="info-user">
+          <h1>Perfil de <%= usuario.nombre %> <%= usuario.apellido %></h1>
+          <p><strong>Usuario:</strong> <%= usuario.username %></p>
+          <p><strong>Email:</strong> <%= usuario.email %></p>
+          <p><strong>Edad:</strong> <%= usuario.edad %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="comunidad-imagen">
+      <img src="/img/profile.png" alt="connect-platform" />
+    </div>
+  </div>
+</section>
+
+<h2>Eventos creados por ti:</h2>
+<ul>
+  <% if (eventos.length === 0) { %>
+  <li>No has creado ningún evento todavía.</li>
+  <% } else { %> <% eventos.forEach(evento => { %>
+  <li>
+    <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
+    evento.lugar %>
+  </li>
+  <% }) %> <% } %>
+</ul>
+>>>>>>> Stashed changes

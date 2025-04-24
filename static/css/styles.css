@@ -698,17 +698,24 @@ section {
 }
 
 .contenedor-test {
-  background-color: #ee821c;
+  background-color: #c24b1a;
   padding: 40px;
   border-radius: 20px;
 }
 
 .btn-test {
   background-color: #3e204f;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 10px;
 }
 
 .btn-test:hover {
   background-color: #1f092b;
+}
+
+.info-user {
+  background-color: #c24b1a;
+  border-radius: 20px;
+  width: 500px;
+  padding: 20px;
 }
