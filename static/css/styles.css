@@ -714,13 +714,9 @@ section {
   background-color: #1f092b;
 }
 
-.info-user {
+.info-perfil {
   background-color: #c24b1a;
   border-radius: 20px;
   width: 500px;
   padding: 20px;
-}
-
-.info-perfil {
-  background-color: #c24b1a;
 }
