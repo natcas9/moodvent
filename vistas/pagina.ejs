@@ -5,45 +5,36 @@
   </head>
 
   <body>
-    <% const mostrarLayoutCompleto = (contenido === "paginas/home" || contenido === "paginas/admin" || contenido === "paginas/mood-test");
-       const ocultarTodo = (contenido === "paginas/login" || contenido === "paginas/registro"); 
-       const ocultarNavbar = (contenido === "paginas/crearEventos" || contenido === "paginas/modificarEvento" || contenido === "paginas/visualizarEventos");
-       const ocultarFooter = (contenido === "paginas/crearEventos" || contenido === "paginas/modificarEvento" || contenido === "paginas/visualizarEventos"); 
+    <% const mostrarLayoutCompleto = ( contenido === "paginas/home" || contenido
+    === "paginas/admin" || contenido === "paginas/mood-test" ); const
+    ocultarTodo = ( contenido === "paginas/login" || contenido ===
+    "paginas/registro" ); const ocultarNavbar = ( contenido ===
+    "paginas/crearEventos" || contenido === "paginas/modificarEvento" ||
+    contenido === "paginas/visualizarEventos" ); const ocultarFooter = (
+    contenido === "paginas/crearEventos" || contenido ===
+    "paginas/modificarEvento" || contenido === "paginas/visualizarEventos" ); %>
+    <% if (!ocultarTodo && !ocultarNavbar) { %> <%-
+    include('./partials/navbar.ejs') %> <% } %> <% if (mostrarLayoutCompleto) {
     %>
-        
-    <% if (!ocultarTodo && !ocultarNavbar) { %>
-      <%- include('./partials/navbar.ejs') %> 
-    <% }  %>
-    
-    <% if (mostrarLayoutCompleto) { %>
-    <div id="contenedor">
-      <% if (session && session.login) { %>
-        <%-include('./partials/cabecera.ejs', { session }) %>
-        <%- include('./partials/sidebarIzq.ejs') %> 
+    <main>
+      <article><%- include(contenido) %></article>
+
+      <% if (getAndClearFlash && getAndClearFlash()) { %>
+      <dialog open class="flash-dialog" id="flashModal">
+        <p><%= getAndClearFlash() %></p>
+        <form method="dialog">
+          <button>OK</button>
+        </form>
+      </dialog>
+
+      <script>
+        setTimeout(() => {
+          const dialog = document.getElementById("flashModal");
+          if (dialog) dialog.close();
+        }, 4000);
+      </script>
       <% } %>
-
-      <main>
-        <article><%- include(contenido) %></article>
-
-        <% if (getAndClearFlash && getAndClearFlash()) { %>
-        <dialog open class="flash-dialog" id="flashModal">
-          <p><%= getAndClearFlash() %></p>
-          <form method="dialog">
-            <button>OK</button>
-          </form>
-        </dialog>
-
-        <script>
-          setTimeout(() => {
-            const dialog = document.getElementById("flashModal");
-            if (dialog) dialog.close();
-          }, 4000);
-        </script>
-        <% } %>
-      </main>
-
-      <%- include('./partials/sidebarDer.ejs') %>
-    </div>
+    </main>
     <% } else { %>
     <main>
       <article><%- include(contenido) %></article>

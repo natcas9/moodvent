@@ -1,6 +1,7 @@
 import { Usuario, UsuarioYaExiste } from "./Usuario.js";
 import { validationResult, matchedData } from "express-validator";
 import { render } from "../utils/render.js";
+import { Evento } from "../eventos/Evento.js";
 
 export function viewLogin(req, res) {
   render(req, res, "paginas/login", {
@@ -27,13 +28,14 @@ export async function doLogin(req, res) {
     req.session.login = true;
     req.session.nombre = usuario.nombre;
     req.session.rol = usuario.role;
+    req.session.username = usuario.username;
 
     req.setFlash(`¡Encantado de verte de nuevo, ${usuario.nombre}!`);
     return res.redirect(
       usuario.role === "admin" ? "/contenido/admin" : "/contenido/normal"
     );
   } catch (e) {
-    req.log.warn(`❌ Login fallido para '${datos.username}'`);
+    req.log.warn(` Login fallido para '${datos.username}'`);
     req.log.debug(e.message);
     return render(req, res, "paginas/login", {
       error: "Usuario o contraseña incorrectos",
@@ -94,4 +96,14 @@ export function doLogout(req, res, next) {
 
 export function viewHome(req, res) {
   render(req, res, "paginas/home");
+}
+
+export function viewPerfil(req, res) {
+  const username = req.session?.username;
+  if (!username) return res.redirect("/usuarios/login");
+
+  const usuario = Usuario.getPorUsername(username);
+  const eventos = Evento.obtenerPorUsuario(username);
+
+  render(req, res, "paginas/perfil", { usuario, eventos });
 }
