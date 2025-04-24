@@ -1,8 +1,27 @@
-<h1>Perfil de <%= usuario.nombre %> <%= usuario.apellido %></h1>
-<p><strong>Usuario:</strong> <%= usuario.username %></p>
-<p><strong>Email:</strong> <%= usuario.email %></p>
-<p><strong>Edad:</strong> <%= usuario.edad %></p>
-<p><strong>Rol:</strong> <%= usuario.role %></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenido a Moodvent</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+
+<section class="comunidad-section">
+  <div class="comunidad-content">
+    <div class="comunidad-texto">
+      <div class="info-perfil">
+        <h1>Perfil de <%= usuario.nombre %> <%= usuario.apellido %></h1>
+        <p><strong>Usuario:</strong> <%= usuario.username %></p>
+        <p><strong>Email:</strong> <%= usuario.email %></p>
+        <p><strong>Edad:</strong> <%= usuario.edad %></p>
+        <p><strong>Rol:</strong> <%= usuario.role %></p>
+      </div>
+    </div>
+
+    <div class="comunidad-imagen">
+      <img src="/img/profile.png" alt="connect-platform" />
+    </div>
+  </div>
+</section>
 
 <h2>Eventos creados por ti:</h2>
 <ul>
