@@ -8,6 +8,7 @@ import {
   doRegistro,
   doLogout,
   viewHome,
+  viewPerfil,
 } from "./controllers.js";
 import { autenticado } from "../middleware/auth.js";
 
@@ -23,6 +24,11 @@ usuariosRouter.post(
 );
 
 usuariosRouter.get("/logout", doLogout);
+usuariosRouter.get(
+  "/perfil",
+  autenticado("/usuarios/perfil"),
+  asyncHandler(viewPerfil)
+);
 
 usuariosRouter.get(
   "/home",

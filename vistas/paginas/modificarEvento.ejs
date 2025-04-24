@@ -2,7 +2,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bienvenido a Moodvent</title>
-  <link rel="stylesheet" href="/css/eventos.css" />
+  <link rel="stylesheet" href="/css/Eventos.css" />
 </head>
 <h1 class="title">Modificar tu evento</h1>
 
@@ -47,6 +47,8 @@
           <option value="Enojado" <%= evento.estadoAnimo === 'Enojado' ? 'selected' : '' %>>Enojado</option>
           <option value="Ansioso" <%= evento.estadoAnimo === 'Ansioso' ? 'selected' : '' %>>Ansioso</option>
           <option value="Relajado" <%= evento.estadoAnimo === 'Relajado' ? 'selected' : '' %>>Relajado</option>
+          <option value="Aburrido" <%= evento.estadoAnimo === 'Aburrido' ? 'selected' : '' %>>Aburrido</option>
+           
         </select>
       </div>
       <button type="submit" class="btn">Guardar modificaciones</button>

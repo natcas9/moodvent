@@ -5,14 +5,15 @@ export class Evento {
     this.db = db;
 
     this.insertEvento = db.prepare(`
-      INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     this.selectPorId = db.prepare(`SELECT * FROM eventos WHERE id = ?`);
 
     this.updateEvento = db.prepare(`
-      UPDATE eventos SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ?
+      UPDATE eventos
+      SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ?, creador = ?
       WHERE id = ?
     `);
 
@@ -27,6 +28,7 @@ export class Evento {
     lugar,
     precio,
     estadoAnimo,
+    creador,
   }) {
     return this.insertEvento.run(
       nombre,
@@ -35,7 +37,8 @@ export class Evento {
       hora,
       lugar,
       precio,
-      estadoAnimo
+      estadoAnimo,
+      creador
     ).lastInsertRowid;
   }
 
@@ -64,7 +67,7 @@ export class Evento {
     }
 
     if (filtros.estadoAnimo) {
-      condiciones.push("estadoAnimo = @estadoAnimo");
+      condiciones.push("estadoAnimo LIKE @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
@@ -81,7 +84,7 @@ export class Evento {
 
   static modificar(
     id,
-    { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo }
+    { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador }
   ) {
     return this.updateEvento.run(
       nombre,
@@ -91,11 +94,16 @@ export class Evento {
       lugar,
       precio,
       estadoAnimo,
+      creador,
       id
     );
   }
 
   static eliminar(id) {
     return this.deleteEvento.run(id);
+  }
+  static obtenerPorUsuario(username) {
+    const stmt = this.db.prepare("SELECT * FROM eventos WHERE creador = ?");
+    return stmt.all(username);
   }
 }

@@ -55,4 +55,7 @@ export class Usuario {
       rolPorDefecto
     );
   }
+  static getPorUsername(username) {
+    return this.selectPorUsername.get(username);
+  }
 }
