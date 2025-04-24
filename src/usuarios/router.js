@@ -14,7 +14,21 @@ import { autenticado } from "../middleware/auth.js";
 
 const usuariosRouter = express.Router();
 
-usuariosRouter.get("/login", autenticado(null), asyncHandler(viewLogin));
+usuariosRouter.get("/login", (req, res) => {
+  if (req.session && req.session.login) {
+    return res.redirect(
+      req.session.rol === "admin" ? "/contenido/admin" : "/contenido/normal"
+    );
+  }
+
+  render(req, res, "paginas/login", {
+    datos: {},
+    errores: {},
+    error: null,
+    session: req.session,
+  });
+});
+
 usuariosRouter.post(
   "/login",
   autenticado(null, "/usuarios/home"),

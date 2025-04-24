@@ -8,6 +8,7 @@ export function viewLogin(req, res) {
     datos: {},
     errores: {},
     error: null,
+    session: req.session,
   });
 }
 
@@ -20,6 +21,7 @@ export async function doLogin(req, res) {
       errores: result.mapped(),
       datos,
       error: null,
+      session: req.session,
     });
   }
 
@@ -41,6 +43,7 @@ export async function doLogin(req, res) {
       error: "Usuario o contraseña incorrectos",
       datos,
       errores: {},
+      session: req.session,
     });
   }
 }
@@ -50,6 +53,7 @@ export function viewRegistro(req, res) {
     datos: {},
     errores: {},
     error: null,
+    session: req.session,
   });
 }
 
@@ -62,6 +66,7 @@ export async function doRegistro(req, res) {
       errores: result.mapped(),
       datos,
       error: null,
+      session: req.session,
     });
   }
 
@@ -77,6 +82,7 @@ export async function doRegistro(req, res) {
       error: e instanceof UsuarioYaExiste ? "El usuario ya existe" : e.message,
       errores: {},
       datos,
+      session: req.session,
     });
   }
 }
@@ -85,6 +91,8 @@ export function doLogout(req, res, next) {
   req.session.login = null;
   req.session.nombre = null;
   req.session.rol = null;
+  req.session.username = null;
+
   req.session.save((err) => {
     if (err) return next(err);
     req.session.regenerate((err) => {
@@ -95,7 +103,9 @@ export function doLogout(req, res, next) {
 }
 
 export function viewHome(req, res) {
-  render(req, res, "paginas/home");
+  render(req, res, "paginas/home", {
+    session: req.session,
+  });
 }
 
 export function viewPerfil(req, res) {
@@ -105,5 +115,9 @@ export function viewPerfil(req, res) {
   const usuario = Usuario.getPorUsername(username);
   const eventos = Evento.obtenerPorUsuario(username);
 
-  render(req, res, "paginas/perfil", { usuario, eventos });
+  render(req, res, "paginas/perfil", {
+    usuario,
+    eventos,
+    session: req.session,
+  });
 }
