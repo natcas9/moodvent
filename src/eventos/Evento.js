@@ -106,4 +106,27 @@ export class Evento {
     const stmt = this.db.prepare("SELECT * FROM Eventos WHERE creador = ?");
     return stmt.all(username);
   }
+
+  static registrarAsistencia(username, eventoId) {
+    const stmt = this.db.prepare(
+      "INSERT OR IGNORE INTO Asistencias (usuario, evento_id) VALUES (?, ?)"
+    );
+    return stmt.run(username, eventoId);
+  }
+
+  static obtenerAsistenciasPorUsuario(username) {
+    const stmt = this.db.prepare(`
+    SELECT e.* FROM Eventos e
+    JOIN Asistencias a ON e.id = a.evento_id
+    WHERE a.usuario = ?
+  `);
+    return stmt.all(username);
+  }
+
+  static cancelarAsistencia(username, eventoId) {
+    const stmt = this.db.prepare(`
+    DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?
+  `);
+    stmt.run(username, eventoId);
+  }
 }

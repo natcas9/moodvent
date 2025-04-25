@@ -28,4 +28,12 @@ CREATE TABLE IF NOT EXISTS Asistencias (
   FOREIGN KEY (usuario) REFERENCES usuarios(username),
   FOREIGN KEY (evento_id) REFERENCES Eventos(id)
 );
+CREATE TABLE IF NOT EXISTS Asistencias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  eventoId INTEGER NOT NULL,
+  FOREIGN KEY (username) REFERENCES usuarios(username),
+  FOREIGN KEY (eventoId) REFERENCES Eventos(id)
+);
+
 COMMIT;

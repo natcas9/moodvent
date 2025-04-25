@@ -87,17 +87,19 @@ export function viewDetalles(req, res) {
   render(req, res, "paginas/detallesEvento", { evento });
 }
 
-
-export function viewProfile(req,res) {
-  res.render("pagina", { contenido: "paginas/home", session: req.session});
+export function viewProfile(req, res) {
+  res.render("pagina", { contenido: "paginas/home", session: req.session });
 }
 
-export function viewMoodForm(req,res) {
-  res.render("pagina", { contenido: "paginas/mood-test", session: req.session});
+export function viewMoodForm(req, res) {
+  res.render("pagina", {
+    contenido: "paginas/mood-test",
+    session: req.session,
+  });
 }
 
-export function handleMoodTest(req,res) {
-  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO} = req.body;
+export function handleMoodTest(req, res) {
+  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
 
   const emociones = {
     FELIZ: parseInt(FELIZ),
@@ -105,31 +107,49 @@ export function handleMoodTest(req,res) {
     RELAJADO: parseInt(RELAJADO),
     ANSIOSO: parseInt(ANSIOSO),
     ENOJADO: parseInt(ENOJADO),
-    ABURRIDO: parseInt(ABURRIDO)
+    ABURRIDO: parseInt(ABURRIDO),
   };
 
   const { dominant, sorted } = getDominantEmotion(emociones);
 
+  res.render("pagina", {
+    contenido: "paginas/resultado",
+    session: req.session,
+    sortedEmotions: sorted,
+    dominantEmotion: dominant,
+  });
+}
 
-  res.render("pagina",{ 
-      contenido: "paginas/resultado",
-      session: req.session,
-      sortedEmotions: sorted,
-      dominantEmotion: dominant 
-    });
+export function cancelarAsistencia(req, res) {
+  const username = req.session?.username;
+  const eventoId = req.params.id;
+
+  if (!username || !eventoId) {
+    return res.redirect("/usuarios/perfil");
+  }
+
+  Evento.cancelarAsistencia(username, eventoId);
+  res.redirect("/usuarios/perfil");
 }
 
 function getDominantEmotion(emociones) {
   const entrada = Object.entries(emociones);
 
-  const priority = [ "FELIZ" , "RELAJADO", "TRISTE", "ANSIOSO", "ENOJADO", "ABURRIDO"];
+  const priority = [
+    "FELIZ",
+    "RELAJADO",
+    "TRISTE",
+    "ANSIOSO",
+    "ENOJADO",
+    "ABURRIDO",
+  ];
 
-  entrada.sort((a,b) => {
-    if (b[1] !== a[1] ) return b[1] - a[1];
+  entrada.sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
     return priority.indexOf(a[0]) - priority.indexOf(b[0]);
   });
   return {
     dominant: entrada[0][0],
-    sorted: entrada.map(([key]) => key)
+    sorted: entrada.map(([key]) => key),
   };
 }
