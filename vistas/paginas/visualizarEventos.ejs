@@ -12,47 +12,58 @@
   </head>
 
   <body>
-    <h1 class="titulo">Explora los eventos disponibles</h1>
+    <h1 class="events-title">Explora los eventos disponibles</h1>
+    <div class="eventos-filtros">
+      <form class="filtros" method="GET" action="/eventos/visualizarEventos">
+        <h3 class="titulo-filtros">Filtrar Eventos</h3>
 
-    <form class="filtros" method="GET" action="/eventos/visualizarEventos">
-      <h3>Filtrar Eventos</h3>
+        <div class="grupo-filtro">
+          <label for="ubicacion">Ubicación:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            placeholder="Ciudad o dirección"
+          />
+        </div>
 
-      <label>
-        Ubicación:
-        <input type="text" name="ubicacion" placeholder="Ciudad o dirección" />
-      </label>
+        <div class="grupo-filtro">
+          <label for="fecha">Fecha:</label>
+          <input type="date" id="fecha" name="fecha" />
+        </div>
 
-      <label>
-        Fecha:
-        <input type="date" name="fecha" />
-      </label>
+        <div class="grupo-filtro">
+          <label for="precio">Precio máximo:</label>
+          <input type="number" id="precio" name="precio" placeholder="Máximo" />
+        </div>
 
-      <label>
-        Precio máximo:
-        <input type="number" name="precio" placeholder="Máximo" />
-      </label>
+        <div class="grupo-filtro">
+          <label for="estadoAnimo">Estado de Ánimo:</label>
+          <select id="estadoAnimo" name="estadoAnimo">
+            <option value="">Todos</option>
+            <option value="Feliz">Feliz</option>
+            <option value="Triste">Triste</option>
+            <option value="Enojado">Enojado</option>
+            <option value="Ansioso">Ansioso</option>
+            <option value="Relajado">Relajado</option>
+            <option value="Aburrido">Aburrido</option>
+          </select>
+        </div>
 
-      <label>
-        Estado de Ánimo:
-        <select name="estadoAnimo">
-          <option value="">Todos</option>
-          <option value="Feliz">Feliz</option>
-          <option value="Triste">Triste</option>
-          <option value="Enojado">Enojado</option>
-          <option value="Ansioso">Ansioso</option>
-          <option value="Relajado">Relajado</option>
-          <option value="Aburrido">Aburrido</option>
-        </select>
-      </label>
-
-      <button type="submit">Aplicar filtros</button>
-      <button
-        type="button"
-        onclick="window.location.href='/eventos/visualizarEventos'"
-      >
-        Limpiar filtros
-      </button>
-    </form>
+        <div class="botones-filtros">
+          <button type="submit" class="btn-evento aplicar">
+            Aplicar Filtros
+          </button>
+          <button
+            type="button"
+            class="btn-evento limpiar"
+            onclick="window.location.href='/eventos/visualizarEventos'"
+          >
+            Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
 
     <div class="eventos-container">
       <% if (eventos.length === 0) { %>
