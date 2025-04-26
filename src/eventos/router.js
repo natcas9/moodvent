@@ -1,5 +1,8 @@
 // src/eventos/router.js
 import express from "express";
+import { autenticado } from "../middleware/auth.js";
+import { Evento } from "./Evento.js";
+import { cancelarAsistencia } from "./controllers.js";
 import asyncHandler from "express-async-handler";
 import {
   viewCrearEvento,
@@ -11,7 +14,7 @@ import {
   viewDetalles,
   viewMoodForm,
   handleMoodTest,
-  viewProfile
+  viewProfile,
 } from "./controllers.js";
 
 const router = express.Router();
@@ -23,8 +26,21 @@ router.get("/editar/:id", asyncHandler(viewEditarEvento));
 router.post("/modificar/:id", asyncHandler(modificarEvento));
 router.post("/eliminar/:id", asyncHandler(eliminarEvento));
 router.get("/detalles/:id", asyncHandler(viewDetalles));
-router.get("/mood-form", asyncHandler(viewMoodForm))
+router.get("/mood-form", asyncHandler(viewMoodForm));
 router.post("/submit-test", asyncHandler(handleMoodTest));
 router.get("/verPerfil", asyncHandler(viewProfile));
+router.post(
+  "/asistir/:id",
+  autenticado("/usuarios/login"),
+  asyncHandler((req, res) => {
+    Evento.registrarAsistencia(req.session.username, req.params.id);
+    res.redirect("/eventos/visualizarEventos");
+  })
+);
+router.post(
+  "/cancelar-asistencia/:id",
+  autenticado("/usuarios/login"),
+  asyncHandler(cancelarAsistencia)
+);
 
 export default router;

@@ -39,10 +39,10 @@
     </form>
 
     <% } else { %>
-    <p>
-      Ya has iniciado sesión.
-      <a href="/contenido/normal">Ir al contenido</a>
-    </p>
+    <script>
+      window.location.href =
+        "<%= session.rol === 'admin' ? '/contenido/admin' : '/contenido/normal' %>";
+    </script>
     <% } %>
   </fieldset>
   <p><a href="/">Volver</a></p>

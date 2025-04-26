@@ -1,23 +1,15 @@
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
-  rel="stylesheet"
-/>
 <nav class="navbar">
   <a href="/" class="company">Moodvent</a>
 
   <!-- Botón del menú hamburguesa -->
   <button class="menu-toggle" id="menu-toggle">&#9776;</button>
 
-  <ul class="nav-links" id="nav-links">
-    <li>Eventos</li>
-    <li>Noticias</li>
-    <li>Comunidad</li>
-  </ul>
-
   <div class="saludo">
+    <% if (session && session.login) { %>
     <a href="/usuarios/perfil" class="btn">Perfil</a>
     <a href="/usuarios/logout" class="btn">Cerrar sesión</a>
+    <% } else { %>
+    <a href="/usuarios/login" class="btn">Login</a>
+    <% } %>
   </div>
 </nav>

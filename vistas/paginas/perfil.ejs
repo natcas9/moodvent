@@ -2,7 +2,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bienvenido a Moodvent</title>
-  <link rel="stylesheet" href="/css/styles.css" />
+  <link rel="stylesheet" href="/css/perfil.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+    rel="stylesheet"
+  />
 </head>
 
 <section class="comunidad-section">
@@ -22,15 +26,41 @@
     </div>
   </div>
 </section>
+<div class="container-events-grid">
+  <h2 class="events-title">Próximos eventos</h2>
+  <div class="btn-container">
+    <a href="/eventos/crearEventos" class="btn-eventos">Crear Eventos</a>
+    <a href="/eventos/visualizarEventos" class="btn-eventos">Ver eventos</a>
+  </div>
+  <h2 class="events-title">Eventos a los que asistirás</h2>
 
-<h2>Eventos creados por ti:</h2>
-<ul>
-  <% if (eventos.length === 0) { %>
-  <li>No has creado ningún evento todavía.</li>
-  <% } else { %> <% eventos.forEach(evento => { %>
-  <li>
-    <strong><%= evento.nombre %></strong> - <%= evento.fecha %> - <%=
-    evento.lugar %>
-  </li>
-  <% }) %> <% } %>
-</ul>
+  <% if (eventosAsistidos.length === 0) { %>
+  <p>No estás registrado en ningún evento todavía.</p>
+  <% } else { %>
+  <div class="eventos">
+    <% eventosAsistidos.forEach((evento) => { %>
+    <div class="evento">
+      <div class="evento-img">
+        <img src="/img/evento-default.jpg" alt="Imagen del evento" />
+      </div>
+      <div class="evento-info">
+        <h2><%= evento.nombre %></h2>
+        <p><strong>Fecha:</strong> <%= evento.fecha %></p>
+        <p><strong>Lugar:</strong> <%= evento.lugar %></p>
+        <p><strong>Precio:</strong> $<%= evento.precio %></p>
+        <p><strong>Estado de ánimo:</strong> <%= evento.estadoAnimo %></p>
+        <p><strong>Temática:</strong> <%= evento.tematica || 'General' %></p>
+        <form
+          action="/eventos/cancelar-asistencia/<%= evento.id %>"
+          method="POST"
+        >
+          <button type="submit" class="btn-evento cancelar">
+            Cancelar asistencia
+          </button>
+        </form>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+  <% } %>
+</div>

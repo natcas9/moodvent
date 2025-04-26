@@ -1,5 +1,4 @@
 BEGIN TRANSACTION;
-
 DROP TABLE IF EXISTS "Eventos";
 CREATE TABLE Eventos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -9,11 +8,8 @@ CREATE TABLE Eventos (
   hora TEXT NOT NULL,
   lugar TEXT NOT NULL,
   precio REAL NOT NULL,
-  estadoAnimo TEXT NOT NULL,
-  tematica TEXT,
-  creador TEXT 
-);
-
+  estadoAnimo TEXT NOT NULL
+, tematica TEXT, creador TEXT);
 DROP TABLE IF EXISTS "usuarios";
 CREATE TABLE usuarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,5 +21,4 @@ CREATE TABLE usuarios (
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'user'
 );
-
 COMMIT;

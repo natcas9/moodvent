@@ -1,0 +1,39 @@
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "Eventos";
+CREATE TABLE Eventos (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  descripcion TEXT NOT NULL,
+  fecha TEXT NOT NULL,
+  hora TEXT NOT NULL,
+  lugar TEXT NOT NULL,
+  precio REAL NOT NULL,
+  estadoAnimo TEXT NOT NULL
+, tematica TEXT, creador TEXT);
+DROP TABLE IF EXISTS "usuarios";
+CREATE TABLE usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  apellido TEXT NOT NULL,
+  edad INTEGER NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  role TEXT NOT NULL DEFAULT 'user'
+);
+CREATE TABLE IF NOT EXISTS Asistencias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario TEXT NOT NULL,
+  evento_id INTEGER NOT NULL,
+  FOREIGN KEY (usuario) REFERENCES usuarios(username),
+  FOREIGN KEY (evento_id) REFERENCES Eventos(id)
+);
+CREATE TABLE IF NOT EXISTS Asistencias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL,
+  eventoId INTEGER NOT NULL,
+  FOREIGN KEY (username) REFERENCES usuarios(username),
+  FOREIGN KEY (eventoId) REFERENCES Eventos(id)
+);
+
+COMMIT;
