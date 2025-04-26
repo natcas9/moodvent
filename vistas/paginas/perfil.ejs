@@ -23,6 +23,7 @@
   </div>
 </section>
 
+<<<<<<< Updated upstream
 <h2>Eventos creados por ti:</h2>
 <ul>
   <% if (eventos.length === 0) { %>
@@ -34,3 +35,41 @@
   </li>
   <% }) %> <% } %>
 </ul>
+=======
+  <div class="eventos-container">
+    <% if (eventosAsistidos.length === 0) { %>
+    <p>No estás registrado en ningún evento todavía.</p>
+    <% } else { %>
+    <div class="eventos">
+      <% eventosAsistidos.forEach((evento) => { %>
+      <div class="evento">
+        <div class="estado-icon">
+          <img
+            src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
+            alt="<=% evento.estadoAnimo %>"
+            class="icono-estado"
+          />
+        </div>
+        <div class="evento-info">
+          <h2><%= evento.nombre %></h2>
+          <p><strong>Fecha:</strong> <%= evento.fecha %></p>
+          <p><strong>Lugar:</strong> <%= evento.lugar %></p>
+          <p><strong>Precio:</strong> $<%= evento.precio %></p>
+          <p><strong>Estado de ánimo:</strong> <%= evento.estadoAnimo %></p>
+          <p><strong>Temática:</strong> <%= evento.tematica || 'General' %></p>
+          <form
+            action="/eventos/cancelar-asistencia/<%= evento.id %>"
+            method="POST"
+          >
+            <button type="submit" class="btn-evento cancelar">
+              Cancelar asistencia
+            </button>
+          </form>
+        </div>
+      </div>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</div>
+>>>>>>> Stashed changes
