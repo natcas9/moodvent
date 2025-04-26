@@ -413,3 +413,15 @@ a {
     text-align: center;
   }
 }
+
+.estado-icon  {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.icono-estado {
+  width: 60px;
+  height: 60px;
+}
