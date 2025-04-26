@@ -132,6 +132,20 @@ export function cancelarAsistencia(req, res) {
   res.redirect("/usuarios/perfil");
 }
 
+export async function asistirEvento(req,res) {
+  const username = req.session?.username;
+  const eventoId = req.params.id;
+
+  if (!username || !eventoId) {
+    return res.redirect("/usuarios/perfil");
+  }
+
+  Evento.asistirEvento(username,eventoId);
+  res.redirect("/usuarios/perfil");
+}
+
+
+
 function getDominantEmotion(emociones) {
   const entrada = Object.entries(emociones);
 

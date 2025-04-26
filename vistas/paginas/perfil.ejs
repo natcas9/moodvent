@@ -41,7 +41,11 @@
     <% eventosAsistidos.forEach((evento) => { %>
     <div class="evento">
       <div class="evento-img">
-        <img src="/img/evento-default.jpg" alt="Imagen del evento" />
+        <img
+        src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
+        alt="<=% evento.estadoAnimo %>"
+        class="icono-estado"
+      />
       </div>
       <div class="evento-info">
         <h2><%= evento.nombre %></h2>
