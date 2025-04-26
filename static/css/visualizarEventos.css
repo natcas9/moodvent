@@ -6,12 +6,11 @@ body {
   color: white;
 }
 
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5%; 
+  padding: 5%;
 }
 
 .eventos-container {
@@ -21,7 +20,7 @@ body {
   width: 100%;
   padding-left: 5%;
 }
-  
+
 .evento-card {
   background-color: white;
   display: flex;
@@ -31,13 +30,12 @@ body {
   margin: 10px 0;
   width: 80%;
   max-width: 800px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
-
 }
 
-.estado-icon {
+.estado-icon  {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -49,22 +47,21 @@ body {
   height: 60px;
 }
 
-  
 .evento-info {
   color: black;
   text-align: left;
   flex-grow: 1;
 }
-  
+
 .evento-info h2 {
   font-size: 1.8rem;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-  
+
 .evento-info p {
   margin: 5px 0;
 }
-  
+
 .mas-info {
   background-color: #520556;
   color: white;
@@ -74,12 +71,11 @@ body {
   border-radius: 5px;
   margin-top: 10px;
 }
-  
+
 .descripcion {
   display: none;
   margin-top: 10px;
 }
-
 
 .btn-evento {
   margin-top: 10px;
@@ -91,7 +87,6 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
-
 }
 
 .eliminar {
@@ -117,10 +112,9 @@ body {
   margin-bottom: 25px;
   width: 95%;
   max-width: none;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   border: 3px solid #8b104e; /* Forces the box */
   align-items: center;
-
 }
 
 .back-button {
@@ -136,16 +130,7 @@ body {
 .back-button:hover {
   background-color: darkviolet;
   transform: scale(1.1);
-<<<<<<< Updated upstream
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-}
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 .navbar {
   background: black;
@@ -331,10 +316,3 @@ a {
   padding: 20px;
   text-align: left;
 }
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
