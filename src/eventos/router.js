@@ -15,6 +15,7 @@ import {
   viewMoodForm,
   handleMoodTest,
   viewProfile,
+  asistirEvento
 } from "./controllers.js";
 
 const router = express.Router();
@@ -34,7 +35,7 @@ router.post(
   autenticado("/usuarios/login"),
   asyncHandler((req, res) => {
     Evento.registrarAsistencia(req.session.username, req.params.id);
-    res.redirect("/eventos/visualizarEventos");
+    res.redirect("/usuarios/perfil");
   })
 );
 router.post(
@@ -42,5 +43,6 @@ router.post(
   autenticado("/usuarios/login"),
   asyncHandler(cancelarAsistencia)
 );
+
 
 export default router;

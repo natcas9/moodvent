@@ -129,4 +129,8 @@ export class Evento {
   `);
     stmt.run(username, eventoId);
   }
+
+  static asistirEvento(usuario,eventoId) {
+    return this.registrarAsistencia.run(usuario, eventoId);
+  }
 }
