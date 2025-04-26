@@ -113,11 +113,13 @@ export function viewPerfil(req, res) {
   if (!username) return res.redirect("/usuarios/login");
 
   const usuario = Usuario.getPorUsername(username);
-  const eventos = Evento.obtenerPorUsuario(username);
+  const eventosCreados = Evento.obtenerPorUsuario(username);
+  const eventosAsistidos = Evento.obtenerAsistenciasPorUsuario(username);
 
   render(req, res, "paginas/perfil", {
     usuario,
-    eventos,
+    eventos: eventosCreados,
+    eventosAsistidos,
     session: req.session,
   });
 }

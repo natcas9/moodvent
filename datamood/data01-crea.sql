@@ -28,4 +28,5 @@ CREATE TABLE IF NOT EXISTS Asistencias (
   FOREIGN KEY (usuario) REFERENCES usuarios(username),
   FOREIGN KEY (evento_id) REFERENCES Eventos(id)
 );
+
 COMMIT;
