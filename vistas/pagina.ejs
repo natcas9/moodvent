@@ -5,17 +5,12 @@
   </head>
 
   <body>
-    <% const mostrarLayoutCompleto = ( contenido === "paginas/home" || contenido
-    === "paginas/admin" || contenido === "paginas/mood-test"|| contenido === "paginas/tableinfo"  ); const
-    ocultarTodo = ( contenido === "paginas/login" || contenido ===
-    "paginas/registro" ); const ocultarNavbar = ( contenido ===
-    "paginas/crearEventos" || contenido === "paginas/modificarEvento" ||
-    contenido === "paginas/visualizarEventos" ); const ocultarFooter = (
-    contenido === "paginas/crearEventos" || contenido ===
-    "paginas/modificarEvento" || contenido === "paginas/visualizarEventos" ); %>
-    <% if (!ocultarTodo && !ocultarNavbar) { %> <%-
-    include('./partials/navbar.ejs') %> <% } %> <% if (mostrarLayoutCompleto) {
-    %>
+    <% const ocultarTodo = (contenido === "paginas/login" || contenido ===
+    "paginas/registro"); const ocultarNavbarFooter = (contenido ===
+    "paginas/crearEventos" || contenido === "paginas/modificarEvento"); %> <% if
+    (!ocultarTodo && !ocultarNavbarFooter) { %> <%-
+    include('./partials/navbar.ejs') %> <% } %>
+
     <main>
       <article><%- include(contenido) %></article>
 
@@ -35,11 +30,8 @@
       </script>
       <% } %>
     </main>
-    <% } else { %>
-    <main>
-      <article><%- include(contenido) %></article>
-    </main>
-    <% } %> <% if (!ocultarTodo && !ocultarFooter) { %>
+
+    <% if (!ocultarTodo && !ocultarNavbarFooter) { %>
     <footer><%- include('./partials/pie.ejs') %></footer>
     <% } %>
   </body>
