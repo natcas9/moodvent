@@ -34,5 +34,11 @@ CREATE TABLE SugerenciasFeedbacks  (
   tipo TEXT NOT NULL,
   texto TEXT NOT NULL
 );
+DROP TABLE IF EXISTS "SugerenciasFeedbacks ";
+CREATE TABLE SugerenciasFeedbacks  (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo TEXT NOT NULL,
+  texto TEXT NOT NULL
+);
 
 COMMIT;
