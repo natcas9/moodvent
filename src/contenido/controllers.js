@@ -47,6 +47,6 @@ export function verTablaInfo(req, res) {
 export function eliminarSugerencia(req, res) {
   const id = req.params.id;
   SugerenciaFeedback.eliminar(id);
- // req.setFlash("Elemento eliminado ✅");
+ // req.setFlash("Elemento eliminado ");
   res.redirect("/contenido/tableinfo");
 }
