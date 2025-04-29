@@ -1,0 +1,43 @@
+/*i tried separating it and make it have the same layout as the other but it only works in styles.css*/
+
+.feedback-table {
+    margin: auto;
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+  .feedback-table th {
+    background-color: #4b166a;
+    color: white;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .feedback-table td {
+    border: 1px solid #444;
+    padding: 8px;
+    text-align: center;
+    color: white;
+  }
+  
+  h1.events-title {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .btn-eliminar {
+    background-color: #ca431d;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn-eliminar:hover {
+    background-color: #a93214;
+  }
+  

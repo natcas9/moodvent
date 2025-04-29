@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +21,8 @@
     </section>
 
     <main>
+    
+
   <div class="container-events-grid">
     <h2 class="events-title">Próximos eventos</h2>
     <div class="btn-container">
@@ -32,25 +33,46 @@
 
     
 
-      <section class="configuracion-section">
-        <h2 class="events-title">Configuración</h2>
-        <div class="config-grid">
-          <div class="config-box">
-            <h3>Sistema de Sugerencias</h3>
-            <textarea
-              placeholder="Agregar o modificar el sistema de sugerencias..."
-            ></textarea>
-            <button class="btn-eventos">Guardar cambios</button>
-          </div>
-          <div class="config-box">
-            <h3>Sistema de Feedback</h3>
-            <textarea
-              placeholder="Agregar o modificar el sistema de feedback..."
-            ></textarea>
-            <button class="btn-eventos">Guardar cambios</button>
-          </div>
-        </div>
-      </section>
+    <section class="configuracion-section">
+      <h2 class="events-title">Configuración</h2>
+      <div class="config-grid">
+    
+        <!-- Suggestion System -->
+        <form class="config-box" action="/contenido/guardar-sugerencia" method="POST">
+          <h3>Sistema de Sugerencias</h3>
+          <textarea
+            name="sugerencia"
+            placeholder="Agregar o modificar el sistema de sugerencias..."
+            required
+          ></textarea>
+          <button type="submit" class="btn-eventos">Guardar cambios</button>
+          <a href="/contenido/tableinfo" class="btn-eventos" style="margin-left: 10px;">Ver sugerencias</a>
+        </form>
+
+        <!-- Feedback System -->
+        <form class="config-box" action="/contenido/guardar-feedback" method="POST">
+          <h3>Sistema de Feedback</h3>
+          <textarea
+            name="feedback"
+            placeholder="Agregar o modificar el sistema de feedback..."
+            required
+          ></textarea>
+          <button type="submit" class="btn-eventos">Guardar cambios</button>
+          <a href="/contenido/tableinfo" class="btn-eventos" style="margin-left: 10px;">Ver feedbacks</a>
+        </form>
+    
+      </div>
+    </section>
+    
+      <!-- Pour message apres sauv-->
+
+      <% const flashMsg = locals.getAndClearFlash && getAndClearFlash(); %>
+      <% if (flashMsg) { %>
+         <div style="background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 20px;">
+             <%= flashMsg %>
+         </div>
+      <% } %>
+  
 
       <!--Equipe -->
       <section class="artistas">
@@ -82,4 +104,4 @@
       </section>
     </main>
   </body>
-</html>
+
