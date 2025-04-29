@@ -6,12 +6,11 @@ body {
   color: white;
 }
 
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5%; 
+  padding: 5%;
 }
 
 .eventos-container {
@@ -21,7 +20,7 @@ body {
   width: 100%;
   padding-left: 5%;
 }
-  
+
 .evento-card {
   background-color: white;
   display: flex;
@@ -31,13 +30,12 @@ body {
   margin: 10px 0;
   width: 80%;
   max-width: 800px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
-
 }
 
-.estado-icon {
+.estado-icon  {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -49,22 +47,21 @@ body {
   height: 60px;
 }
 
-  
 .evento-info {
   color: black;
   text-align: left;
   flex-grow: 1;
 }
-  
+
 .evento-info h2 {
   font-size: 1.8rem;
-   margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-  
+
 .evento-info p {
   margin: 5px 0;
 }
-  
+
 .mas-info {
   background-color: #520556;
   color: white;
@@ -74,12 +71,11 @@ body {
   border-radius: 5px;
   margin-top: 10px;
 }
-  
+
 .descripcion {
   display: none;
   margin-top: 10px;
 }
-
 
 .btn-evento {
   margin-top: 10px;
@@ -91,7 +87,6 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
-
 }
 
 .eliminar {
@@ -103,24 +98,24 @@ body {
   background-color: #ffcc00;
 }
 
+.asistir {
+  background-color: rgb(144, 229, 138);
+}
+
+.limpiar {
+  background-color: #520556;
+  color: white;
+}
+
+.aplicar {
+  background-color: #ca431d;
+  color: white;
+}
+
 .titulo {
   color: white;
   text-align: center;
   margin: 20px 0;
-}
-
-.filtros {
-  background: black;
-  color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 25px;
-  width: 95%;
-  max-width: none;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-  border: 3px solid #8b104e; /* Forces the box */
-  align-items: center;
-
 }
 
 .back-button {
@@ -136,4 +131,151 @@ body {
 .back-button:hover {
   background-color: darkviolet;
   transform: scale(1.1);
+}
+
+body {
+  background-color: #000000;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: rgb(255, 255, 255);
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.company {
+  font-family: "Noto Serif JP", serif;
+  text-decoration: none;
+  font-size: 1.8em;
+  color: white;
+  font-weight: 600;
+}
+
+.title-overlay {
+  font-family: "Noto Serif JP", serif;
+  font-size: 35px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.logo {
+  width: 500px;
+  height: 500px;
+}
+
+/* Navbar */
+.navbar {
+  background: black;
+  display: flex;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-links li:not(:first-child) {
+  margin-left: 50px;
+}
+
+/* Botón de menú hamburguesa */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+.footer {
+  background-color: #1c1b1b;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 50px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+  margin: 10px;
+}
+
+.footer-column h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.saludo .btn {
+  color: white;
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.events-title {
+  text-align: center;
+  font-size: 28px;
+  margin: 20px;
+  font-family: "Noto Serif JP", serif;
+}
+
+.eventos-filtros {
+  padding: 40px;
+}
+
+input {
+  border-radius: 10px;
 }

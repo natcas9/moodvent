@@ -5,14 +5,14 @@ export class Evento {
     this.db = db;
 
     this.insertEvento = db.prepare(`
-      INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador)
+      INSERT INTO Eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
     this.selectPorId = db.prepare(`SELECT * FROM eventos WHERE id = ?`);
 
     this.updateEvento = db.prepare(`
-      UPDATE eventos
+      UPDATE Eventos
       SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ?, creador = ?
       WHERE id = ?
     `);
@@ -103,7 +103,34 @@ export class Evento {
     return this.deleteEvento.run(id);
   }
   static obtenerPorUsuario(username) {
-    const stmt = this.db.prepare("SELECT * FROM eventos WHERE creador = ?");
+    const stmt = this.db.prepare("SELECT * FROM Eventos WHERE creador = ?");
     return stmt.all(username);
+  }
+
+  static registrarAsistencia(username, eventoId) {
+    const stmt = this.db.prepare(
+      "INSERT OR IGNORE INTO Asistencias (usuario, evento_id) VALUES (?, ?)"
+    );
+    return stmt.run(username, eventoId);
+  }
+
+  static obtenerAsistenciasPorUsuario(username) {
+    const stmt = this.db.prepare(`
+    SELECT e.* FROM Eventos e
+    JOIN Asistencias a ON e.id = a.evento_id
+    WHERE a.usuario = ?
+  `);
+    return stmt.all(username);
+  }
+
+  static cancelarAsistencia(username, eventoId) {
+    const stmt = this.db.prepare(`
+    DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?
+  `);
+    stmt.run(username, eventoId);
+  }
+
+  static asistirEvento(usuario,eventoId) {
+    return this.registrarAsistencia.run(usuario, eventoId);
   }
 }

@@ -9,7 +9,7 @@ CREATE TABLE Eventos (
   lugar TEXT NOT NULL,
   precio REAL NOT NULL,
   estadoAnimo TEXT NOT NULL
-, tematica TEXT);
+, tematica TEXT, creador TEXT);
 DROP TABLE IF EXISTS "usuarios";
 CREATE TABLE usuarios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,4 +21,12 @@ CREATE TABLE usuarios (
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'user'
 );
+CREATE TABLE IF NOT EXISTS Asistencias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario TEXT NOT NULL,
+  evento_id INTEGER NOT NULL,
+  FOREIGN KEY (usuario) REFERENCES usuarios(username),
+  FOREIGN KEY (evento_id) REFERENCES Eventos(id)
+);
+
 COMMIT;

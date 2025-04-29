@@ -15,6 +15,7 @@ import { autenticado } from "../middleware/auth.js";
 const usuariosRouter = express.Router();
 
 usuariosRouter.get("/login", autenticado(null), asyncHandler(viewLogin));
+
 usuariosRouter.post(
   "/login",
   autenticado(null, "/usuarios/home"),
@@ -24,6 +25,7 @@ usuariosRouter.post(
 );
 
 usuariosRouter.get("/logout", doLogout);
+
 usuariosRouter.get(
   "/perfil",
   autenticado("/usuarios/perfil"),
@@ -35,6 +37,7 @@ usuariosRouter.get(
   autenticado("/usuarios/home"),
   asyncHandler(viewHome)
 );
+
 usuariosRouter.get(
   "/registro",
   autenticado(null, "/usuarios/home"),
