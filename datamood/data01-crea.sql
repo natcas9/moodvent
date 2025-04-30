@@ -28,5 +28,17 @@ CREATE TABLE IF NOT EXISTS Asistencias (
   FOREIGN KEY (usuario) REFERENCES usuarios(username),
   FOREIGN KEY (evento_id) REFERENCES Eventos(id)
 );
+DROP TABLE IF EXISTS "SugerenciasFeedbacks ";
+CREATE TABLE SugerenciasFeedbacks  (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo TEXT NOT NULL,
+  texto TEXT NOT NULL
+);
+DROP TABLE IF EXISTS "SugerenciasFeedbacks ";
+CREATE TABLE SugerenciasFeedbacks  (
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tipo TEXT NOT NULL,
+  texto TEXT NOT NULL
+);
 
 COMMIT;

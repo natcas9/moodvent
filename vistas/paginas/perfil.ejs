@@ -40,12 +40,12 @@
   <div class="eventos">
     <% eventosAsistidos.forEach((evento) => { %>
     <div class="evento">
-      <div class="evento-img">
+      <div class="estado-icon">
         <img
-        src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
-        alt="<=% evento.estadoAnimo %>"
-        class="icono-estado"
-      />
+          src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
+          alt="<=% evento.estadoAnimo %>"
+          class="icono-estado"
+        />
       </div>
       <div class="evento-info">
         <h2><%= evento.nombre %></h2>

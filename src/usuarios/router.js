@@ -62,4 +62,13 @@ usuariosRouter.post(
   asyncHandler(doRegistro)
 );
 
+/*usuariosRouter.get(
+  "/admin",
+  (req, res) => {
+    res.render("paginas/tableinfo", { session: req.session });
+  }
+);*/
+
+
+
 export default usuariosRouter;
