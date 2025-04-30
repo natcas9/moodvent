@@ -34,11 +34,12 @@ CREATE TABLE SugerenciasFeedbacks  (
   tipo TEXT NOT NULL,
   texto TEXT NOT NULL
 );
-DROP TABLE IF EXISTS "SugerenciasFeedbacks ";
-CREATE TABLE SugerenciasFeedbacks  (
- id INTEGER PRIMARY KEY AUTOINCREMENT,
-  tipo TEXT NOT NULL,
-  texto TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS TestResults (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  fecha TEXT NOT NULL,
+  mood TEXT NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES usuarios(user_id)
 );
 
 COMMIT;

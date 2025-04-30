@@ -9,6 +9,7 @@ import {
   doLogout,
   viewHome,
   viewPerfil,
+  viewHistorial
 } from "./controllers.js";
 import { autenticado } from "../middleware/auth.js";
 
@@ -60,6 +61,12 @@ usuariosRouter.post(
       .withMessage("La contraseña debe tener entre 6 y 12 caracteres"),
   ],
   asyncHandler(doRegistro)
+);
+
+usuariosRouter.get(
+  "/historial", 
+  autenticado("usuarios/historial"),
+  asyncHandler(viewHistorial)
 );
 
 /*usuariosRouter.get(
