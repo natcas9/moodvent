@@ -2,6 +2,8 @@ import { Usuario, UsuarioYaExiste } from "./Usuario.js";
 import { validationResult, matchedData } from "express-validator";
 import { render } from "../utils/render.js";
 import { Evento } from "../eventos/Evento.js";
+import { getConnection } from "../database.js";
+import session from "express-session";
 
 export function viewLogin(req, res) {
   render(req, res, "paginas/login", {
@@ -122,4 +124,23 @@ export function viewPerfil(req, res) {
     eventosAsistidos,
     session: req.session,
   });
+}
+
+export async function viewHistorial(req,res) {
+  const username = req.session?.username;
+  if (!username) return res.redirect("/usuarios/perfil");
+
+  const db = getConnection();
+
+  const historial = db.prepare(`
+    SELECT fecha, mood FROM TestResults
+    WHERE user_id = ?
+    ORDER BY fecha desc
+  `).all(username);
+
+  render(req,res, "paginas/historial", {
+    historial,
+    session: req.session,
+  });
+
 }

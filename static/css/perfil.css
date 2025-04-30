@@ -431,3 +431,23 @@ a {
   text-align: center;
 
 }
+
+.historial-button {
+  background-color: #3e204f;
+  color: white;
+  font-size: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-home {
+  background-color: #af69d7;
+  color: white;
+  font-size: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; 
+}

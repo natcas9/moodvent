@@ -1,0 +1,24 @@
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Pagina del historial de tests del usuario</title>
+    <link rel="stylesheet" href="/css/historial.css" /> 
+  </head>
+
+  <main class="historial">
+    <div> 
+        <% if (historial.length > 0) { %>
+            <ul>
+                <% historial.forEach(entry => { %>
+                    <li>
+                        <%= entry.date %>: <%=entry.mood %>
+                    </li>
+                    <% }); %>
+            </ul>
+            <% } else { %>
+                <p> No tienes entradas todavía</p>
+            <% }  %>
+    </div>
+    <a href="/usuarios/perfil" class="goPerfil"> Volver al perfil</a>
+  </main>

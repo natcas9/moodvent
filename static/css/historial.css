@@ -1,0 +1,10 @@
+
+.goPerfil {
+    background-color: #3e204f;
+    color: white;
+    font-size: 15px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

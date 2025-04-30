@@ -69,9 +69,10 @@
   <% } %>
 
   <!-- Sección del historial del usuario-->
-  <div class="Historial" >
+  <form action="/usuarios/historial" method="get" class="Historial">
     <h2> HISTORIAL </h2>
-    <h3> ¡ Mira los resultados de tus tests anteriores!</h3>
-    <!-- TODO -->
+    <button type="submit" class="historial-button"> ¡ Mira los resultados de tus tests anteriores!</button>
+  </form>
+    <a href="/usuarios/home" class="btn-home"> Volver</a>
   </div>
 </div>
