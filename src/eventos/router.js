@@ -15,7 +15,8 @@ import {
   viewMoodForm,
   handleMoodTest,
   viewProfile,
-  asistirEvento
+  asistirEvento, 
+  verHistorial
 } from "./controllers.js";
 
 const router = express.Router();
@@ -43,6 +44,7 @@ router.post(
   autenticado("/usuarios/login"),
   asyncHandler(cancelarAsistencia)
 );
+router.get("/historial", asyncHandler(verHistorial));
 
 
 export default router;

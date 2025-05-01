@@ -8,9 +8,9 @@
 
   <main class="historial">
     <div> 
-        <% if (historial.length > 0) { %>
+        <% if (typeof TestResults != 'undefined' && TestResults.length > 0) { %>
             <ul>
-                <% historial.forEach(entry => { %>
+                <% TestResults.forEach(entry => { %>
                     <li>
                         <%= entry.date %>: <%=entry.mood %>
                     </li>

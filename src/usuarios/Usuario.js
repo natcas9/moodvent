@@ -1,4 +1,6 @@
 import { getConnection } from "../database.js";
+const db = getConnection();
+
 import bcrypt from "bcryptjs";
 
 export class UsuarioYaExiste extends Error {
