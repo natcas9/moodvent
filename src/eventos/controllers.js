@@ -31,6 +31,7 @@ export function crearEvento(req, res) {
       lugar,
       precio,
       estadoAnimo,
+      creador: req.session.username
     });
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
@@ -61,7 +62,7 @@ export function viewEditarEvento(req, res) {
 
 export function modificarEvento(req, res) {
   try {
-    Evento.modificar(req.params.id, req.body);
+    Evento.modificar(req.params.id, { ...req.body, creador:req.session.username});
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error modificando evento");
@@ -98,7 +99,7 @@ export function viewMoodForm(req, res) {
   });
 }
 
-export function handleMoodTest(req, res) {
+export async function handleMoodTest(req, res) {
   const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
 
   const emociones = {
@@ -111,6 +112,15 @@ export function handleMoodTest(req, res) {
   };
 
   const { dominant, sorted } = getDominantEmotion(emociones);
+
+  if (req.session?.user_id) {
+    try {
+      await Evento.guardarResTest(req.session.user_id, dominant);
+    } catch (error) {
+      req.log?.error("Error guardando el resultado del test");
+      req.log?.debug(error.message);
+    }
+  }
 
   res.render("pagina", {
     contenido: "paginas/resultado",
@@ -144,7 +154,24 @@ export async function asistirEvento(req,res) {
   res.redirect("/usuarios/perfil");
 }
 
+export async function verHistorial(req,res) {
+  if (!req.session?.user_id) {
+    return res.redirect("/usuarios/login");
+  }
 
+  try {
+    const TestResults = await Evento.obtenerResPorUsuario(req.session.user_id);
+    res.render("pagina", {
+      contenido: "paginas/historial",
+      session: req.session,
+      TestResults
+    });
+  } catch(e) {
+    req.log?.error("Error al encontrar los resultados del test");
+    req.log?.debug(e.message);
+    res.status(500).send("Error al obtener el historial");
+  }
+}
 
 function getDominantEmotion(emociones) {
   const entrada = Object.entries(emociones);

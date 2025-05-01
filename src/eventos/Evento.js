@@ -131,6 +131,25 @@ export class Evento {
   }
 
   static asistirEvento(usuario,eventoId) {
-    return this.registrarAsistencia.run(usuario, eventoId);
+    const stmt = this.db.prepare(
+      "INSERT OR IGNORE Asistencias (usuario, evento_id) VALUES (?,?)"
+    );
+    return stmt.run(usuario, eventoId);
+  }
+
+  static guardarResTest(user_id, mood, fecha = new Date().toISOString()) {
+    const stmt = this.db.prepare(`
+      INSERT INTO TestResults (user_id, fecha, mood)
+      VALUES(?,?,?)
+    `);
+    return stmt.run(user_id, fecha, mood);
+  }
+
+  static obtenerResPorUsuario(user_id) {
+    const stmt = this.db.prepare(`
+      SELECT * FROM TestResults WHERE user_id = ?
+      ORDER By fecha DESC
+    `);
+    return stmt.all(user_id);
   }
 }
