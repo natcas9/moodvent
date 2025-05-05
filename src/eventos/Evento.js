@@ -137,19 +137,26 @@ export class Evento {
     return stmt.run(usuario, eventoId);
   }
 
-  static guardarResTest(user_id, mood, fecha = new Date().toISOString()) {
+  static guardarResTest(username, mood,) {
+    const getUser = this.db.prepare("SELECT id FROM usuarios WHERE username = ?");
+    const user = getUser.get(username);
+    if (!user) {
+      console.log("No se encontró el usuario:", username);
+      return;
+    }
+
     const stmt = this.db.prepare(`
-      INSERT INTO TestResults (user_id, fecha, mood)
-      VALUES(?,?,?)
+      INSERT INTO TestResults (user_id, mood, fecha)
+      VALUES(?,?,datetime('now'))
     `);
-    return stmt.run(user_id, fecha, mood);
+    return stmt.run(username,mood);
   }
 
-  static obtenerResPorUsuario(user_id) {
+  static obtenerResPorUsuario(username) {
     const stmt = this.db.prepare(`
       SELECT * FROM TestResults WHERE user_id = ?
       ORDER By fecha DESC
     `);
-    return stmt.all(user_id);
+    return stmt.all(username);
   }
 }

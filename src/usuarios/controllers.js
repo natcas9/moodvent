@@ -33,6 +33,7 @@ export async function doLogin(req, res) {
     req.session.nombre = usuario.nombre;
     req.session.rol = usuario.role;
     req.session.username = usuario.username;
+  
 
     req.setFlash(`¡Encantado de verte de nuevo, ${usuario.nombre}!`);
     return res.redirect(
