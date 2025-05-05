@@ -83,7 +83,7 @@ export function eliminarEvento(req, res) {
 }
 
 export function viewDetalles(req, res) {
-  const evento = Evento.porId(req.params.id);
+  const evento = Evento.obtenerPorId(req.params.id);
   if (!evento) return res.status(404).send("Evento no encontrado");
   render(req, res, "paginas/detallesEvento", { evento });
 }
@@ -113,13 +113,10 @@ export async function handleMoodTest(req, res) {
 
   const { dominant, sorted } = getDominantEmotion(emociones);
 
-  if (req.session?.user_id) {
-    try {
-      await Evento.guardarResTest(req.session.user_id, dominant);
-    } catch (error) {
-      req.log?.error("Error guardando el resultado del test");
-      req.log?.debug(error.message);
-    }
+  if (req.session?.username) {
+    console.log("Llamando a guardarResTest con:", req.session.username, dominant);
+    Evento.guardarResTest(req.session.username, dominant);
+    
   }
 
   res.render("pagina", {
@@ -155,12 +152,12 @@ export async function asistirEvento(req,res) {
 }
 
 export async function verHistorial(req,res) {
-  if (!req.session?.user_id) {
+  if (!req.session?.username) {
     return res.redirect("/usuarios/login");
   }
 
   try {
-    const TestResults = await Evento.obtenerResPorUsuario(req.session.user_id);
+    const TestResults = await Evento.obtenerResPorUsuario(req.session.username);
     res.render("pagina", {
       contenido: "paginas/historial",
       session: req.session,
