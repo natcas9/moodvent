@@ -5,19 +5,45 @@ export class Evento {
     this.db = db;
 
     this.insertEvento = db.prepare(`
-      INSERT INTO Eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador)
+      INSERT INTO eventos (nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
-    this.selectPorId = db.prepare(`SELECT * FROM eventos WHERE id = ?`);
+    this.selectPorId = db.prepare("SELECT * FROM eventos WHERE id = ?");
 
     this.updateEvento = db.prepare(`
-      UPDATE Eventos
-      SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ?, creador = ?
+      UPDATE eventos SET nombre = ?, descripcion = ?, fecha = ?, hora = ?, lugar = ?, precio = ?, estadoAnimo = ?, creador = ?
       WHERE id = ?
     `);
 
-    this.deleteEvento = db.prepare(`DELETE FROM eventos WHERE id = ?`);
+    this.deleteEvento = db.prepare("DELETE FROM eventos WHERE id = ?");
+
+    this.insertAsistencia = db.prepare(
+      "INSERT OR IGNORE INTO Asistencias (usuario, evento_id) VALUES (?, ?)"
+    );
+
+    this.deleteAsistencia = db.prepare(
+      "DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?"
+    );
+
+    this.selectTestResultsByUser = db.prepare(`
+      SELECT * FROM TestResults WHERE user_id = ? ORDER BY fecha DESC
+    `);
+
+    this.insertTestResult = db.prepare(`
+      INSERT INTO TestResults (user_id, mood, fecha) VALUES (?, ?, datetime('now'))
+    `);
+
+    this.selectEventosCreadosPorUsuario = db.prepare(`
+      SELECT * FROM eventos WHERE creador = ? ORDER BY fecha DESC
+    `);
+
+    this.selectAsistenciasPorUsuario = db.prepare(`
+      SELECT e.* FROM eventos e
+      INNER JOIN Asistencias a ON e.id = a.evento_id
+      WHERE a.usuario = ?
+      ORDER BY e.fecha DESC
+    `);
   }
 
   static crear({
@@ -30,6 +56,31 @@ export class Evento {
     estadoAnimo,
     creador,
   }) {
+    if (
+      !nombre ||
+      !descripcion ||
+      !fecha ||
+      !hora ||
+      !lugar ||
+      precio == null ||
+      !estadoAnimo ||
+      !creador
+    ) {
+      throw new Error("Todos los campos son obligatorios");
+    }
+
+    if (
+      typeof nombre !== "string" ||
+      typeof descripcion !== "string" ||
+      typeof fecha !== "string" ||
+      typeof hora !== "string" ||
+      typeof lugar !== "string" ||
+      typeof estadoAnimo !== "string" ||
+      typeof creador !== "string"
+    ) {
+      throw new Error("Datos inválidos");
+    }
+
     return this.insertEvento.run(
       nombre,
       descripcion,
@@ -46,28 +97,37 @@ export class Evento {
     const condiciones = [];
     const valores = {};
 
-    if (filtros.tematica) {
+    if (
+      typeof filtros.tematica === "string" &&
+      filtros.tematica.trim() !== ""
+    ) {
       condiciones.push("tematica = @tematica");
       valores.tematica = filtros.tematica;
     }
 
-    if (filtros.ubicacion) {
+    if (
+      typeof filtros.ubicacion === "string" &&
+      filtros.ubicacion.trim() !== ""
+    ) {
       condiciones.push("lugar LIKE @ubicacion");
       valores.ubicacion = `%${filtros.ubicacion}%`;
     }
 
-    if (filtros.fecha) {
+    if (typeof filtros.fecha === "string" && filtros.fecha.trim() !== "") {
       condiciones.push("fecha = @fecha");
       valores.fecha = filtros.fecha;
     }
 
-    if (filtros.precio !== undefined) {
+    if (typeof filtros.precio === "number") {
       condiciones.push("precio <= @precio");
       valores.precio = filtros.precio;
     }
 
-    if (filtros.estadoAnimo) {
-      condiciones.push("estadoAnimo LIKE @estadoAnimo");
+    if (
+      typeof filtros.estadoAnimo === "string" &&
+      filtros.estadoAnimo.trim() !== ""
+    ) {
+      condiciones.push("estadoAnimo = @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
@@ -79,13 +139,31 @@ export class Evento {
   }
 
   static obtenerPorId(id) {
-    return this.selectPorId.get(id);
+    const idNum = Number(id);
+    if (!Number.isInteger(idNum)) return null;
+    return this.selectPorId.get(idNum);
   }
 
   static modificar(
     id,
     { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador }
   ) {
+    const idNum = Number(id);
+    if (!Number.isInteger(idNum)) return;
+
+    if (
+      !nombre ||
+      !descripcion ||
+      !fecha ||
+      !hora ||
+      !lugar ||
+      precio == null ||
+      !estadoAnimo ||
+      !creador
+    ) {
+      throw new Error("Todos los campos son obligatorios");
+    }
+
     return this.updateEvento.run(
       nombre,
       descripcion,
@@ -95,68 +173,49 @@ export class Evento {
       precio,
       estadoAnimo,
       creador,
-      id
+      idNum
     );
   }
 
   static eliminar(id) {
-    return this.deleteEvento.run(id);
-  }
-  static obtenerPorUsuario(username) {
-    const stmt = this.db.prepare("SELECT * FROM Eventos WHERE creador = ?");
-    return stmt.all(username);
+    const idNum = Number(id);
+    if (!Number.isInteger(idNum)) return;
+    return this.deleteEvento.run(idNum);
   }
 
-  static registrarAsistencia(username, eventoId) {
-    const stmt = this.db.prepare(
-      "INSERT OR IGNORE INTO Asistencias (usuario, evento_id) VALUES (?, ?)"
-    );
-    return stmt.run(username, eventoId);
-  }
-
-  static obtenerAsistenciasPorUsuario(username) {
-    const stmt = this.db.prepare(`
-    SELECT e.* FROM Eventos e
-    JOIN Asistencias a ON e.id = a.evento_id
-    WHERE a.usuario = ?
-  `);
-    return stmt.all(username);
+  static asistirEvento(username, eventoId) {
+    if (!username || !eventoId) return;
+    return this.insertAsistencia.run(username, eventoId);
   }
 
   static cancelarAsistencia(username, eventoId) {
-    const stmt = this.db.prepare(`
-    DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?
-  `);
-    stmt.run(username, eventoId);
+    if (!username || !eventoId) return;
+    return this.deleteAsistencia.run(username, eventoId);
   }
 
-  static asistirEvento(usuario,eventoId) {
-    const stmt = this.db.prepare(
-      "INSERT OR IGNORE Asistencias (usuario, evento_id) VALUES (?,?)"
+  static obtenerPorUsuario(username) {
+    return this.selectEventosCreadosPorUsuario.all(username);
+  }
+
+  static obtenerAsistenciasPorUsuario(username) {
+    return this.selectAsistenciasPorUsuario.all(username);
+  }
+
+  static guardarResTest(username, mood) {
+    const getUserId = this.db.prepare(
+      "SELECT id FROM usuarios WHERE username = ?"
     );
-    return stmt.run(usuario, eventoId);
-  }
-
-  static guardarResTest(username, mood,) {
-    const getUser = this.db.prepare("SELECT id FROM usuarios WHERE username = ?");
-    const user = getUser.get(username);
-    if (!user) {
-      console.log("No se encontró el usuario:", username);
-      return;
-    }
-
-    const stmt = this.db.prepare(`
-      INSERT INTO TestResults (user_id, mood, fecha)
-      VALUES(?,?,datetime('now'))
-    `);
-    return stmt.run(username,mood);
+    const user = getUserId.get(username);
+    if (!user) throw new Error("Usuario no encontrado");
+    return this.insertTestResult.run(user.id, mood);
   }
 
   static obtenerResPorUsuario(username) {
-    const stmt = this.db.prepare(`
-      SELECT * FROM TestResults WHERE user_id = ?
-      ORDER By fecha DESC
-    `);
-    return stmt.all(username);
+    const getUserId = this.db.prepare(
+      "SELECT id FROM usuarios WHERE username = ?"
+    );
+    const user = getUserId.get(username);
+    if (!user) throw new Error("Usuario no encontrado");
+    return this.selectTestResultsByUser.all(user.id);
   }
 }

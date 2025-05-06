@@ -22,7 +22,8 @@ CREATE TABLE usuarios (
   password TEXT NOT NULL,
   role TEXT NOT NULL DEFAULT 'user'
 );
-CCREATE TABLE IF NOT EXISTS Asistencias (
+DROP TABLE IF EXISTS Asistencias;
+CREATE TABLE Asistencias (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   usuario TEXT NOT NULL,
   evento_id INTEGER NOT NULL,

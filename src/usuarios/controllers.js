@@ -33,7 +33,6 @@ export async function doLogin(req, res) {
     req.session.nombre = usuario.nombre;
     req.session.rol = usuario.role;
     req.session.username = usuario.username;
-  
 
     req.setFlash(`¡Encantado de verte de nuevo, ${usuario.nombre}!`);
     return res.redirect(
@@ -115,33 +114,38 @@ export function viewPerfil(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/login");
 
-  const usuario = Usuario.getPorUsername(username);
-  const eventosCreados = Evento.obtenerPorUsuario(username);
-  const eventosAsistidos = Evento.obtenerAsistenciasPorUsuario(username);
+  try {
+    const usuario = Usuario.getPorUsername(username);
+    const eventosCreados = Evento.obtenerPorUsuario(username);
+    const eventosAsistidos = Evento.obtenerAsistenciasPorUsuario(username);
 
-  render(req, res, "paginas/perfil", {
-    usuario,
-    eventos: eventosCreados,
-    eventosAsistidos,
-    session: req.session,
-  });
+    render(req, res, "paginas/perfil", {
+      usuario,
+      eventos: eventosCreados,
+      eventosAsistidos,
+      session: req.session,
+    });
+  } catch (e) {
+    req.log.error("Error al mostrar perfil");
+    req.log.debug(e.message);
+    res.status(500).send("Error al cargar el perfil");
+  }
 }
 
-export async function viewHistorial(req,res) {
+export async function viewHistorial(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/perfil");
 
-  const db = getConnection();
+  try {
+    const historial = Evento.obtenerResPorUsuario(username);
 
-  const historial = db.prepare(`
-    SELECT fecha, mood FROM TestResults
-    WHERE user_id = ?
-    ORDER BY fecha desc
-  `).all(username);
-
-  render(req,res, "paginas/historial", {
-    historial,
-    session: req.session,
-  });
-
+    render(req, res, "paginas/historial", {
+      historial,
+      session: req.session,
+    });
+  } catch (e) {
+    req.log.error("Error al obtener historial");
+    req.log.debug(e.message);
+    res.status(500).send("Error al cargar el historial");
+  }
 }
