@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS TestResults (
   user_id INTEGER NOT NULL,
   fecha TEXT NOT NULL,
   mood TEXT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES usuarios(user_id)
+  FOREIGN KEY (user_id) REFERENCES usuarios(username)
 );
 
 COMMIT;
