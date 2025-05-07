@@ -8,12 +8,15 @@
 
   <main class="historial">
     <div class="container"> 
+        <h1> Historial de Emociones </h1>
         <% if (typeof TestResults != 'undefined' && TestResults.length > 0) { %>
             <ul class="history-list">
                 <% TestResults.forEach(entry => { %>
-                    </li class="history-entry">
-                        <span class="date"> <%= entry.fecha %> </span>
-                        <span class="mood"> Estado: <%=entry.mood %></span>
+                    <li class="history-entry">
+                        <div class="entry-content">
+                            <span class="date"> <%= entry.fecha %> </span>
+                            <span class="mood"> Estado: <%=entry.mood %></span>
+                        </div>
                     </li>
                     <% }); %>
             </ul>
