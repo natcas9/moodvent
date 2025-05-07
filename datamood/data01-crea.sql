@@ -37,13 +37,13 @@ CREATE TABLE SugerenciasFeedbacks (
   tipo TEXT NOT NULL,
   texto TEXT NOT NULL
 );
-
-CREATE TABLE IF NOT EXISTS TestResults (
+DROP TABLE IF EXISTS "TestResults";
+CREATE TABLE TestResults (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER NOT NULL,
+  username TEXT NOT NULL,
   fecha TEXT NOT NULL,
   mood TEXT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES usuarios(username)
+  FOREIGN KEY (username) REFERENCES usuarios(username)
 );
 
 COMMIT;

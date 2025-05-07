@@ -1,5 +1,59 @@
+.body {
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.historial .container {
+    max-width: 600 px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.historial  h1 {
+    text-align: center;
+    color: #3e204f;
+    margin-bottom: 20px;
+}
+
+.history-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.history-entry {
+   display: flex;
+   justify-content: center;
+   padding: 12px 18px;
+   margin-bottom: 10px;
+   background-color: #d8d3f0;
+   border-left: 5px solid #3e204f;
+   border-radius: 5px;
+   font-size: 14px;
+   color: #2c2c2c;
+   transition: background-color 0.2 ease-in-out;
+}
+
+.history-entry:hover {
+    background-color: #c8c8c8;
+}
+
+.date {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.mood {
+    font-style: italic;
+}
 
 .goPerfil {
+    display: block;
+    width: fit-content;
     background-color: #3e204f;
     color: white;
     font-size: 15px;
@@ -7,4 +61,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.goPerfil:hover {
+    background-color: #572d6d;
 }

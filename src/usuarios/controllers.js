@@ -132,70 +132,30 @@ export function viewPerfil(req, res) {
   }
 }
 
-<<<<<<< Updated upstream
 export async function viewHistorial(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/perfil");
+  const db = getConnection();
 
-  try {
-    const historial = Evento.obtenerResPorUsuario(username);
-=======
-export function viewMoodForm(req, res) {
-  render(req, res, "paginas/mood-test", {
+  const historial = db.prepare(`
+    SELECT fecha, mood FROM TestResults
+    WHERE username = ?
+    ORDER BY fecha desc
+  `).all(username);
+
+  render(req,res, "paginas/historial", {
+    TestResults: historial,
     session: req.session,
   });
-}
 
-export async function handleMoodTest(req, res) {
-  try {
-    const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
-    const emociones = {
-      FELIZ: parseInt(FELIZ),
-      TRISTE: parseInt(TRISTE),
-      RELAJADO: parseInt(RELAJADO),
-      ANSIOSO: parseInt(ANSIOSO),
-      ENOJADO: parseInt(ENOJADO),
-      ABURRIDO: parseInt(ABURRIDO),
-    };
->>>>>>> Stashed changes
 
-    const { dominant, sorted } = getDominantEmotion(emociones);
-
-    if (req.session?.username) {
-      Evento.guardarResTest(req.session.username, dominant);
-    }
-
-    res.render("pagina", {
-      contenido: "paginas/resultado",
+    render(req, res, "paginas/historial", {
+      historial,
       session: req.session,
-      sortedEmotions: sorted,
-      dominantEmotion: dominant,
     });
   } catch (e) {
-    req.log?.error("Error procesando el test de estado de ánimo");
-    req.log?.debug(e.message);
-    res.status(500).send("Ocurrió un error al procesar el test");
+    req.log.error("Error al obtener historial");
+    req.log.debug(e.message);
+    res.status(500).send("Error al cargar el historial");
   }
-}
-
-function getDominantEmotion(emociones) {
-  const entrada = Object.entries(emociones);
-  const priority = [
-    "FELIZ",
-    "RELAJADO",
-    "TRISTE",
-    "ANSIOSO",
-    "ENOJADO",
-    "ABURRIDO",
-  ];
-
-  entrada.sort((a, b) => {
-    if (b[1] !== a[1]) return b[1] - a[1];
-    return priority.indexOf(a[0]) - priority.indexOf(b[0]);
-  });
-
-  return {
-    dominant: entrada[0][0],
-    sorted: entrada.map(([key]) => key),
-  };
 }

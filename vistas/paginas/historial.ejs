@@ -7,12 +7,13 @@
   </head>
 
   <main class="historial">
-    <div> 
+    <div class="container"> 
         <% if (typeof TestResults != 'undefined' && TestResults.length > 0) { %>
-            <ul>
+            <ul class="history-list">
                 <% TestResults.forEach(entry => { %>
-                    <li>
-                        <%= entry.date %>: <%=entry.mood %>
+                    </li class="history-entry">
+                        <span class="date"> <%= entry.fecha %> </span>
+                        <span class="mood"> Estado: <%=entry.mood %></span>
                     </li>
                     <% }); %>
             </ul>

@@ -201,21 +201,26 @@ export class Evento {
     return this.selectAsistenciasPorUsuario.all(username);
   }
 
-  static guardarResTest(username, mood) {
-    const getUserId = this.db.prepare(
-      "SELECT id FROM usuarios WHERE username = ?"
-    );
-    const user = getUserId.get(username);
-    if (!user) throw new Error("Usuario no encontrado");
-    return this.insertTestResult.run(user.id, mood);
+  static guardarResTest(username, mood,) {
+    const getUser = this.db.prepare("SELECT id FROM usuarios WHERE username = ?");
+    const user = getUser.get(username);
+    if (!user) {
+      console.log("No se encontró el usuario:", username);
+      return;
+    }
+
+    const stmt = this.db.prepare(`
+      INSERT INTO TestResults (username, mood, fecha)
+      VALUES(?,?,datetime('now'))
+    `);
+    return stmt.run(username,mood);
   }
 
   static obtenerResPorUsuario(username) {
-    const getUserId = this.db.prepare(
-      "SELECT id FROM usuarios WHERE username = ?"
-    );
-    const user = getUserId.get(username);
-    if (!user) throw new Error("Usuario no encontrado");
-    return this.selectTestResultsByUser.all(user.id);
+    const stmt = this.db.prepare(`
+      SELECT * FROM TestResults WHERE username = ?
+      ORDER By fecha DESC
+    `);
+    return stmt.all(username);
   }
 }
