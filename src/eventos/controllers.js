@@ -117,3 +117,58 @@ export function cancelarAsistencia(req, res) {
   Evento.cancelarAsistencia(username, eventoId);
   res.redirect("/usuarios/perfil");
 }
+
+export function viewMoodForm(req,res) {
+  render(req,res, "paginas/mood-test");
+}
+
+export async function handleMoodTest(req, res) {
+  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
+
+  const emociones = {
+    FELIZ: parseInt(FELIZ),
+    TRISTE: parseInt(TRISTE),
+    RELAJADO: parseInt(RELAJADO),
+    ANSIOSO: parseInt(ANSIOSO),
+    ENOJADO: parseInt(ENOJADO),
+    ABURRIDO: parseInt(ABURRIDO),
+  };
+
+  const { dominant, sorted } = getDominantEmotion(emociones);
+
+  if (req.session?.username) {
+    console.log("Llamando a guardarResTest con:", req.session.username, dominant);
+    Evento.guardarResTest(req.session.username, dominant);
+    
+  }
+
+  res.render("pagina", {
+    contenido: "paginas/resultado",
+    session: req.session,
+    sortedEmotions: sorted,
+    dominantEmotion: dominant,
+  });
+}
+
+
+function getDominantEmotion(emociones) {
+const entrada = Object.entries(emociones);
+
+const priority = [
+  "FELIZ",
+  "RELAJADO",
+  "TRISTE",
+  "ANSIOSO",
+  "ENOJADO",
+  "ABURRIDO",
+];
+
+entrada.sort((a, b) => {
+  if (b[1] !== a[1]) return b[1] - a[1];
+  return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+});
+return {
+  dominant: entrada[0][0],
+  sorted: entrada.map(([key]) => key),
+};
+}

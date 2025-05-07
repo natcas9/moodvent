@@ -26,14 +26,6 @@ export class Evento {
       "DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?"
     );
 
-    this.selectTestResultsByUser = db.prepare(`
-      SELECT * FROM TestResults WHERE user_id = ? ORDER BY fecha DESC
-    `);
-
-    this.insertTestResult = db.prepare(`
-      INSERT INTO TestResults (user_id, mood, fecha) VALUES (?, ?, datetime('now'))
-    `);
-
     this.selectEventosCreadosPorUsuario = db.prepare(`
       SELECT * FROM eventos WHERE creador = ? ORDER BY fecha DESC
     `);

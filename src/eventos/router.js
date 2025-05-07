@@ -10,6 +10,8 @@ import {
   viewDetalles,
   asistirEvento,
   cancelarAsistencia,
+  viewMoodForm,
+  handleMoodTest,
 } from "./controllers.js";
 import { body, query, param } from "express-validator";
 
@@ -66,5 +68,7 @@ router.get("/detalles/:id", param("id").isInt(), asyncHandler(viewDetalles));
 
 router.post("/asistir/:id", asyncHandler(asistirEvento));
 router.post("/cancelar-asistencia/:id", asyncHandler(cancelarAsistencia));
+router.get("/mood-form", asyncHandler(viewMoodForm));
+router.post("/submit-test", asyncHandler(handleMoodTest));
 
 export default router;
