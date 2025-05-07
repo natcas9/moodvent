@@ -148,7 +148,7 @@ export async function viewHistorial(req, res) {
     session: req.session,
   });
 
-
+  try {
     render(req, res, "paginas/historial", {
       historial,
       session: req.session,
@@ -159,3 +159,4 @@ export async function viewHistorial(req, res) {
     res.status(500).send("Error al cargar el historial");
   }
 }
+

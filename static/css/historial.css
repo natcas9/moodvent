@@ -1,6 +1,6 @@
 .body {
     background-color: #f4f4f4;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -9,46 +9,53 @@
     max-width: 600 px;
     margin: 40px auto;
     padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: black;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .historial  h1 {
-    text-align: center;
-    color: #3e204f;
+    text-align: left; 
+    color: #bb9dcd;
     margin-bottom: 20px;
+    font-size: 24px;
 }
 
 .history-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .history-entry {
-   display: flex;
-   justify-content: center;
-   padding: 12px 18px;
-   margin-bottom: 10px;
-   background-color: #d8d3f0;
-   border-left: 5px solid #3e204f;
-   border-radius: 5px;
-   font-size: 14px;
-   color: #2c2c2c;
-   transition: background-color 0.2 ease-in-out;
+   background-color: #e6e1f5;
+   border-left: 6px solid #3e204f;
+   margin-bottom: 15px;
+   padding: 15px 20px;
+   border-radius: 8px;
+   transition: transform 0.2s ease, background-color 0.3s ease;
 }
 
 .history-entry:hover {
     background-color: #c8c8c8;
+    transform: scale(1.02);
+}
+
+.entry-content {
+    display: flex;
+    flex-direction: column;
 }
 
 .date {
-    font-weight: bold;
     font-size: 13px;
+    color: #555;
+    margin-bottom: 5px;
 }
 
 .mood {
-    font-style: italic;
+    font-size: 16px;
+    font-weight: 500;
+    color: #222;
 }
 
 .goPerfil {
