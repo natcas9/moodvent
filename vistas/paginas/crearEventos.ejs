@@ -40,17 +40,22 @@
 
     <div class="form-group">
       <label for="estadoAnimo">Estado de ánimo recomendado</label>
-      <select name="estadoAnimo" id="estadoAnimo">
+      <select name="estadoAnimo" id="estadoAnimo" required>
+        <option value="">Selecciona uno</option>
         <option value="Feliz">Feliz</option>
         <option value="Triste">Triste</option>
         <option value="Enojado">Enojado</option>
         <option value="Ansioso">Ansioso</option>
         <option value="Relajado">Relajado</option>
-        <option value="Aburrido"> Aburrido</option>
+        <option value="Aburrido">Aburrido</option>
       </select>
     </div>
 
     <button type="submit" class="btn">Crear Evento</button>
-    <p><a href="/eventos/visualizarEventos" class="link">Ver todos los eventos</a></p>
+    <p>
+      <a href="/eventos/visualizarEventos" class="link"
+        >Ver todos los eventos</a
+      >
+    </p>
   </form>
 </div>
