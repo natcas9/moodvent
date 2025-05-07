@@ -6,8 +6,11 @@
 
   <div class="saludo">
     <% if (session && session.login) { %>
+    <a href="/eventos/visualizarEventos" class="btn">Ver eventos</a>
+    <a href="/usuarios/home" class="btn">Mi espacio </a>
     <a href="/usuarios/perfil" class="btn">Perfil</a>
     <a href="/usuarios/logout" class="btn">Cerrar sesión</a>
+
     <% } else { %>
     <a href="/usuarios/login" class="btn">Login</a>
     <% } %>
