@@ -157,5 +157,4 @@ export async function viewHistorial(req, res) {
     req.log.error("Error al obtener historial");
     req.log.debug(e.message);
     res.status(500).send("Error al cargar el historial");
-  }
 }
