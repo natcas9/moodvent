@@ -117,3 +117,43 @@ export function cancelarAsistencia(req, res) {
   Evento.cancelarAsistencia(username, eventoId);
   res.redirect("/usuarios/perfil");
 }
+export async function verHistorial(req, res) {
+  if (!req.session?.username) {
+    return res.redirect("/usuarios/login");
+  }
+
+  try {
+    const TestResults = await Evento.obtenerResPorUsuario(req.session.username);
+    res.render("pagina", {
+      contenido: "paginas/historial",
+      session: req.session,
+      TestResults,
+    });
+  } catch (e) {
+    req.log?.error("Error al encontrar los resultados del test");
+    req.log?.debug(e.message);
+    res.status(500).send("Error al obtener el historial");
+  }
+}
+
+function getDominantEmotion(emociones) {
+  const entrada = Object.entries(emociones);
+
+  const priority = [
+    "FELIZ",
+    "RELAJADO",
+    "TRISTE",
+    "ANSIOSO",
+    "ENOJADO",
+    "ABURRIDO",
+  ];
+
+  entrada.sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+  });
+  return {
+    dominant: entrada[0][0],
+    sorted: entrada.map(([key]) => key),
+  };
+}

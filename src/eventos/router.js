@@ -66,5 +66,6 @@ router.get("/detalles/:id", param("id").isInt(), asyncHandler(viewDetalles));
 
 router.post("/asistir/:id", asyncHandler(asistirEvento));
 router.post("/cancelar-asistencia/:id", asyncHandler(cancelarAsistencia));
+router.get("/historial", asyncHandler(verHistorial));
 
 export default router;
