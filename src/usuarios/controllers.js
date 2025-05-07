@@ -135,12 +135,12 @@ export async function viewHistorial(req,res) {
 
   const historial = db.prepare(`
     SELECT fecha, mood FROM TestResults
-    WHERE user_id = ?
+    WHERE username = ?
     ORDER BY fecha desc
   `).all(username);
 
   render(req,res, "paginas/historial", {
-    historial,
+    TestResults: historial,
     session: req.session,
   });
 

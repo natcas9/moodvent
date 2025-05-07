@@ -146,7 +146,7 @@ export class Evento {
     }
 
     const stmt = this.db.prepare(`
-      INSERT INTO TestResults (user_id, mood, fecha)
+      INSERT INTO TestResults (username, mood, fecha)
       VALUES(?,?,datetime('now'))
     `);
     return stmt.run(username,mood);
@@ -154,7 +154,7 @@ export class Evento {
 
   static obtenerResPorUsuario(username) {
     const stmt = this.db.prepare(`
-      SELECT * FROM TestResults WHERE user_id = ?
+      SELECT * FROM TestResults WHERE username = ?
       ORDER By fecha DESC
     `);
     return stmt.all(username);
