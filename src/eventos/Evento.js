@@ -1,4 +1,5 @@
 import { getConnection } from "../database.js";
+import { escapeLikePattern } from "../utils/escape.js";
 
 export class Evento {
   static initStatements(db) {
@@ -46,50 +47,16 @@ export class Evento {
     `);
   }
 
-  static crear({
-    nombre,
-    descripcion,
-    fecha,
-    hora,
-    lugar,
-    precio,
-    estadoAnimo,
-    creador,
-  }) {
-    if (
-      !nombre ||
-      !descripcion ||
-      !fecha ||
-      !hora ||
-      !lugar ||
-      precio == null ||
-      !estadoAnimo ||
-      !creador
-    ) {
-      throw new Error("Todos los campos son obligatorios");
-    }
-
-    if (
-      typeof nombre !== "string" ||
-      typeof descripcion !== "string" ||
-      typeof fecha !== "string" ||
-      typeof hora !== "string" ||
-      typeof lugar !== "string" ||
-      typeof estadoAnimo !== "string" ||
-      typeof creador !== "string"
-    ) {
-      throw new Error("Datos inválidos");
-    }
-
+  static crear(datos) {
     return this.insertEvento.run(
-      nombre,
-      descripcion,
-      fecha,
-      hora,
-      lugar,
-      precio,
-      estadoAnimo,
-      creador
+      datos.nombre,
+      datos.descripcion,
+      datos.fecha,
+      datos.hora,
+      datos.lugar,
+      datos.precio,
+      datos.estadoAnimo,
+      datos.creador
     ).lastInsertRowid;
   }
 
@@ -98,37 +65,42 @@ export class Evento {
     const valores = {};
 
     if (
-      typeof filtros.tematica === "string" &&
-      filtros.tematica.trim() !== ""
-    ) {
-      condiciones.push("tematica = @tematica");
-      valores.tematica = filtros.tematica;
-    }
-
-    if (
       typeof filtros.ubicacion === "string" &&
       filtros.ubicacion.trim() !== ""
     ) {
-      condiciones.push("lugar LIKE @ubicacion");
-      valores.ubicacion = `%${filtros.ubicacion}%`;
+      const ubicacionSanitizada = escapeLikePattern(filtros.ubicacion.trim());
+      condiciones.push("lugar LIKE @ubicacion ESCAPE '\\'");
+      valores.ubicacion = `%${ubicacionSanitizada}%`;
     }
 
     if (typeof filtros.fecha === "string" && filtros.fecha.trim() !== "") {
-      condiciones.push("fecha = @fecha");
-      valores.fecha = filtros.fecha;
+      const fechaObj = new Date(filtros.fecha);
+      if (!isNaN(fechaObj)) {
+        const fechaNormalizada = fechaObj.toISOString().split("T")[0];
+        condiciones.push("fecha = @fecha");
+        valores.fecha = fechaNormalizada;
+      }
     }
 
-    if (typeof filtros.precio === "number") {
+    if (typeof filtros.precio === "number" && !isNaN(filtros.precio)) {
       condiciones.push("precio <= @precio");
       valores.precio = filtros.precio;
     }
 
+    const ESTADOS_ANIMO_VALIDOS = [
+      "feliz",
+      "triste",
+      "relajado",
+      "ansioso",
+      "enojado",
+      "aburrido",
+    ];
     if (
       typeof filtros.estadoAnimo === "string" &&
-      filtros.estadoAnimo.trim() !== ""
+      ESTADOS_ANIMO_VALIDOS.includes(filtros.estadoAnimo.trim())
     ) {
       condiciones.push("estadoAnimo = @estadoAnimo");
-      valores.estadoAnimo = filtros.estadoAnimo;
+      valores.estadoAnimo = filtros.estadoAnimo.trim();
     }
 
     const where =
@@ -144,35 +116,19 @@ export class Evento {
     return this.selectPorId.get(idNum);
   }
 
-  static modificar(
-    id,
-    { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador }
-  ) {
+  static modificar(id, datos) {
     const idNum = Number(id);
     if (!Number.isInteger(idNum)) return;
 
-    if (
-      !nombre ||
-      !descripcion ||
-      !fecha ||
-      !hora ||
-      !lugar ||
-      precio == null ||
-      !estadoAnimo ||
-      !creador
-    ) {
-      throw new Error("Todos los campos son obligatorios");
-    }
-
     return this.updateEvento.run(
-      nombre,
-      descripcion,
-      fecha,
-      hora,
-      lugar,
-      precio,
-      estadoAnimo,
-      creador,
+      datos.nombre,
+      datos.descripcion,
+      datos.fecha,
+      datos.hora,
+      datos.lugar,
+      datos.precio,
+      datos.estadoAnimo,
+      datos.creador,
       idNum
     );
   }
@@ -201,8 +157,10 @@ export class Evento {
     return this.selectAsistenciasPorUsuario.all(username);
   }
 
-  static guardarResTest(username, mood,) {
-    const getUser = this.db.prepare("SELECT id FROM usuarios WHERE username = ?");
+  static guardarResTest(username, mood) {
+    const getUser = this.db.prepare(
+      "SELECT id FROM usuarios WHERE username = ?"
+    );
     const user = getUser.get(username);
     if (!user) {
       console.log("No se encontró el usuario:", username);
@@ -213,7 +171,7 @@ export class Evento {
       INSERT INTO TestResults (username, mood, fecha)
       VALUES(?,?,datetime('now'))
     `);
-    return stmt.run(username,mood);
+    return stmt.run(username, mood);
   }
 
   static obtenerResPorUsuario(username) {
