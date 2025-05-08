@@ -27,14 +27,6 @@ export class Evento {
       "DELETE FROM Asistencias WHERE usuario = ? AND evento_id = ?"
     );
 
-    this.selectTestResultsByUser = db.prepare(`
-      SELECT * FROM TestResults WHERE user_id = ? ORDER BY fecha DESC
-    `);
-
-    this.insertTestResult = db.prepare(`
-      INSERT INTO TestResults (user_id, mood, fecha) VALUES (?, ?, datetime('now'))
-    `);
-
     this.selectEventosCreadosPorUsuario = db.prepare(`
       SELECT * FROM eventos WHERE creador = ? ORDER BY fecha DESC
     `);
@@ -99,8 +91,8 @@ export class Evento {
       typeof filtros.estadoAnimo === "string" &&
       ESTADOS_ANIMO_VALIDOS.includes(filtros.estadoAnimo.trim())
     ) {
-      condiciones.push("estadoAnimo = @estadoAnimo");
-      valores.estadoAnimo = filtros.estadoAnimo.trim();
+      condiciones.push("estadoAnimo LIKE @estadoAnimo");
+      valores.estadoAnimo = filtros.estadoAnimo;
     }
 
     const where =
@@ -172,13 +164,5 @@ export class Evento {
       VALUES(?,?,datetime('now'))
     `);
     return stmt.run(username, mood);
-  }
-
-  static obtenerResPorUsuario(username) {
-    const stmt = this.db.prepare(`
-      SELECT * FROM TestResults WHERE username = ?
-      ORDER By fecha DESC
-    `);
-    return stmt.all(username);
   }
 }
