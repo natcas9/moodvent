@@ -1,4 +1,11 @@
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "Asistencias";
+CREATE TABLE Asistencias (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  usuario TEXT NOT NULL,
+  evento_id INTEGER NOT NULL,
+  FOREIGN KEY (evento_id) REFERENCES Eventos(id) ON DELETE CASCADE
+);
 DROP TABLE IF EXISTS "Eventos";
 CREATE TABLE Eventos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,28 +17,7 @@ CREATE TABLE Eventos (
   precio REAL NOT NULL,
   estadoAnimo TEXT NOT NULL
 , tematica TEXT, creador TEXT);
-
-DROP TABLE IF EXISTS "usuarios";
-CREATE TABLE usuarios (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  nombre TEXT NOT NULL,
-  apellido TEXT NOT NULL,
-  edad INTEGER NOT NULL,
-  email TEXT NOT NULL UNIQUE,
-  username TEXT NOT NULL UNIQUE,
-  password TEXT NOT NULL,
-  role TEXT NOT NULL DEFAULT 'user'
-);
-DROP TABLE IF EXISTS Asistencias;
-CREATE TABLE Asistencias (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  usuario TEXT NOT NULL,
-  evento_id INTEGER NOT NULL,
-  FOREIGN KEY (usuario) REFERENCES usuarios(username),
-  FOREIGN KEY (evento_id) REFERENCES Eventos(id)
-);
-
-DROP TABLE IF EXISTS SugerenciasFeedbacks;
+DROP TABLE IF EXISTS "SugerenciasFeedbacks";
 CREATE TABLE SugerenciasFeedbacks (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   tipo TEXT NOT NULL,
@@ -45,5 +31,15 @@ CREATE TABLE TestResults (
   mood TEXT NOT NULL,
   FOREIGN KEY (username) REFERENCES usuarios(username)
 );
-
+DROP TABLE IF EXISTS "usuarios";
+CREATE TABLE usuarios (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  nombre TEXT NOT NULL,
+  apellido TEXT NOT NULL,
+  edad INTEGER NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  role TEXT NOT NULL DEFAULT 'user'
+);
 COMMIT;
