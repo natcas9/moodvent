@@ -105,9 +105,11 @@ export function doLogout(req, res, next) {
 }
 
 export function viewHome(req, res) {
-  render(req, res, "paginas/home", {
-    session: req.session,
-  });
+  if (req.session?.rol === "admin") {
+    return res.redirect("/contenido/admin");
+  } else {
+    return res.redirect("/contenido/normal");
+  }
 }
 
 export function viewPerfil(req, res) {
