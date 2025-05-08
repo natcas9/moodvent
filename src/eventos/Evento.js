@@ -201,6 +201,10 @@ export class Evento {
       return;
     }
 
+    const hoy = new Date().toISOString.split("T")[0];
+    const testHoy = this.db.prepare(`
+      SELECT * FROM TestResults 
+      WHERE username = ? AND DATE(fecha) = ?`)
     const stmt = this.db.prepare(`
       INSERT INTO TestResults (username, mood, fecha)
       VALUES(?,?,datetime('now'))
