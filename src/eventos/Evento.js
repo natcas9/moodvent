@@ -119,7 +119,7 @@ export class Evento {
       typeof filtros.estadoAnimo === "string" &&
       filtros.estadoAnimo.trim() !== ""
     ) {
-      condiciones.push("estadoAnimo = @estadoAnimo");
+      condiciones.push("estadoAnimo LIKE @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
@@ -206,13 +206,5 @@ export class Evento {
       VALUES(?,?,datetime('now'))
     `);
     return stmt.run(username,mood);
-  }
-
-  static obtenerResPorUsuario(username) {
-    const stmt = this.db.prepare(`
-      SELECT * FROM TestResults WHERE username = ?
-      ORDER By fecha DESC
-    `);
-    return stmt.all(username);
   }
 }

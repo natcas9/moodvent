@@ -9,20 +9,50 @@
   <main class="historial">
     <div class="container"> 
         <h1> Historial de Emociones </h1>
-        <% if (typeof TestResults != 'undefined' && TestResults.length > 0) { %>
-            <ul class="history-list">
-                <% TestResults.forEach(entry => { %>
-                    <li class="history-entry">
-                        <div class="entry-content">
-                            <span class="date"> <%= entry.fecha %> </span>
-                            <span class="mood"> Estado: <%=entry.mood %></span>
-                        </div>
-                    </li>
-                    <% }); %>
-            </ul>
-            <% } else { %>
-                <p> No tienes entradas todavía</p>
-            <% }  %>
-    </div>
+        <!-- Resumen semanal-->
+        <div class="historial-flex">
+            <div class="seccion-historial">
+                 <!-- Historial-->
+                <% if (typeof TestResults != 'undefined' && TestResults.length > 0) { %>
+                    <ul class="history-list">
+                        <% TestResults.forEach(entry => { %>
+                            <li class="history-entry">
+                                <div class="entry-content">
+                                    <span class="date"> <%= entry.fecha %> </span>
+                                    <span class="mood"> Estado: <%=entry.mood %></span>
+                                </div>
+                            </li>
+                        <% }); %>
+                    </ul>
+                <% } else { %>
+                    <p> No tienes entradas todavía</p>
+                <% }  %>
+            </div>
+
+            <% if (typeof ResumenSemanal !== 'undefined' && Object.keys(ResumenSemanal).length > 0) { 
+                const maxValor = Math.max(...Object.values(ResumenSemanal));
+            %>
+                <div class="resumen-semanal">
+                    <h2> Resumen Semanal</h2>
+                    <div class="resumen-barras">
+                        <% for (const estado in ResumenSemanal) { %>
+                            <% 
+                            const cantidad = ResumenSemanal[estado];
+                            const porcentaje = ( cantidad / maxValor) * 100;
+                        %>
+
+                          <div class="barra-linea">
+                            <span class="barra-label"> <%= estado %> : </span>
+                                <div class="barra-contenedor">
+                                    <div class="barra" style="width: <%= porcentaje %>%;">
+                                        <span class="barra-num"> <%= cantidad %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>      
+            <%} %>
+        </div>
     <a href="/usuarios/perfil" class="goPerfil"> Volver al perfil</a>
   </main>
