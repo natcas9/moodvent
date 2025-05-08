@@ -150,25 +150,24 @@ export async function handleMoodTest(req, res) {
   });
 }
 
-
 function getDominantEmotion(emociones) {
-const entrada = Object.entries(emociones);
+  const entrada = Object.entries(emociones);
 
-const priority = [
-  "FELIZ",
-  "RELAJADO",
-  "TRISTE",
-  "ANSIOSO",
-  "ENOJADO",
-  "ABURRIDO",
-];
+  const priority = [
+    "FELIZ",
+    "RELAJADO",
+    "TRISTE",
+    "ANSIOSO",
+    "ENOJADO",
+    "ABURRIDO",
+  ];
 
-entrada.sort((a, b) => {
-  if (b[1] !== a[1]) return b[1] - a[1];
-  return priority.indexOf(a[0]) - priority.indexOf(b[0]);
-});
-return {
-  dominant: entrada[0][0],
-  sorted: entrada.map(([key]) => key),
-};
+  entrada.sort((a, b) => {
+    if (b[1] !== a[1]) return b[1] - a[1];
+    return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+  });
+  return {
+    dominant: entrada[0][0],
+    sorted: entrada.map(([key]) => key),
+  };
 }

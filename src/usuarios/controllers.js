@@ -135,22 +135,30 @@ export function viewPerfil(req, res) {
 export async function viewHistorial(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/perfil");
+ 
   const db = getConnection();
-
   const historial = db.prepare(`
     SELECT fecha, mood FROM TestResults
     WHERE username = ?
     ORDER BY fecha desc
   `).all(username);
 
-  render(req,res, "paginas/historial", {
-    TestResults: historial,
-    session: req.session,
-  });
 
+  // Resumen semanal
+  const resumen = {};
+  const weekBefore = new Date();
+  weekBefore.setDate(weekBefore.getDate() - 7);
+
+  historial.forEach(entry => {
+    const fecha = new Date(entry.fecha);
+    if (fecha >= weekBefore) {
+      resumen[entry.mood] = (resumen[entry.mood] || 0) + 1;
+    }
+  });
   try {
     render(req, res, "paginas/historial", {
-      historial,
+      TestResults: historial,
+      ResumenSemanal: resumen, 
       session: req.session,
     });
   } catch (e) {

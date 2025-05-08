@@ -6,7 +6,7 @@
 }
 
 .historial .container {
-    max-width: 600 px;
+    max-width: 1000 px;
     margin: 40px auto;
     padding: 20px;
     background-color: black;
@@ -19,6 +19,18 @@
     color: #bb9dcd;
     margin-bottom: 20px;
     font-size: 24px;
+}
+
+.historial-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.seccion-historial {
+    flex: 1;
+    min-width: 300px;
 }
 
 .history-list {
@@ -73,4 +85,61 @@
 
 .goPerfil:hover {
     background-color: #572d6d;
+}
+
+.resumen-semanal {
+    flex: 1;
+    min-width: 300px;
+    background-color: #f4f8ff;
+    border: 2px solid #b3d1ff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.resumen-semanal h2 {
+    margin-top: 0;
+    font-size: 1.4em;
+    color: #2a4d7f;
+    margin-bottom: 12px;
+}
+
+.resumen-barras {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.barra-linea {
+    display: flex;
+    flex-direction: column;
+}
+
+.barra-label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #2a4d7f;
+}
+
+.barra-contenedor {
+    background-color: #e6e1f5;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 24px;
+    width: 100%;
+}
+
+.barra {
+    height: 100%;
+    background-color: #3e204f;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    border-radius: 5px;
+    transition: width 0.3s ease;
 }
