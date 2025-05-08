@@ -131,23 +131,21 @@ export function viewPerfil(req, res) {
     res.status(500).send("Error al cargar el perfil");
   }
 }
-
 export async function viewHistorial(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/perfil");
-  const db = getConnection();
 
-  const historial = db.prepare(`
-    SELECT fecha, mood FROM TestResults
-    WHERE username = ?
-    ORDER BY fecha desc
-  `).all(username);
-
-  render(req,res, "paginas/historial", {
-    TestResults: historial,
-    session: req.session,
-  });
-
+  try {
+    const db = getConnection();
+    const historial = db
+      .prepare(
+        `
+      SELECT fecha, mood FROM TestResults
+      WHERE username = ?
+      ORDER BY fecha DESC
+    `
+      )
+      .all(username);
 
     render(req, res, "paginas/historial", {
       historial,
@@ -157,4 +155,5 @@ export async function viewHistorial(req, res) {
     req.log.error("Error al obtener historial");
     req.log.debug(e.message);
     res.status(500).send("Error al cargar el historial");
+  }
 }
