@@ -117,23 +117,40 @@ export function cancelarAsistencia(req, res) {
   Evento.cancelarAsistencia(username, eventoId);
   res.redirect("/usuarios/perfil");
 }
-export async function verHistorial(req, res) {
-  if (!req.session?.username) {
-    return res.redirect("/usuarios/login");
+
+export function viewMoodForm(req, res) {
+  render(req, res, "paginas/mood-test");
+}
+
+export async function handleMoodTest(req, res) {
+  const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
+
+  const emociones = {
+    FELIZ: parseInt(FELIZ),
+    TRISTE: parseInt(TRISTE),
+    RELAJADO: parseInt(RELAJADO),
+    ANSIOSO: parseInt(ANSIOSO),
+    ENOJADO: parseInt(ENOJADO),
+    ABURRIDO: parseInt(ABURRIDO),
+  };
+
+  const { dominant, sorted } = getDominantEmotion(emociones);
+
+  if (req.session?.username) {
+    console.log(
+      "Llamando a guardarResTest con:",
+      req.session.username,
+      dominant
+    );
+    Evento.guardarResTest(req.session.username, dominant);
   }
 
-  try {
-    const TestResults = await Evento.obtenerResPorUsuario(req.session.username);
-    res.render("pagina", {
-      contenido: "paginas/historial",
-      session: req.session,
-      TestResults,
-    });
-  } catch (e) {
-    req.log?.error("Error al encontrar los resultados del test");
-    req.log?.debug(e.message);
-    res.status(500).send("Error al obtener el historial");
-  }
+  res.render("pagina", {
+    contenido: "paginas/resultado",
+    session: req.session,
+    sortedEmotions: sorted,
+    dominantEmotion: dominant,
+  });
 }
 
 function getDominantEmotion(emociones) {
