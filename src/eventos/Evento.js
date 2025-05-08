@@ -1,5 +1,4 @@
 import { getConnection } from "../database.js";
-import { escapeLikePattern } from "../utils/escape.js";
 
 export class Evento {
   static initStatements(db) {
@@ -39,16 +38,50 @@ export class Evento {
     `);
   }
 
-  static crear(datos) {
+  static crear({
+    nombre,
+    descripcion,
+    fecha,
+    hora,
+    lugar,
+    precio,
+    estadoAnimo,
+    creador,
+  }) {
+    if (
+      !nombre ||
+      !descripcion ||
+      !fecha ||
+      !hora ||
+      !lugar ||
+      precio == null ||
+      !estadoAnimo ||
+      !creador
+    ) {
+      throw new Error("Todos los campos son obligatorios");
+    }
+
+    if (
+      typeof nombre !== "string" ||
+      typeof descripcion !== "string" ||
+      typeof fecha !== "string" ||
+      typeof hora !== "string" ||
+      typeof lugar !== "string" ||
+      typeof estadoAnimo !== "string" ||
+      typeof creador !== "string"
+    ) {
+      throw new Error("Datos inválidos");
+    }
+
     return this.insertEvento.run(
-      datos.nombre,
-      datos.descripcion,
-      datos.fecha,
-      datos.hora,
-      datos.lugar,
-      datos.precio,
-      datos.estadoAnimo,
-      datos.creador
+      nombre,
+      descripcion,
+      fecha,
+      hora,
+      lugar,
+      precio,
+      estadoAnimo,
+      creador
     ).lastInsertRowid;
   }
 
@@ -57,39 +90,34 @@ export class Evento {
     const valores = {};
 
     if (
+      typeof filtros.tematica === "string" &&
+      filtros.tematica.trim() !== ""
+    ) {
+      condiciones.push("tematica = @tematica");
+      valores.tematica = filtros.tematica;
+    }
+
+    if (
       typeof filtros.ubicacion === "string" &&
       filtros.ubicacion.trim() !== ""
     ) {
-      const ubicacionSanitizada = escapeLikePattern(filtros.ubicacion.trim());
-      condiciones.push("lugar LIKE @ubicacion ESCAPE '\\'");
-      valores.ubicacion = `%${ubicacionSanitizada}%`;
+      condiciones.push("lugar LIKE @ubicacion");
+      valores.ubicacion = `%${filtros.ubicacion}%`;
     }
 
     if (typeof filtros.fecha === "string" && filtros.fecha.trim() !== "") {
-      const fechaObj = new Date(filtros.fecha);
-      if (!isNaN(fechaObj)) {
-        const fechaNormalizada = fechaObj.toISOString().split("T")[0];
-        condiciones.push("fecha = @fecha");
-        valores.fecha = fechaNormalizada;
-      }
+      condiciones.push("fecha = @fecha");
+      valores.fecha = filtros.fecha;
     }
 
-    if (typeof filtros.precio === "number" && !isNaN(filtros.precio)) {
+    if (typeof filtros.precio === "number") {
       condiciones.push("precio <= @precio");
       valores.precio = filtros.precio;
     }
 
-    const ESTADOS_ANIMO_VALIDOS = [
-      "feliz",
-      "triste",
-      "relajado",
-      "ansioso",
-      "enojado",
-      "aburrido",
-    ];
     if (
       typeof filtros.estadoAnimo === "string" &&
-      ESTADOS_ANIMO_VALIDOS.includes(filtros.estadoAnimo.trim())
+      filtros.estadoAnimo.trim() !== ""
     ) {
       condiciones.push("estadoAnimo LIKE @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
@@ -108,19 +136,35 @@ export class Evento {
     return this.selectPorId.get(idNum);
   }
 
-  static modificar(id, datos) {
+  static modificar(
+    id,
+    { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador }
+  ) {
     const idNum = Number(id);
     if (!Number.isInteger(idNum)) return;
 
+    if (
+      !nombre ||
+      !descripcion ||
+      !fecha ||
+      !hora ||
+      !lugar ||
+      precio == null ||
+      !estadoAnimo ||
+      !creador
+    ) {
+      throw new Error("Todos los campos son obligatorios");
+    }
+
     return this.updateEvento.run(
-      datos.nombre,
-      datos.descripcion,
-      datos.fecha,
-      datos.hora,
-      datos.lugar,
-      datos.precio,
-      datos.estadoAnimo,
-      datos.creador,
+      nombre,
+      descripcion,
+      fecha,
+      hora,
+      lugar,
+      precio,
+      estadoAnimo,
+      creador,
       idNum
     );
   }
@@ -162,7 +206,7 @@ export class Evento {
     const hoy = new Date().toISOString.split("T")[0];
     const testHoy = this.db.prepare(`
       SELECT * FROM TestResults 
-      WHERE username = ? AND DATE(fecha) = ?`)
+      WHERE username = ? AND DATE(fecha) = ?`);
     const stmt = this.db.prepare(`
       INSERT INTO TestResults (username, mood, fecha)
       VALUES(?,?,datetime('now'))
