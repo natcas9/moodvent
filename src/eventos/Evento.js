@@ -119,7 +119,7 @@ export class Evento {
       typeof filtros.estadoAnimo === "string" &&
       filtros.estadoAnimo.trim() !== ""
     ) {
-      condiciones.push("estadoAnimo LIKE @estadoAnimo");
+      condiciones.push("estadoAnimo = @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
