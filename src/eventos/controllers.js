@@ -1,6 +1,7 @@
 import { Evento } from "./Evento.js";
 import { render } from "../utils/render.js";
 import { validationResult, matchedData } from "express-validator";
+import session from "express-session";
 
 export function viewCrearEvento(req, res) {
   render(req, res, "paginas/crearEventos", { session: req.session });
@@ -119,7 +120,10 @@ export function cancelarAsistencia(req, res) {
 }
 
 export function viewMoodForm(req,res) {
-  render(req,res, "paginas/mood-test");
+  render(req,res, "paginas/mood-test", {
+    errorTest: null,
+    session: req.session
+  });
 }
 
 export async function handleMoodTest(req, res) {
@@ -136,9 +140,18 @@ export async function handleMoodTest(req, res) {
 
   const { dominant, sorted } = getDominantEmotion(emociones);
 
+  let error = null;
+
   if (req.session?.username) {
     console.log("Llamando a guardarResTest con:", req.session.username, dominant);
-    Evento.guardarResTest(req.session.username, dominant);
+    const resultado = Evento.guardarResTest(req.session.username, dominant);
+
+    if (resultado?.error) {
+      return render(req,res,"paginas/mood-test", {
+        session: req.session,
+        errorTest: resultado.error,
+      });
+    }
     
   }
 
@@ -147,6 +160,7 @@ export async function handleMoodTest(req, res) {
     session: req.session,
     sortedEmotions: sorted,
     dominantEmotion: dominant,
+    errorTest: error,
   });
 }
 
