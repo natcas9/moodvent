@@ -70,3 +70,13 @@
 .boton:hover {
     background-color: #48b2c5;
 }
+
+.mensaje-error {
+    background-color: #ffd3d3;
+    color: #d8000c;
+    border: 1px solid #d8000c;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-align: center;
+}

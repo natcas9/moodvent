@@ -7,6 +7,14 @@
 
 <main class="main"> 
     <h1> ¿ Cómo te sientes hoy? </h1>
+
+    <% if (errorTest) { %>
+        <div class="mensaje-error">
+            <%= errorTest %>
+        </div>
+    <% } %>
+
+    <% if (!errorTest) { %>
     <form  action="/eventos/submit-test" method="POST">
         <div class="form-grid">
             <div class="form-item">
@@ -98,7 +106,8 @@
          <div>
             <button class="boton" type="submit"> SUBMIT </button>
          </div>
-
+        
+        <% } %>
         <!-- Antes de ir a la página de eventos
             Indicar la emoción principal del usuario 
             (Resultado del formulario)-->
