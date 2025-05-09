@@ -119,7 +119,7 @@ export class Evento {
       typeof filtros.estadoAnimo === "string" &&
       filtros.estadoAnimo.trim() !== ""
     ) {
-      condiciones.push("estadoAnimo LIKE @estadoAnimo");
+      condiciones.push("estadoAnimo = @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
@@ -212,8 +212,8 @@ export class Evento {
 
     const stmt = this.db.prepare(`
       INSERT INTO TestResults (username, mood, fecha)
-      VALUES(?,?,datetime('now'))
+      VALUES (?, ?, datetime('now'))
     `);
-    return stmt.run(username,mood);
+    return stmt.run(username, mood);
   }
 }

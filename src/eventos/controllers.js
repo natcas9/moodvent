@@ -119,12 +119,12 @@ export function cancelarAsistencia(req, res) {
   res.redirect("/usuarios/perfil");
 }
 
+
 export function viewMoodForm(req,res) {
   render(req,res, "paginas/mood-test", {
     errorTest: null,
     session: req.session
   });
-}
 
 export async function handleMoodTest(req, res) {
   const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
@@ -152,7 +152,6 @@ export async function handleMoodTest(req, res) {
         errorTest: resultado.error,
       });
     }
-    
   }
 
   res.render("pagina", {
