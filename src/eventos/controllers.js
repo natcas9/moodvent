@@ -119,12 +119,12 @@ export function cancelarAsistencia(req, res) {
   res.redirect("/usuarios/perfil");
 }
 
-
-export function viewMoodForm(req,res) {
-  render(req,res, "paginas/mood-test", {
+export function viewMoodForm(req, res) {
+  render(req, res, "paginas/mood-test", {
     errorTest: null,
-    session: req.session
+    session: req.session,
   });
+}
 
 export async function handleMoodTest(req, res) {
   const { FELIZ, TRISTE, RELAJADO, ANSIOSO, ENOJADO, ABURRIDO } = req.body;
@@ -143,11 +143,15 @@ export async function handleMoodTest(req, res) {
   let error = null;
 
   if (req.session?.username) {
-    console.log("Llamando a guardarResTest con:", req.session.username, dominant);
+    console.log(
+      "Llamando a guardarResTest con:",
+      req.session.username,
+      dominant
+    );
     const resultado = Evento.guardarResTest(req.session.username, dominant);
 
     if (resultado?.error) {
-      return render(req,res,"paginas/mood-test", {
+      return render(req, res, "paginas/mood-test", {
         session: req.session,
         errorTest: resultado.error,
       });
