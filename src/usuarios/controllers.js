@@ -105,11 +105,9 @@ export function doLogout(req, res, next) {
 }
 
 export function viewHome(req, res) {
-  if (req.session?.rol === "admin") {
-    return res.redirect("/contenido/admin");
-  } else {
-    return res.redirect("/contenido/normal");
-  }
+  render(req, res, "paginas/home", {
+    session: req.session,
+  });
 }
 
 export function viewPerfil(req, res) {
@@ -133,6 +131,7 @@ export function viewPerfil(req, res) {
     res.status(500).send("Error al cargar el perfil");
   }
 }
+
 export async function viewHistorial(req, res) {
   const username = req.session?.username;
   if (!username) return res.redirect("/usuarios/perfil");
