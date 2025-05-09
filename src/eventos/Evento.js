@@ -194,22 +194,9 @@ export class Evento {
   }
 
   static guardarResTest(username, mood) {
-    const getUser = this.db.prepare(
-      "SELECT id FROM usuarios WHERE username = ?"
-    );
-    const user = getUser.get(username);
-    if (!user) {
-      console.log("No se encontró el usuario:", username);
-      return;
-    }
-
-    const hoy = new Date().toISOString.split("T")[0];
-    const testHoy = this.db.prepare(`
-      SELECT * FROM TestResults 
-      WHERE username = ? AND DATE(fecha) = ?`);
     const stmt = this.db.prepare(`
       INSERT INTO TestResults (username, mood, fecha)
-      VALUES(?,?,datetime('now'))
+      VALUES (?, ?, datetime('now'))
     `);
     return stmt.run(username, mood);
   }
