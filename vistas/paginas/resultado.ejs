@@ -1,46 +1,46 @@
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Resultado del Test</title>
-    <link rel="stylesheet" href="/css/resultado.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultado del Test</title>
+  <link rel="stylesheet" href="/css/resultado.css" />
 </head>
 
-<body> 
-    <main class="test-results">
-        <h1>  ¡ Resultados !</h1>
-        <p> Gracias por contestar el formulario, aquí está tu resumen:</p>
+<body>
+  <main class="test-results">
+    <h1>¡ Resultados !</h1>
+    <p>Gracias por contestar el formulario, aquí está tu resumen:</p>
 
-        <ul class="podium">
-            <% if (sortedEmotions.length > 1) { %>
-                <li class="segundo">
-                    🥈<br>
-                    <%= sortedEmotions[1].charAt(0).toUpperCase() + sortedEmotions[1].slice(1).toLowerCase() %>
-                </li>
-            <% } %>
+    <ul class="podium">
+      <% if (sortedEmotions.length > 1) { %>
+      <li class="segundo">
+        🥈<br />
+        <%= sortedEmotions[1].charAt(0).toUpperCase() +
+        sortedEmotions[1].slice(1).toLowerCase() %>
+      </li>
+      <% } %> <% if (sortedEmotions.length > 0) { %>
+      <li class="primero-wrapper">
+        <span class="corona">👑</span>
+        🥇<br />
+        <%= sortedEmotions[0].charAt(0).toUpperCase() +
+        sortedEmotions[0].slice(1).toLowerCase() %>
+      </li>
+      <% } %> <% if (sortedEmotions.length > 2) { %>
+      <li class="tercero">
+        🥉<br />
+        <%= sortedEmotions[2].charAt(0).toUpperCase() +
+        sortedEmotions[2].slice(1).toLowerCase() %>
+      </li>
+      <% } %>
+    </ul>
 
-            <% if (sortedEmotions.length > 0) { %>
-                <li class="primero-wrapper">
-                    <span class="corona">👑</span>
-                    🥇<br>
-                    <%= sortedEmotions[0].charAt(0).toUpperCase() + sortedEmotions[0].slice(1).toLowerCase() %>
-                </li>
-            <% } %>
+    <h2>
+      Emoción principal: <%= dominantEmotion.charAt(0) +
+      dominantEmotion.slice(1).toLowerCase() %>
+    </h2>
 
-            <% if (sortedEmotions.length > 2) { %>
-                <li class="tercero">
-                    🥉<br>
-                    <%= sortedEmotions[2].charAt(0).toUpperCase() + sortedEmotions[2].slice(1).toLowerCase() %>
-                </li>
-            <% } %> 
-        </ul>
-
-        <h2> Emoción principal: 
-            <%= dominantEmotion.charAt(0) + dominantEmotion.slice(1).toLowerCase() %>
-        </h2>
-
-        <form action="/eventos/visualizarEventos" method="GET">
-            <input type="hidden" name="estadoAnimo" value="<%= dominantEmotion %>" />
-            <button class="boton" type="submit"> VER EVENTOS RECOMENDADOS </button>
-        </form>
-    </main>
-</body> 
+    <form action="/eventos/visualizarEventos" method="GET">
+      <input type="hidden" name="estadoAnimo" value="<%= dominantEmotion %>" />
+      <button class="boton" type="submit">VER EVENTOS RECOMENDADOS</button>
+    </form>
+  </main>
+</body>
