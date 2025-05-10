@@ -144,6 +144,43 @@
       </section>
     </div>
 
+    <h2 class="events-title">¿Cómo te sientes hoy?</h2>
+    <div class="contenedor-test">
+      <h3>¿Cuál es tu mood hoy?</h3>
+      <form
+        method="POST"
+        action="procesar_formulario.html"
+        enctype="multipart/form-data"
+      >
+        <div>
+          <label for="inputNombre">¿Cuáles son tus eventos favoritos?</label>
+          <input type="text" name="nombre" id="inputNombre" />
+        </div>
+        <div>
+          <label for="inputApellidos">¿Quién es tu artista favorito?</label>
+          <input
+            type="text"
+            name="apellidos"
+            id="inputApellidos"
+            style="width: 30em"
+          />
+        </div>
+        <div>
+          <input type="checkbox" name="fumador" value="si" id="inputFumador" />
+          <label for="inputFumador">¿Te interesa asisitir a eventos?</label>
+        </div>
+        <div>
+          <label for="inputImagen"
+            >Una foto que te represente tu estado de ánimo...</label
+          >
+          <input type="file" name="foto" id="inputImagen" />
+        </div>
+        <div>
+          <input type="submit" value="Enviar" />
+        </div>
+      </form>
+    </div>
+
     <footer class="footer">
       <div class="footer-column">
         <h3>Contacto</h3>

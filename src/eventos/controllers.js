@@ -20,6 +20,10 @@ export function crearEvento(req, res) {
 
   const datos = matchedData(req);
 
+  datos.creador = req.session.username;
+
+  console.log(datos);
+
   try {
     Evento.crear({ ...datos });
     res.redirect("/eventos/visualizarEventos");
