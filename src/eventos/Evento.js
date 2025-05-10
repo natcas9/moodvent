@@ -47,7 +47,6 @@ export class Evento {
     precio,
     estadoAnimo,
     creador,
-    imagen, // Esta es la imagen que se guarda
   }) {
     if (
       !nombre ||
@@ -74,7 +73,6 @@ export class Evento {
       throw new Error("Datos inválidos");
     }
 
-    // Aquí estamos insertando el evento en la base de datos
     return this.insertEvento.run(
       nombre,
       descripcion,
@@ -83,8 +81,7 @@ export class Evento {
       lugar,
       precio,
       estadoAnimo,
-      creador,
-      imagen // Guardamos el nombre del archivo de la imagen
+      creador
     ).lastInsertRowid;
   }
 
@@ -197,8 +194,6 @@ export class Evento {
   }
 
   static guardarResTest(username, mood) {
-<<<<<<< Updated upstream
-=======
     const getUser = this.db.prepare(
       "SELECT id FROM usuarios WHERE username = ?"
     );
@@ -221,7 +216,6 @@ export class Evento {
       return { error: "Ya has respondido el test hoy" };
     }
 
->>>>>>> Stashed changes
     const stmt = this.db.prepare(`
       INSERT INTO TestResults (username, mood, fecha)
       VALUES (?, ?, datetime('now'))
