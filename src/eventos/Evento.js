@@ -193,10 +193,8 @@ export class Evento {
     return this.selectAsistenciasPorUsuario.all(username);
   }
 
-  static guardarResTest(username, mood) {
-    const getUser = this.db.prepare(
-      "SELECT id FROM usuarios WHERE username = ?"
-    );
+  static guardarResTest(username, mood,) {
+    const getUser = this.db.prepare("SELECT id FROM usuarios WHERE username = ?");
     const user = getUser.get(username);
     if (!user) {
       console.log("No se encontró el usuario:", username);
@@ -204,16 +202,12 @@ export class Evento {
     }
 
     const hoy = new Date().toISOString().split("T")[0];
-    const testHoy = this.db
-      .prepare(
-        `
+    const testHoy = this.db.prepare(`
       SELECT * FROM TestResults 
-      WHERE username = ? AND DATE(fecha) = ?`
-      )
-      .get(username, hoy);
+      WHERE username = ? AND DATE(fecha) = ?`).get(username, hoy);
 
     if (testHoy) {
-      return { error: "Ya has respondido el test hoy" };
+      return {error: "Ya has respondido el test hoy"};
     }
 
     const stmt = this.db.prepare(`
