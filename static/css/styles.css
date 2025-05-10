@@ -755,3 +755,36 @@ h1.events-title {
 .btn-eliminar:hover {
   background-color: #a93214;
 }
+
+div {
+  margin-bottom: 1em;
+}
+
+.contenedor-test.results {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+}
+
+.sideone,
+.sidetwo {
+  width: 48%;
+  padding: 10px;
+}
+
+.sideone {
+  text-align: left;
+}
+
+.sidetwo {
+  text-align: center;
+}
+
+img {
+  width: 100%;
+  border-radius: 8px;
+}
+.code {
+  color: #520556;
+}

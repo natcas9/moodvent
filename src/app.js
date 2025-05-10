@@ -12,6 +12,24 @@ import contenidoRouter from "./contenido/router.js";
 import eventosRouter from "./eventos/router.js";
 
 export const app = express();
+import multer from "multer";
+
+import { procesarFormulario, viewImagen } from "./simple/controladores.js";
+
+const upload = multer({ dest: config.uploads });
+
+app.set("view engine", "ejs");
+app.set("views", config.vistas);
+
+app.use("/", express.static(config.recursos));
+
+app.post(
+  "/procesar_formulario.html",
+  upload.single("foto"),
+  procesarFormulario
+);
+
+app.get("/imagen/:id", viewImagen);
 
 app.set("view engine", "ejs");
 app.set("views", config.vistas);

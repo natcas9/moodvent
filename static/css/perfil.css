@@ -323,7 +323,6 @@ a {
   height: 500px;
 }
 
-/* Navbar */
 .navbar {
   background: black;
   display: flex;
@@ -429,7 +428,6 @@ a {
 .Historial {
   font-family: "Noto Serif JP", serif;
   text-align: center;
-
 }
 
 .historial-button {
@@ -449,5 +447,5 @@ a {
   padding: 10px 18px;
   border: none;
   border-radius: 5px;
-  cursor: pointer; 
+  cursor: pointer;
 }

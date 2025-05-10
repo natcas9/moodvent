@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gracias!</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <h1 class="events-title">Gracias por participar</h1>
+    <div class="contenedor-test results">
+      <div class="sideone">
+        <h2>Mis eventos favoritos</h2>
+        <h3><%= nombre %></h3>
+        <h2>Mi artista favorito</h2>
+        <h3><%= apellidos %></h3>
+        <h2>Quiero ser parte de todos los eventos de moodvent</h2>
+        <h3><%= fumador ? "Sí" : "No" %></h3>
+        <div class="code">
+          <h3>
+            Muchas gracias por participar! Moodvent te lo agradece y es por eso
+            que te comparte un código de descuento para cuando empecemos a
+            habilitar la venta de eventos de paga. Estamos muy cerca...
+          </h3>
+          <h2>Tu código: Moodventer100</h2>
+        </div>
+      </div>
+      <div class="sidetwo">
+        <% if (imagen) { %>
+        <h2>Así me siento hoy</h2>
+        <img src="/imagen/<%= imagen %>" />
+        <% } %>
+      </div>
+    </div>
+
+    <div class="volver">
+      <a href="index.html" class="btn">Volver a Moodvent</a>
+    </div>
+  </body>
+</html>
