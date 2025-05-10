@@ -6,56 +6,59 @@
 </head>
 <h1 class="title">Crear nuevo evento</h1>
 
-<div class="form-container">
-  <form action="/eventos/crear" method="POST">
-    <div class="form-group">
-      <label for="nombre">Evento:</label>
-      <input type="text" id="nombre" name="nombre" required />
-    </div>
+<form action="/eventos/crear" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="nombre">Evento:</label>
+    <input type="text" id="nombre" name="nombre" required />
+  </div>
 
-    <div class="form-group">
-      <label for="descripcion">Descripción:</label>
-      <input type="text" id="descripcion" name="descripcion" required />
-    </div>
+  <div class="form-group">
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" name="descripcion" required />
+  </div>
 
-    <div class="form-group">
-      <label for="fecha">Fecha:</label>
-      <input type="date" id="fecha" name="fecha" required />
-    </div>
+  <div class="form-group">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" name="fecha" required />
+  </div>
 
-    <div class="form-group">
-      <label for="hora">Hora:</label>
-      <input type="time" id="hora" name="hora" required />
-    </div>
+  <div class="form-group">
+    <label for="hora">Hora:</label>
+    <input type="time" id="hora" name="hora" required />
+  </div>
 
-    <div class="form-group">
-      <label for="lugar">Lugar:</label>
-      <input type="text" id="lugar" name="lugar" required />
-    </div>
+  <div class="form-group">
+    <label for="lugar">Lugar:</label>
+    <input type="text" id="lugar" name="lugar" required />
+  </div>
 
-    <div class="form-group">
-      <label for="precio">Precio:</label>
-      <input type="number" id="precio" name="precio" required />
-    </div>
+  <div class="form-group">
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" name="precio" required />
+  </div>
 
-    <div class="form-group">
-      <label for="estadoAnimo">Estado de ánimo recomendado</label>
-      <select name="estadoAnimo" id="estadoAnimo" required>
-        <option value="">Selecciona uno</option>
-        <option value="Feliz">Feliz</option>
-        <option value="Triste">Triste</option>
-        <option value="Enojado">Enojado</option>
-        <option value="Ansioso">Ansioso</option>
-        <option value="Relajado">Relajado</option>
-        <option value="Aburrido">Aburrido</option>
-      </select>
-    </div>
+  <div class="form-group">
+    <label for="estadoAnimo">Estado de ánimo recomendado:</label>
+    <select name="estadoAnimo" id="estadoAnimo" required>
+      <option value="">Selecciona uno</option>
+      <option value="Feliz">Feliz</option>
+      <option value="Triste">Triste</option>
+      <option value="Enojado">Enojado</option>
+      <option value="Ansioso">Ansioso</option>
+      <option value="Relajado">Relajado</option>
+      <option value="Aburrido">Aburrido</option>
+    </select>
+  </div>
 
-    <button type="submit" class="btn">Crear Evento</button>
-    <p>
-      <a href="/eventos/visualizarEventos" class="link"
-        >Ver todos los eventos</a
-      >
-    </p>
-  </form>
+  <div class="form-group">
+    <label for="inputImagen">Foto:</label>
+    <input type="file" name="foto" id="inputImagen" />
+  </div>
+
+  <button type="submit" class="btn">Crear Evento</button>
+</form>
+
+  <p>
+    <a href="/eventos/visualizarEventos" class="link">Ver todos los eventos</a>
+  </p>
 </div>

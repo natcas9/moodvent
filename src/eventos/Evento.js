@@ -47,6 +47,7 @@ export class Evento {
     precio,
     estadoAnimo,
     creador,
+    imagen, // Esta es la imagen que se guarda
   }) {
     if (
       !nombre ||
@@ -73,6 +74,7 @@ export class Evento {
       throw new Error("Datos inválidos");
     }
 
+    // Aquí estamos insertando el evento en la base de datos
     return this.insertEvento.run(
       nombre,
       descripcion,
@@ -81,7 +83,8 @@ export class Evento {
       lugar,
       precio,
       estadoAnimo,
-      creador
+      creador,
+      imagen // Guardamos el nombre del archivo de la imagen
     ).lastInsertRowid;
   }
 

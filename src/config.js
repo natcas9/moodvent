@@ -19,6 +19,7 @@ export const config = {
   recursos: join(rootDir, "static"),
   vistas: join(rootDir, "vistas"),
   logs: join(rootDir, "logs"),
+  uploads: join(rootDir, "uploads"),
 
   session: {
     resave: false,

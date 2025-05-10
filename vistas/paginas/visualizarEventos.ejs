@@ -72,13 +72,29 @@
       <div class="evento-card">
         <div class="evento-info">
           <h2><%= evento.nombre %></h2>
+
+          <!-- Mostrar imagen del evento -->
+          <% if (evento.imagen) { %>
+          <div class="evento-imagen-container">
+            <img
+              src="/imagen/<%= evento.imagen %>"
+              alt="<%= evento.nombre %>"
+              class="evento-imagen"
+            />
+          </div>
+          <% } else { %>
+          <p>No hay imagen disponible para este evento.</p>
+          <% } %>
+
+          <!-- Mostrar icono del estado de ánimo -->
           <div class="estado-icon">
             <img
               src="/img/icons/<%= evento.estadoAnimo.toLowerCase() %>.jpg"
-              alt="<=% evento.estadoAnimo %>"
+              alt="<%= evento.estadoAnimo %>"
               class="icono-estado"
             />
           </div>
+
           <p>Estado de ánimo: <%= evento.estadoAnimo %></p>
 
           <button
@@ -93,7 +109,7 @@
             style="display: none"
           >
             <p>Fecha: <%= evento.fecha %></p>
-            <p>Hora:<%= evento.hora %></p>
+            <p>Hora: <%= evento.hora %></p>
             <p>Lugar: <%= evento.lugar %></p>
             <p>Precio: $<%= evento.precio %></p>
             <p><%= evento.descripcion %></p>
