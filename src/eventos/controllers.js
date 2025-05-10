@@ -1,27 +1,14 @@
 import { Evento } from "./Evento.js";
 import { render } from "../utils/render.js";
 import { validationResult, matchedData } from "express-validator";
+import session from "express-session";
 
 export function viewCrearEvento(req, res) {
   render(req, res, "paginas/crearEventos", { session: req.session });
 }
-export function viewEventos(req, res) {
-  const filtros = matchedData(req, { locations: ["query"] });
-
-  try {
-    const eventos = Evento.obtenerTodos(filtros); // Obtener los eventos
-    render(req, res, "paginas/visualizarEventos", { eventos });
-  } catch (e) {
-    req.log.error("Error obteniendo eventos");
-    req.log.debug(e.message);
-    res.status(500).send("Error al obtener eventos");
-  }
-}
 
 export function crearEvento(req, res) {
-  console.log("Datos recibidos para crear el evento:", req.body); // Verifica si los datos están en req.body
   const result = validationResult(req);
-
   if (!result.isEmpty()) {
     req.setFlash("Por favor completa todos los campos correctamente.");
     return render(req, res, "paginas/crearEventos", {
@@ -33,17 +20,37 @@ export function crearEvento(req, res) {
 
   const datos = matchedData(req);
 
-  // Añadimos la lógica para manejar la imagen
-  const imagen = req.file ? req.file.filename : null; // Si el archivo existe, usamos el nombre del archivo
-
   try {
-    Evento.crear({ ...datos, imagen }); // Guardamos la imagen en la base de datos junto con los demás datos
+    Evento.crear({ ...datos });
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error creando evento");
     req.log.debug(e.message);
     res.status(500).send("Error al guardar el evento");
   }
+}
+
+export function viewEventos(req, res) {
+  const filtros = matchedData(req, { locations: ["query"] });
+
+  try {
+    const eventos = Evento.obtenerTodos(filtros);
+    render(req, res, "paginas/visualizarEventos", { eventos });
+  } catch (e) {
+    req.log.error("Error obteniendo eventos");
+    req.log.debug(e.message);
+    res.status(500).send("Error al obtener eventos");
+  }
+}
+
+export function viewEditarEvento(req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) return res.status(400).send("ID inválido");
+
+  const evento = Evento.obtenerPorId(id);
+  if (!evento) return res.status(404).send("Evento no encontrado");
+
+  render(req, res, "paginas/modificarEvento", { evento });
 }
 
 export function modificarEvento(req, res) {
@@ -113,7 +120,10 @@ export function cancelarAsistencia(req, res) {
 }
 
 export function viewMoodForm(req, res) {
-  render(req, res, "paginas/mood-test");
+  render(req, res, "paginas/mood-test", {
+    errorTest: null,
+    session: req.session,
+  });
 }
 
 export async function handleMoodTest(req, res) {
@@ -130,13 +140,22 @@ export async function handleMoodTest(req, res) {
 
   const { dominant, sorted } = getDominantEmotion(emociones);
 
+  let error = null;
+
   if (req.session?.username) {
     console.log(
       "Llamando a guardarResTest con:",
       req.session.username,
       dominant
     );
-    Evento.guardarResTest(req.session.username, dominant);
+    const resultado = Evento.guardarResTest(req.session.username, dominant);
+
+    if (resultado?.error) {
+      return render(req, res, "paginas/mood-test", {
+        session: req.session,
+        errorTest: resultado.error,
+      });
+    }
   }
 
   res.render("pagina", {
@@ -144,6 +163,7 @@ export async function handleMoodTest(req, res) {
     session: req.session,
     sortedEmotions: sorted,
     dominantEmotion: dominant,
+    errorTest: error,
   });
 }
 
