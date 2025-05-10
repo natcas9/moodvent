@@ -2,12 +2,12 @@ import express from "express";
 import session from "express-session";
 import pinoHttp from "pino-http";
 import asyncHandler from "express-async-handler";
-import multer from "multer"; // Asegúrate de importar multer
+import multer from "multer";
 import { config } from "./config.js";
 import { logger } from "./logger.js";
 import { errorHandler } from "./middleware/error.js";
 import { flashMessages } from "./middleware/flash.js";
-import { crearEvento } from "./eventos/controllers.js"; // Asegúrate de que la ruta es correcta
+import { crearEvento } from "./eventos/controllers.js";
 
 import usuariosRouter from "./usuarios/router.js";
 import contenidoRouter from "./contenido/router.js";
