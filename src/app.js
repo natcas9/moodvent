@@ -1,13 +1,11 @@
 import express from "express";
 import session from "express-session";
 import pinoHttp from "pino-http";
-import asyncHandler from "express-async-handler";
-import multer from "multer";
+
 import { config } from "./config.js";
 import { logger } from "./logger.js";
 import { errorHandler } from "./middleware/error.js";
 import { flashMessages } from "./middleware/flash.js";
-import { crearEvento } from "./eventos/controllers.js";
 
 import usuariosRouter from "./usuarios/router.js";
 import contenidoRouter from "./contenido/router.js";
@@ -33,23 +31,16 @@ app.post(
 
 app.get("/imagen/:id", viewImagen);
 
-// Configuración de multer
-const upload = multer({ dest: config.uploads }); // Aquí se especifica el directorio donde se guardarán los archivos
+app.set("view engine", "ejs");
+app.set("views", config.vistas);
+
+const pinoMiddleware = pinoHttp(config.logger.http(logger));
+app.use(pinoMiddleware);
 
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(session(config.session));
 app.use(flashMessages);
-
-app.set("view engine", "ejs");
-app.set("views", config.vistas);
-
-// Configuración de pino para logs
-const pinoMiddleware = pinoHttp(config.logger.http(logger));
-app.use(pinoMiddleware);
-
-// Ruta para crear un evento que maneja la carga de imágenes
-app.post("/eventos/crear", upload.single("foto"), asyncHandler(crearEvento)); // Aquí se usa el middleware multer para manejar la imagen
 
 app.use("/", express.static(config.recursos));
 
@@ -58,10 +49,6 @@ app.get("/", (req, res) => {
     contenido: "paginas/index",
     session: req.session,
   });
-});
-app.get("/imagen/:id", (req, res) => {
-  const imagen = req.params.id;
-  res.sendFile(join(config.uploads, imagen)); // Esta ruta sirve para mostrar la imagen cargada
 });
 
 app.use("/usuarios", usuariosRouter);
