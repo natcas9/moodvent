@@ -28,3 +28,5 @@ INSERT INTO "usuarios" ("id","nombre","apellido","edad","email","username","pass
 INSERT INTO "usuarios" ("id","nombre","apellido","edad","email","username","password","role") VALUES (11,'Nat','Cad',12,'testi9@gmail.com','Lunsa999','$2b$10$i6xgUGapzrxL0MUNH1eOBe.4SNwux3WG44QNmhw8NmlQBdV4eqhgy','user');
 INSERT INTO "usuarios" ("id","nombre","apellido","edad","email","username","password","role") VALUES (12,'Test2','cas',23,'test1@tes3t.com','test9','$2b$10$PzjsHiJiCRUi0FCmrwgxFekTsmw1YEqJcuBtjb82k8KNLRr7QYsD2','user');
 COMMIT;
+
+--usuario: natsi9 contraseña: 123456789  admin: admin  contraseña: adminpass -->

@@ -57,7 +57,7 @@ export class Evento {
       precio,
       estadoAnimo,
       creador,
-    }); // Ver los datos antes de insertarlos
+    });
 
     if (
       !nombre ||
