@@ -98,7 +98,8 @@
             <p>Precio: $<%= evento.precio %></p>
             <p><%= evento.descripcion %></p>
           </div>
-
+         
+        <% if (session.login) { %>
           <a
             href="/eventos/editar/<%= evento.id %>"
             class="btn-evento modificar"
@@ -120,8 +121,21 @@
           >
             <button type="submit" class="btn-evento asistir">Asistir</button>
           </form>
+
+          <% } else { %>
+              <a 
+                href="/usuarios/login"
+                class="btn-evento modificar"
+              > Modificar </a>
+
+              <form
+                action="/usuarios/login"
+                method="GET" >
+                <button type="submit" class="btn-evento eliminar"> Eliminar</button>
+              </form>
         </div>
       </div>
+      <% } %>
       <% }) %> <% } %>
     </div>
 

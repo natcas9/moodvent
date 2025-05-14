@@ -1,0 +1,31 @@
+.flash-dialog {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 20px 40px;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 18px;
+    max-width: 80%;
+    width: 300px;
+    text-align: center;
+}
+
+.flash-dialog button {
+    margin-top: 20px;
+    padding: 8px 16px;
+    background-color: #721c24;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.flash-dialog button:hover {
+    background-color: #5a1319;
+}
