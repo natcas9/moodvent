@@ -23,6 +23,7 @@ app.set("views", config.vistas);
 
 app.use("/", express.static(config.recursos));
 
+
 app.post(
   "/procesar_formulario.html",
   upload.single("foto"),
@@ -48,6 +49,7 @@ app.get("/", (req, res) => {
   res.render("pagina", {
     contenido: "paginas/index",
     session: req.session,
+    flash_msg: res.locals.getAndClearFlash?.(),
   });
 });
 

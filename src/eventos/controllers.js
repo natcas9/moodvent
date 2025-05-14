@@ -26,11 +26,13 @@ export function crearEvento(req, res) {
 
   try {
     Evento.crear({ ...datos });
+    req.setFlash( "Evento creado exitosamente");
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error creando evento");
     req.log.debug(e.message);
-    res.status(500).send("Error al guardar el evento");
+    req.setFlash( "Error al guardar el evento");
+    res.redirect("/eventos/crear");
   }
 }
 
@@ -60,6 +62,7 @@ export function viewEditarEvento(req, res) {
 export function modificarEvento(req, res) {
   const result = validationResult(req);
   if (!result.isEmpty()) {
+    console.log("Errores de validación:", result.mapped());
     req.setFlash("Por favor completa todos los campos correctamente.");
     return render(req, res, "paginas/modificarEvento", {
       errores: result.mapped(),
@@ -70,28 +73,36 @@ export function modificarEvento(req, res) {
 
   const datos = matchedData(req);
   const id = parseInt(req.params.id);
+  datos.creador = req.session.usuario;
 
   try {
     Evento.modificar(id, datos);
+    req.setFlash( "Evento modificado con éxito");
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
-    req.log.error("Error modificando evento");
+    req.log.error("Error modificando evento",e);
     req.log.debug(e.message);
-    res.status(500).send("Error al modificar el evento");
+    req.setFlash("Error al modificar el evento");
+    res.redirect(`/eventos/editar/${id}`);
   }
 }
 
 export function eliminarEvento(req, res) {
   const id = parseInt(req.params.id);
-  if (isNaN(id)) return res.status(400).send("ID inválido");
+  if (isNaN(id)) {
+    req.setFlash( "ID inválido");
+    return res.redirect("/eventos/visualizarEventos");
+  } 
 
   try {
     Evento.eliminar(id);
+    req.setFlash("Evento eliminado exitosamente");
     res.redirect("/eventos/visualizarEventos");
   } catch (e) {
     req.log.error("Error eliminando evento");
     req.log.debug(e.message);
-    res.status(500).send("Error al eliminar el evento");
+    req.setFlash("Error al eliminar el evento");
+    res.redirect("/eventos/visualizarEventos");
   }
 }
 
@@ -108,18 +119,26 @@ export function viewDetalles(req, res) {
 export function asistirEvento(req, res) {
   const username = req.session?.username;
   const eventoId = req.params.id;
-  if (!username || !eventoId) return res.redirect("/usuarios/perfil");
+  if (!username || !eventoId) {
+    req.setFlash( "Debe estar logueado para asistir");
+    return res.redirect("/usuarios/perfil");
+  } 
 
   Evento.asistirEvento(username, eventoId);
+  req.setFlash( "Te has registrado al evento");
   res.redirect("/usuarios/perfil");
 }
 
 export function cancelarAsistencia(req, res) {
   const username = req.session?.username;
   const eventoId = req.params.id;
-  if (!username || !eventoId) return res.redirect("/usuarios/perfil");
+  if (!username || !eventoId)  {
+    req.setFlash( "Debes estar logueado para cancelar");
+    return res.redirect("/usuarios/perfil");
+  }
 
   Evento.cancelarAsistencia(username, eventoId);
+  req.setFlash( "Has cancelado tu asistencia");
   res.redirect("/usuarios/perfil");
 }
 
