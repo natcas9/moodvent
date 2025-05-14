@@ -9,7 +9,7 @@ import {
   doLogout,
   viewHome,
   viewPerfil,
-  viewHistorial,
+  viewHistorial
 } from "./controllers.js";
 import { autenticado } from "../middleware/auth.js";
 
@@ -64,7 +64,7 @@ usuariosRouter.post(
 );
 
 usuariosRouter.get(
-  "/historial",
+  "/historial", 
   autenticado("usuarios/historial"),
   asyncHandler(viewHistorial)
 );
@@ -75,5 +75,7 @@ usuariosRouter.get(
     res.render("paginas/tableinfo", { session: req.session });
   }
 );*/
+
+
 
 export default usuariosRouter;
