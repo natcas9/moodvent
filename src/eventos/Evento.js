@@ -130,7 +130,8 @@ export class Evento {
       typeof filtros.estadoAnimo === "string" &&
       filtros.estadoAnimo.trim() !== ""
     ) {
-      condiciones.push("estadoAnimo = @estadoAnimo");
+      // Dejar el LIKE !! -> de lo contrario no funciona el filtro 
+      condiciones.push("estadoAnimo LIKE @estadoAnimo");
       valores.estadoAnimo = filtros.estadoAnimo;
     }
 
@@ -152,8 +153,12 @@ export class Evento {
     { nombre, descripcion, fecha, hora, lugar, precio, estadoAnimo, creador }
   ) {
     const idNum = Number(id);
-    if (!Number.isInteger(idNum)) return;
+    console.log("Modificando ID:", idNum);
 
+    if (!Number.isInteger(idNum)) {
+      console.log("ID no es entero");
+      return;
+    }
     if (
       !nombre ||
       !descripcion ||
@@ -182,7 +187,11 @@ export class Evento {
 
   static eliminar(id) {
     const idNum = Number(id);
-    if (!Number.isInteger(idNum)) return;
+    console.log("Intentando eliminar ID: ", idNum);
+    if (!Number.isInteger(idNum)) {
+      console.log("ID no es un entero");
+      return;
+    }
     return this.deleteEvento.run(idNum);
   }
 
