@@ -61,17 +61,12 @@
 
       <div>
         <label for="username">Usuario:</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          value="<%= datos.username || '' %>"
-        />
-        <span id="username-status" style="margin-left: 10px; font-weight: bold;"></span>
-        <%= helpers.error(errores, 'username') %>
+        <input type="text" id="username" name="username" required />
+        <span id="icono-username" class="icono"></span>
+        <span class="feedback error"></span>
       </div>
       
-
+      
       <div>
         <label for="password">Contraseña:</label>
         <input type="password" id="password" name="password" />
@@ -89,3 +84,4 @@
 
 <script src="/static/js/fetch.js"></script>
 <script src="/static/js/registro.js"></script>
+

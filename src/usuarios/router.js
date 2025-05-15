@@ -13,6 +13,8 @@ import {
 } from "./controllers.js";
 import { autenticado } from "../middleware/auth.js";
 
+
+
 const usuariosRouter = express.Router();
 
 usuariosRouter.get("/login", autenticado(null), asyncHandler(viewLogin));
@@ -78,14 +80,13 @@ usuariosRouter.post("/api/usuarios/disponible", express.json(), (req, res) => {
   }
 
   try {
-    const usuario = Usuario.getPorUsername(username);
-    res.json({ available: !usuario }); // return JSON object
+    const usuario = Usuario.getPorUsername(username); // sync
+    return res.json({ available: !usuario }); // e.g. { available: true }
   } catch (e) {
     console.error("Error checking username:", e);
-    res.status(500).json({ error: "Internal error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 
 /*usuariosRouter.get(
