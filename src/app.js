@@ -44,6 +44,8 @@ app.use(session(config.session));
 app.use(flashMessages);
 
 app.use("/", express.static(config.recursos));
+app.use('/static', express.static('static'));
+
 
 app.get("/", (req, res) => {
   res.render("pagina", {

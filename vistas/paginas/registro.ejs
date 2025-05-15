@@ -67,8 +67,10 @@
           name="username"
           value="<%= datos.username || '' %>"
         />
+        <span id="username-status" style="margin-left: 10px; font-weight: bold;"></span>
         <%= helpers.error(errores, 'username') %>
       </div>
+      
 
       <div>
         <label for="password">Contraseña:</label>
@@ -84,3 +86,6 @@
     </p>
   </div>
 </div>
+
+<script src="/static/js/fetch.js"></script>
+<script src="/static/js/registro.js"></script>

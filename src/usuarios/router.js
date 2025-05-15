@@ -69,6 +69,25 @@ usuariosRouter.get(
   asyncHandler(viewHistorial)
 );
 
+//For Ajax :
+usuariosRouter.post("/api/usuarios/disponible", express.json(), (req, res) => {
+  const { username } = req.body;
+
+  if (!username) {
+    return res.status(400).json({ error: "No username provided" });
+  }
+
+  try {
+    const usuario = Usuario.getPorUsername(username);
+    res.json({ available: !usuario }); // return JSON object
+  } catch (e) {
+    console.error("Error checking username:", e);
+    res.status(500).json({ error: "Internal error" });
+  }
+});
+
+
+
 /*usuariosRouter.get(
   "/admin",
   (req, res) => {
