@@ -10,11 +10,11 @@ export function viewCrearEvento(req, res) {
 export function crearEvento(req, res) {
   const result = validationResult(req);
   if (!result.isEmpty()) {
-    req.setFlash("Por favor completa todos los campos correctamente.");
     return render(req, res, "paginas/crearEventos", {
       errores: result.mapped(),
       datos: req.body,
       session: req.session,
+      flash_msg: "Por favor completa todos los campos correctamente",
     });
   }
 
@@ -63,19 +63,21 @@ export function modificarEvento(req, res) {
   const result = validationResult(req);
   if (!result.isEmpty()) {
     console.log("Errores de validación:", result.mapped());
-    req.setFlash("Por favor completa todos los campos correctamente.");
     return render(req, res, "paginas/modificarEvento", {
       errores: result.mapped(),
       datos: req.body,
       session: req.session,
+      flash_msg: "Por favor completa todos los campos correctamente.",
     });
   }
 
-  const datos = matchedData(req);
+  const datos = { ...req.body};
+  datos.precio = Number(datos.precio);
   const id = parseInt(req.params.id);
-  datos.creador = req.session.usuario;
+  datos.creador = req.session.username;
 
   try {
+    console.log("Datos que se envían a modificar:", datos);
     Evento.modificar(id, datos);
     req.setFlash( "Evento modificado con éxito");
     res.redirect("/eventos/visualizarEventos");
@@ -181,8 +183,7 @@ export async function handleMoodTest(req, res) {
     }
   }
 
-  res.render("pagina", {
-    contenido: "paginas/resultado",
+  render(req, res, "paginas/resultado", {
     session: req.session,
     sortedEmotions: sorted,
     dominantEmotion: dominant,

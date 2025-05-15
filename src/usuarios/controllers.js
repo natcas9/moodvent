@@ -101,7 +101,6 @@ export function doLogout(req, res, next) {
     if (err) return next(err);
     req.session.regenerate((err) => {
       if (err) return next(err);
-      req.setFlash("¡ Has cerrado sesión con éxito");
       res.redirect("/");
     });
   });
