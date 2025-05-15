@@ -157,7 +157,7 @@ export class Evento {
 
     if (!Number.isInteger(idNum)) {
       console.log("ID no es entero");
-      return;
+      throw new Error("ID invalido");
     }
     if (
       !nombre ||
@@ -165,7 +165,7 @@ export class Evento {
       !fecha ||
       !hora ||
       !lugar ||
-      precio == null ||
+      typeof precio != "number" || isNaN(precio) ||
       !estadoAnimo ||
       !creador
     ) {
