@@ -39,7 +39,7 @@ router.get(
     query("tematica").optional().isString(),
     query("ubicacion").optional().isString(),
     query("fecha").optional().isISO8601(),
-    query("precio").optional().isFloat({ min: 0 }),
+    query("precio").optional().isFloat({ min: 0 }).toFloat(),
     query("estadoAnimo").optional().isString(),
   ],
   asyncHandler(viewEventos)
