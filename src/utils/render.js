@@ -5,6 +5,7 @@ export function render(req, res, contenido, params = {}) {
     contenido,
     session: req.session,
     helpers: { error },
+    flash_msg: params.flash_msg ?? res.locals.getAndClearFlash?.(),
     ...params,
   });
 }

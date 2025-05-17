@@ -2,6 +2,7 @@
 <html lang="es">
   <head>
     <%- include('./partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/pagina.css">
   </head>
 
   <body>
@@ -14,20 +15,20 @@
     <main>
       <article><%- include(contenido) %></article>
 
-      <% if (getAndClearFlash && getAndClearFlash()) { %>
-      <dialog open class="flash-dialog" id="flashModal">
-        <p><%= getAndClearFlash() %></p>
-        <form method="dialog">
-          <button>OK</button>
-        </form>
-      </dialog>
+      <% if (flash_msg) { %>
+        <dialog open class="flash-dialog" id="flashModal">
+          <p> <%= flash_msg %> </p>
+          <form method="dialog">
+            <button> OK </button>
+          </form>
+        </dialog>
 
-      <script>
-        setTimeout(() => {
-          const dialog = document.getElementById("flashModal");
-          if (dialog) dialog.close();
-        }, 4000);
-      </script>
+        <script> 
+          setTimeout (() => {
+            const dialog = document.getElementById("flashModal");
+            if (dialog) dialog.close();
+          }, 4000)
+        </script>
       <% } %>
     </main>
 

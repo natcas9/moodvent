@@ -22,6 +22,7 @@ function createConnection() {
   const dbPath = join(__dirname, "..", "datamood", "moodvent.db");
   const db = new Database(dbPath, options);
   db.pragma("journal_mode = WAL");
+  db.pragma("foreign_keys = ON");
 
   return db;
 }

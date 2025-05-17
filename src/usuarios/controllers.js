@@ -41,6 +41,7 @@ export async function doLogin(req, res) {
   } catch (e) {
     req.log.warn(` Login fallido para '${datos.username}'`);
     req.log.debug(e.message);
+    req.setFlash("Usuario o contraseña incorrectos");
     return render(req, res, "paginas/login", {
       error: "Usuario o contraseña incorrectos",
       datos,
@@ -80,6 +81,7 @@ export async function doRegistro(req, res) {
   } catch (e) {
     req.log.error(`Error al registrar '${datos.username}'`);
     req.log.debug(e.message);
+    req.setFlash(e instanceof UsuarioYaExiste ? "El usuario ya existe" :  e.message);
     return render(req, res, "paginas/registro", {
       error: e instanceof UsuarioYaExiste ? "El usuario ya existe" : e.message,
       errores: {},
@@ -128,6 +130,7 @@ export function viewPerfil(req, res) {
   } catch (e) {
     req.log.error("Error al mostrar perfil");
     req.log.debug(e.message);
+    req.setFlash("Error al cargar el perfil");
     res.status(500).send("Error al cargar el perfil");
   }
 }
@@ -167,6 +170,7 @@ export async function viewHistorial(req, res) {
   } catch (e) {
     req.log.error("Error al obtener historial");
     req.log.debug(e.message);
+    req.setFlash("Error al cargar el historial");
     res.status(500).send("Error al cargar el historial");
   }
 }

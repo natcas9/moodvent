@@ -35,15 +35,15 @@ body {
   overflow: hidden;
 }
 
-.estado-icon  {
+.estado-icon {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   gap: 10px;
   margin: 5px 0;
 }
 
 .icono-estado {
-  width: 60x;
+  width: 60px;
   height: 60px;
 }
 

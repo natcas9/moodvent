@@ -114,39 +114,50 @@
             <p>Precio: $<%= evento.precio %></p>
             <p><%= evento.descripcion %></p>
           </div>
+         
+        <% if (session.login) { %>
+          <a href="/eventos/editar/<%= evento.id %>" class="btn-evento modificar" >Modificar </a>
 
-          <a
-            href="/eventos/editar/<%= evento.id %>"
-            class="btn-evento modificar"
-            >Modificar</a
-          >
-
-          <form
-            action="/eventos/eliminar/<%= evento.id %>"
-            method="POST"
-            onsubmit="return confirm('¿Estás seguro de eliminar este evento?')"
-            style="display: inline"
-          >
+          <form action="/eventos/eliminar/<%= evento.id %>" method="POST" 
+            onsubmit="return confirm('¿Estás seguro de eliminar este evento?')" 
+            style="display: inline">
             <button type="submit" class="btn-evento eliminar">Eliminar</button>
           </form>
-          <form
-            action="/eventos/asistir/<%= evento.id %>"
-            method="POST"
-            style="margin-top: 10px"
-          >
+        
+          <form action="/eventos/asistir/<%= evento.id %>" method="POST"
+              style="margin-top: 10px">
             <button type="submit" class="btn-evento asistir">Asistir</button>
           </form>
+
+          <% } else { %>
+              <a 
+                href="/usuarios/login"
+                class="btn-evento modificar"
+              > Modificar </a>
+
+              <form
+                action="/usuarios/login"
+                method="GET" >
+                <button type="submit" class="btn-evento eliminar"> Eliminar</button>
+              </form>
+              <% } %>
         </div>
       </div>
-      <% }) %> <% } %>
+      <% }) %>
+    <% } %>
     </div>
 
-    <button
+    <% if (session.login) { %> 
+      <button
       onclick="window.location.href='/usuarios/perfil'"
-      class="back-button"
-    >
-      Volver
-    </button>
+      class="back-button"> Volver</button>
+    <% } else { %>
+      <button
+      onclick="window.location.href='/'"
+      class="back-button"> Volver</button>
+    <% } %>
+
+    
 
     <script>
       function toggleDescripcion(id) {
